@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "d:/01_FACULDADE_ADS/01_PERIODO_2025/02_ALGORITMOS_LOGICA_PROG/02_RESOLUÇÃO_EXERCICIOS/02_C/02_LISTA01A_SEQUENCIAL/LISTA01A_SEQUENCIALEX05",
+      "program": "d:/01_FACULDADE_ADS/01_PERIODO_2025/02_ALGORITMOS_LOGICA_PROG/02_RESOLUÇÃO_EXERCICIOS/02_C/02_LISTA01A_SEQUENCIAL/LISTA01A_SEQUENCIALEX05/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}

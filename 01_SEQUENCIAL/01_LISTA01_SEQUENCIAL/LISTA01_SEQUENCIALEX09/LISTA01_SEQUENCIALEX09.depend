@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1742758017 source:c:\users\lucas\onedrive\documents\notebook luquinhas\03_ads\01_algoritmos_programacao\lista01_sequencialex09\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<math.h>
+	<time.h>
+	<windows.h>
+
