@@ -229,7 +229,7 @@ int main()
         {
             system("cls");
             printf("3-) Calculo fatorial de um numero\n");
-
+            //
             // Declaração das variaveis opção 3
             int num;
 
