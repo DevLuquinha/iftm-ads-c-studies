@@ -231,13 +231,47 @@ int main()
             printf("3-) Calculo fatorial de um numero\n");
 
             // Declaração das variaveis opção 3
-            int num;
+            int num, resul, i;
+            resul = i = 0;
 
             do
             {
                printf("\nDigite um numero que deseje fazer o fatorial: ");
                fflush(stdin);
+               scanf("%d", &num);
+               if(num < 0)
+                printf("\nErro! Nao existe fatorial de numeros negativos.");
+            }while(num < 0);
+
+            // Começa no valor digitado
+            i = num;
+            resul = 1;
+
+            // Faz o calculo do fatorial
+            while((i-1) >= 1)
+            {
+                resul = resul * i;
+                i--;
             }
+
+            printf("\nO valor de %d! = %d\n", num, resul);
+
+            // Mostra o estilo do fatorial
+            for(num; num >= 1; num--)
+            {
+                if(num == 1)
+                {
+                    Sleep(150);
+                    printf("%d = ", num);
+                }
+                else
+                {
+                    Sleep(150);
+                    printf("%d * ", num);
+                }
+            }
+
+            printf("%d\n", resul);
 
             // Só sai quando clicar ESC
             char teclaUsuario;
@@ -247,15 +281,16 @@ int main()
                 teclaUsuario = getch();
             }while(teclaUsuario != 27);
             system("cls");
-        }
-        else
-        {
-            system("cls");
-            printf("\n ACABOU\n");
-        }
 
+        }
     }while(query != 4);
 
+    printf("\n FINALIZANDO PROGRAMA...: ");
+    for(int f = 0; f <= 20; f++)
+    {
+        Sleep(100);
+        printf("%c", 178);
+    }
 
     //FINALIZAR PROGRAMA
     printf ("\n\n\n FIM DO PROGRAMA - VAI EMBORA DAQUI :/ \n\n\n");
