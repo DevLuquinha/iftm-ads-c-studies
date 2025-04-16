@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1744844855 source:c:\users\lucas\onedrive\desktop\estudo c\04_menu\02_lista07\lista07b\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<math.h>
+	<time.h>
+	<windows.h>
+
