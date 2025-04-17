@@ -120,6 +120,31 @@ int main()
             system("cls");
             printf("2-) Orcamento vidracaria\n");
 
+            int largUsua, compUsua;
+            int larg5, comp5;
+            largUsua = compUsua = 0;
+            larg5 = comp5 = 0;
+
+            // Atribui largura usuario
+            do
+            {
+                printf("\nDigite a largura do vidro: ");
+                fflush(stdin);
+                scanf("%d", &largUsua);
+            }while(largUsua <= 0);
+
+            // Atribui comprimento usuario
+            do
+            {
+                printf("\nDigite o comprimento do vidro: ");
+                fflush(stdin);
+                scanf("%d", &compUsua);
+            }while(compUsua <= 0);
+
+
+
+            printf("O vidro tem comp x largura: %d x %d", compUsua, largUsua);
+
             // So sai quando clicar ESC
             char teclaUsuario;
             do
