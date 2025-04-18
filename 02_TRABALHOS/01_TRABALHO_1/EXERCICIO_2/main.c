@@ -214,7 +214,6 @@ int main()
             printf("\n%s", nome4);
     }
 
-
     //FINALIZAR PROGRAMA
     printf ("\n\n\nFIM DO PROGRAMA - VAI EMBORA DAQUI :/ \n\n\n");
 
