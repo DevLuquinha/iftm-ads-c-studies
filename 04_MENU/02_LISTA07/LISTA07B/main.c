@@ -71,8 +71,8 @@ int main()
             system("cls");
             printf("1-) Numero perfeito\n");
 
-            int nLimite, somaN;
-            nLimite = somaN = 0;
+            int nLimite, somaN, qtdN;
+            nLimite = somaN = qtdN = 0;
 
             // Recebe valor do numero limite
             printf("\nDigite um numero [N] limite para analisar os numeros perfeitos entre [2-N]: ");
@@ -84,7 +84,7 @@ int main()
                     printf("\nErro! Digite um numero (N) maior que 2:");
             }while(nLimite <= 2);
 
-            printf("\n Os numeros perfeitos entre [2-%d]: \n", nLimite);
+            printf("\nOs numeros perfeitos entre [2-%d]: \n", nLimite);
 
             // num é cada numero até o limite
             for(int num = 3; num <= nLimite; num++)
@@ -103,8 +103,14 @@ int main()
                         somaN += i;
                 }
                 if(somaN == num)    // Caso a soma seja igual ao numero, ele é perfeito
-                    printf("%d, ", num);
+                {
+                    printf("\n%d", num);
+                    qtdN++;
+                }
             }
+
+            if(qtdN == 0)
+                printf("\nNao existe numeros perfeitos entre esse intervalo :(");
 
             // So sai quando clicar ESC
             char teclaUsuario;
@@ -122,28 +128,82 @@ int main()
 
             int largUsua, compUsua;
             int larg5, comp5;
-            largUsua = compUsua = 0;
-            larg5 = comp5 = 0;
+            int qtdVidros;
+            float valorMm2, valorVidro, valorTotal;
+            float maior, menor;
 
-            // Atribui largura usuario
+            valorMm2 = valorTotal = valorVidro = 0;
+            qtdVidros = maior = menor = 0;
+
             do
             {
-                printf("\nDigite a largura do vidro: ");
-                fflush(stdin);
-                scanf("%d", &largUsua);
-            }while(largUsua <= 0);
+                // Atribui o valor do mm2 do vidro
+                do
+                {
+                    printf("\nInforme o valor do mm2 do vidro, para encerrar digite 0: ");
+                    fflush(stdin);
+                    scanf("%f", &valorMm2);
+                }while(valorMm2 < 0);
 
-            // Atribui comprimento usuario
-            do
-            {
-                printf("\nDigite o comprimento do vidro: ");
-                fflush(stdin);
-                scanf("%d", &compUsua);
-            }while(compUsua <= 0);
+                if(valorMm2 != 0)
+                {
+                    largUsua = compUsua = 0;
+                    larg5 = comp5 = 0;
 
+                    // Atribui comprimento usuario
+                    do
+                    {
+                        printf("\nDigite o comprimento do vidro: ");
+                        fflush(stdin);
+                        scanf("%d", &compUsua);
+                    }while(compUsua <= 0);
 
+                    // Atribui largura usuario
+                    do
+                    {
+                        printf("\nDigite a largura do vidro: ");
+                        fflush(stdin);
+                        scanf("%d", &largUsua);
+                    }while(largUsua <= 0);
 
-            printf("O vidro tem comp x largura: %d x %d", compUsua, largUsua);
+                    // Retorna o valor do comprimento minimo multiplo de 5
+                    while(comp5 < compUsua)
+                    {
+                        comp5 = comp5 + 5;
+                    }
+
+                    // Retorna o valor da largura minima multiplo de 5
+                    while(larg5 < largUsua)
+                    {
+                        larg5 = larg5 + 5;
+                    }
+
+                    valorVidro = valorMm2 *  (comp5 * larg5);
+                    valorTotal += valorVidro;
+                    qtdVidros++;
+                    if(qtdVidros == 1)
+                    {
+                        maior = menor = valorVidro;
+                    }
+                    else
+                    {
+                        if(valorVidro > maior)
+                            maior = valorVidro;
+                        if(valorVidro < menor)
+                            menor = valorVidro;
+                    }
+                    printf("\nO valor a ser pago por um vidro(%d x %d): R$%.2f\n", comp5, larg5, valorVidro);
+                    printf("PARA UM NOVO ORCAMENTO APERTE QUALQUER TECLA");
+                    getch();
+                    system("cls");
+                }
+            }while(valorMm2 != 0);
+
+            system("cls");
+            printf("RELATORIO DE ORCAMENTOS\n");
+            printf("\nHouve %d Orcamentos!", qtdVidros);
+            printf("\nO valor total dos orcamentos: R$%.2f", valorTotal);
+            printf("\nO maior orcamento e o menor orcamento: R$%.2f e R$%.2f", maior, menor);
 
             // So sai quando clicar ESC
             char teclaUsuario;
