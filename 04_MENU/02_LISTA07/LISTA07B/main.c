@@ -219,6 +219,36 @@ int main()
             system("cls");
             printf("3-) Sequencia com variacao de sinal\n");
 
+            int sinal, qtdnN;
+            float num, den, resul, soma;
+            qtdnN = resul = soma = 0;
+            num = 1000;
+            den = 5;
+            sinal = 1;
+
+            do
+            {
+                printf("\nDigite a quantidade de termos da sequencia: ");
+                fflush(stdin);
+                scanf("%d", &qtdnN);
+            }while(qtdnN <= 0);
+
+            for(int i = 1; i <= qtdnN; i++)
+            {
+                if(i == 1)
+                    sinal = 1;
+                else
+                {
+                    if(i % 2 == 1)
+                        sinal = sinal * -1;
+                }
+                resul = (num / den )* sinal;
+                num = num - 3;
+                den = den + 5;
+                soma += resul;
+            }
+
+            printf("\nO resultado da soma dos %d termos da sequencia: %.3f\n", qtdnN ,soma);
             // So sai quando clicar ESC
             char teclaUsuario;
             do
