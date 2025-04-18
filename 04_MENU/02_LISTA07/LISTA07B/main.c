@@ -263,6 +263,41 @@ int main()
             system("cls");
             printf("4-) Numeros divisiveis por 4\n");
 
+            int num;
+            char voltar;
+            voltar = ' ';
+            num = 0;
+
+            do
+            {
+                do
+                {
+                    printf("Digite um num (n) que deseje saber os multiplos de 4, entre [1, n]: ");
+                    fflush(stdin);
+                    scanf("%d", &num);
+                    if(num <= 0)
+                        printf("\nErro! Digite apenas numeros positivos!");
+                }while(num <= 0);
+
+                printf("\nO resultado dos numeros multiplos de 4 entre o intervalo [1-%d]:\n", num);
+
+                for(int i = 1; i <= num; i++)
+                {
+                    if(i % 4 == 0)
+                        printf("%d ", i);
+                }
+
+                do
+                {
+                    printf("\nDeseja executar com outro numero?");
+                    printf("\n<<S>> ou <<N>>: ");
+                    fflush(stdin);
+                    scanf("%c", &voltar);
+                }while(voltar != 'S' && voltar != 's' && voltar != 'N' && voltar != 'n');
+                system("cls");
+            }while(voltar != 'N' && voltar != 'n');
+
+            printf("OBRIGADO POR UTILIZAR O PROGRAMA :)");
             // So sai quando clicar ESC
             char teclaUsuario;
             do
@@ -281,7 +316,6 @@ int main()
         Sleep(50);
         printf("%c", 178);
     }
-
 
     //FINALIZAR PROGRAMA
     printf ("\n\n\n FIM DO PROGRAMA - VAI EMBORA DAQUI :/ \n\n\n");
