@@ -43,11 +43,13 @@ int main()
     //CRIAR VARIAVEIS
     float num, soma, media, resul;
     int qtdCal;
-    int pos;
+    float pos;
+    char query;
 
     // INICIALIZAR VARIAVEIS
     num = soma = resul = media = qtdCal = 0;
     pos = 0;
+    query = ' ';
 
     do
     {
@@ -59,23 +61,46 @@ int main()
         {
             pos++;
             resul = pow((num * pos), pos);
-            printf("\nCALCULO %d:", pos);
-            printf("\n(%.0f * %d)^%d: %.2f\n", num, pos, pos, resul);
+            printf("\nCALCULO %.0f:", pos);
+            printf("\n(%.2f * %.0f)^%.0f: %.2f\n", num, pos, pos, resul);
 
             soma += resul;
             qtdCal++;
         }
     }while(num != 0);
 
-    media = soma / qtdCal;
+    if(qtdCal == 0)
+    {
+        system("cls");
+        printf("Infelizmente o usuario nao realizou nenhum calculo :(");
+        printf("\nPara imprimir um relatorio, reinicie o programa e informe valores!");
+    }
+    else
+    {
+        media = soma / qtdCal;
 
-    printf("\nRELATORIO FINAL");
-    printf("\nA soma de todos os calculos: %.2f", soma);
-    printf("\nA media aritmetica: %.2f", media);
-    printf("\nA quantidade de calculos: %d", qtdCal);
+        do
+        {
+            printf("\nPara a impressao do relatorio final, deseja:");
+            printf("\nApagar o historico de operacoes? <<S>> ou <<N>>: ");
+            fflush(stdin);
+            scanf("%c", &query);
+        }while(query != 'S' && query != 's' && query != 'n' && query != 'N');
+
+        if(query == 'S' || query == 's')
+            system("cls");
+        else
+            printf("\n");
+        printf("RELATORIO FINAL");
+        printf("\n=================================================");
+        printf("\nA soma de todos os calculos: %.2f", soma);
+        printf("\nA media aritmetica: %.2f", media);
+        printf("\nA quantidade de calculos: %d", qtdCal);
+        printf("\n=================================================");
+    }
 
     //FINALIZAR PROGRAMA
-    printf ("\n\n\n FIM DO PROGRAMA - VAI EMBORA DAQUI :/ \n\n\n");
+    printf ("\n\n\nFIM DO PROGRAMA - VAI EMBORA DAQUI :) \n\n\n");
 
     return 0;
 }
