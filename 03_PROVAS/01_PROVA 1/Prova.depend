@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1745454567 source:c:\users\aluno\desktop\prova\prova\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<windows.h>
+	<time.h>
+	<math.h>
+	<conio.h>
+

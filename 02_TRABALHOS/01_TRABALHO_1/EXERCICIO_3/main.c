@@ -160,10 +160,10 @@ int main()
     percentualExcedente = 100 * (totalCanaExcedente / totalCanaTonelada);
     percentualNormal = 100 * (totalCanaNormal / totalCanaTonelada);
     printf("RELATORIO FINAL");
-    printf("\nA) Foram transporatadas %.2f Toneladas no total.", totalCanaTonelada);
+    printf("\nA) Foram transportadas %.2f Toneladas no total.", totalCanaTonelada);
     printf("\nB) %.2f Toneladas normais e %.2f Toneladas excedentes.", totalCanaNormal, totalCanaExcedente);
     printf("\nC) Ocorreram %d viagens no total.", qtdForms);
-    printf("\nD) Ocorreram %d viagens normais e %d viagens excentes.", qtdNormais, qtdExcedentes);
+    printf("\nD) Ocorreram %d viagens normais e %d viagens excedentes.", qtdNormais, qtdExcedentes);
     printf("\nE) %.2f%% de cana excedente.", percentualExcedente);
     printf("\nF) %.2f%% de cana normal.", percentualNormal);
 
