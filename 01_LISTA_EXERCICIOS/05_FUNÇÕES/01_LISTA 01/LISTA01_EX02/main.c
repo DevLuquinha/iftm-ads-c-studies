@@ -1,7 +1,6 @@
 /*===============================================================
-
     CURSO: ANALISE E DESENVOLVIMENTO DE SISTEMAS - ADS
-    1¬∫ PER√çODO - DISCIPLINA DE ALGORITMO E L√ìGICA DE PROGRAMA√á√ÉO
+    1∫ PERÕODO - DISCIPLINA DE ALGORITMO E L”GICA DE PROGRAMA«√O
     Nome do aluno(a): Lucas Emmanuel Rodrigues Firmino de Paula
     1 SEMESTRE 2025
     Prof. Ernani Claudio Borges
@@ -20,67 +19,59 @@
 #include <time.h>
 #include <windows.h>
 #include <conio.h>
-
 //===============================================================
 //============== LOCAL PARA DECLARAR OS PROTOTIPOS ==============
 //===============================================================
 
 //===============================================================
-//============== LOCAL PARA CRIAR OS M√ìDULOS DE FUN√á√ïES =========
+//============== LOCAL PARA CRIAR OS M”DULOS DE FUN«’ES =========
 //===============================================================
-
-//===============================================================
-//===============================================================
-//===============================================================
-// Fun√ß√£o por refer√™ncia
-void VerifyNumber(char msg[400], int *intNum)
+int GetNumber(char msg[500])
 {
-    // Variavel responsavel por verificar se √© inteiro
-    float floNum = 0;
+    int num = 0;
 
-    do // Enquanto for negativo ou nulo
+    do // Enquanto for negativo
     {
-        do // Enquanto n√£o for inteiro
-        {
+        if(num < 0)
             system("cls");
-            // Imprime a mensagem
-            printf("%s", msg);
-            fflush(stdin);
-            scanf("%f", &floNum);
+        printf("%s", msg);  // Printa a mensagem escrita no param
+        fflush(stdin);
+        scanf("%d", &num);
+    }while(num < 0);
 
-            *intNum = floNum;    // Parte inteira
-        }while(*intNum != floNum);
-
-    }while(*intNum <= 0);
+    return num;
 }
 //===============================================================
-// Fun√ß√£o por valor
-void SumNNumbers(int endNum)
+int TransformToSecond(int hour, int minutes, int seconds)
 {
-    int sum = 0;
-
-    for(int i = 1; i <= endNum; i++)
-    {
-        sum += i;
-    }
-    printf("O somatorio dos N's inteiros comecando por 1 ate %d: %d", endNum, sum);
+    return (hour * 3600) + (minutes * 60) + seconds;
 }
+//===============================================================
+
+//===============================================================
+
+//===============================================================
+
 //===============================================================
 //==============  CODIGO PRINCIPAL ==============================
 //===============================================================
 int main()
 {
-    //CRIAR VARIAVEIS
-    int num = 0;
-    int resul = 0;
+    // CRIAR VARIAVEIS
+    int numH = 0;
+    int numM = 0;
+    int numS = 0;
+    int secTot = 0;
 
-    // Fun√ß√£o por refer√™ncia
-    VerifyNumber("Digite um numero inteiro e positivo: ", &num);
+    // PEGA OS INPUTS DO USU¡RIO
+    numH = GetNumber("Digite a quantidade de HORAS: ");
+    numM = GetNumber("Digite a quantidade de MINUTOS: ");
+    numS = GetNumber("Digite a quantidade de SEGUNDOS: ");
 
-    // Fun√ß√£o por valor
-    SumNNumbers(num);
-
-    //FINALIZAR PROGRAMA
+    // REALIZA A TRANFORMA«√O
+    secTot = TransformToSecond(numH, numM, numS);
+    // FINALIZAR PROGRAMA
+    printf("%d Horas, %d Minutos, %d Segundos = %d segundos :)", numH, numM, numS, secTot);
     printf ("\n\n\n FIM DO PROGRAMA - VAI EMBORA DAQUI :/ \n\n\n");
     return 0;
 }

@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1746657900 source:c:\users\aluno\desktop\estudos-linguagem-c\01_lista_exercicios\05_fun«’es\01_lista 01\lista01_ex02\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<math.h>
+	<time.h>
+	<windows.h>
+	<conio.h>
+
