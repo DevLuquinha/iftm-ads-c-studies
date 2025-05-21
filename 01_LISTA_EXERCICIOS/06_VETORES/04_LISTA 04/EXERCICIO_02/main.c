@@ -20,7 +20,7 @@
 #include <time.h>
 #include <windows.h>
 #include <conio.h>
-#define len 24
+#define len 50
 
 //===============================================================
 //============== LOCAL PARA DECLARAR OS PROTOTIPOS ==============
