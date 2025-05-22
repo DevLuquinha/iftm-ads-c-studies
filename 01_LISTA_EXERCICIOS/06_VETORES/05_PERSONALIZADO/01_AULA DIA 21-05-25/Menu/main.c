@@ -40,9 +40,9 @@ void PrintMenu()
     printf("\n=============================================================");
 }
 //===============================================================
-void ClearVector(int vector[], int range)
+void ClearVector(int vector[])
 {
-    for(int i = 0; i < range; i++)
+    for(int i = 0; i < len; i++)
         vector[i] = 0;
 }
 //===============================================================
@@ -74,17 +74,19 @@ int DifferenceNumbers(int num1, int num2)
     return num1 - num2;
 }
 //===============================================================
-void InputVector(int vector[], int range, int opt)
+void InputVector(int vector[], int opt)
 {
     float num = 0;
-    int numInt = 0;
+    int numInt = 1;
     int i = 0;
+    int endPosition;
+
     if(opt == 1)
     {
-        for(i = 0; i < range; i++)
+        while(numInt != 0 && i < len)
         {
             if(i == 0)
-            printf("----------------HISTOGRAMA HORIZONTAL----------------");
+                printf("----------------HISTOGRAMA HORIZONTAL----------------");
             do
             {
                 printf("\nDigite um numero inteiro e positivo para Vetor[%d]: ", i);
@@ -100,19 +102,23 @@ void InputVector(int vector[], int range, int opt)
                     printf("\nErro! Vc nao pode digitar um numero maior que 25.");
             }while(numInt != num || numInt < 0 || numInt > 25);
 
-            vector[i] = numInt;
+            if(numInt != 0)
+            {
+               vector[i] = numInt;
+               i++;
+            }
         }
     }
     else if(opt == 2)
     {
         int biggerDifference, posBiggerDifference = 0;
-        int endPosition;
+
         int difference;
 
         numInt = 1; // Iniciar com algum valor diferente de 0
         i = 0;
 
-        while(numInt != 0) // Responsável por preencher vetor até digitar 0
+        while(numInt != 0 && i < len) // Responsável por preencher vetor até digitar 0
         {
             if(i == 0)
                 printf("----------------Maior diferenca entre dois elementos consecutivos----------------");
@@ -128,7 +134,7 @@ void InputVector(int vector[], int range, int opt)
                     printf("\nErro! Vc digitou um numero negativo ou com casas decimais!");
             }while(numInt != num || numInt < 0);
 
-            if(numInt != 0)
+            if(numInt != 0 && i <= len)
             {
                 vector[i] = numInt;
                 i++;
@@ -152,30 +158,33 @@ void InputVector(int vector[], int range, int opt)
 
 }
 //===============================================================
-void ShowVector(int vector[], int range, int opt)
+void ShowVector(int vector[], int opt)
 {
     printf("\n=============================================================");
     if(opt == 1)
     {
         printf("\nPosicao  conteudo    histograma");
-        for(int i = 0; i < range; i++)
+        for(int i = 0; i < len; i++)
         {
-            printf("\n%7d %9d    ", i, vector[i]);
-            CreateHistogram(vector[i]);
+            if(vector[i] != 0)
+            {
+                printf("\n%7d %9d    ", i, vector[i]);
+                CreateHistogram(vector[i]);
+            }
         }
     }
     else if(opt == 2)
     {
         printf("\n");
         printf("VET: ");
-        for(int i = 0; i < range; i++)
+        for(int i = 0; i < len; i++)
         {
             if(vector[i] != 0)
                 printf("%2d ", vector[i]);
         }
         printf("\n-------------------------------------------------------------\n");
         printf("POS: ");
-        for(int i = 0; i < range; i++)
+        for(int i = 0; i < len; i++)
         {
             if(vector[i] != 0)
                 printf("%2d ", i);
@@ -201,11 +210,11 @@ int main()
 
         optionSel = InputMenu(); // Recebe o valor da opcao digitada pelo usuario
 
-        ClearVector(vector, len); // Inicializar - Limpar Vetor
+        ClearVector(vector); // Inicializar - Limpar Vetor
 
-        InputVector(vector, len, optionSel); // Recebe os valores para o vetor conforme a opção selecionada
+        InputVector(vector, optionSel); // Recebe os valores para o vetor conforme a opção selecionada
 
-        ShowVector(vector, len, optionSel); // Mostra o vetor conforme a opção selecionada
+        ShowVector(vector, optionSel); // Mostra o vetor conforme a opção selecionada
 
         if(optionSel != 4)
         {
