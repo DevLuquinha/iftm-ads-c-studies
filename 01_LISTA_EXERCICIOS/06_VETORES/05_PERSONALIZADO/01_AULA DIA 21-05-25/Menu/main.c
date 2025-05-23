@@ -74,6 +74,44 @@ int DifferenceNumbers(int num1, int num2)
     return num1 - num2;
 }
 //===============================================================
+int GetSmallestNumber(int vector[])
+{
+    int number = 0;
+
+    for(int i = 0; i < len; i++)
+    {
+        if(i == 0)
+        {
+            number = vector[0];
+        }
+        else
+        {
+            if(vector[i] != 0)
+            {
+                if(vector[i] < number)
+                {
+                    number = vector[i];
+                }
+            }
+        }
+    }
+
+    return number;
+}
+//===============================================================
+int IndexOf(int num, int vector[])
+{
+    int index = -1; // Caso retorne -1, pq não achou um index
+
+    for(int i = len; i >= 0; i--)
+    {
+        if(vector[i] == num)
+            index = i;
+    }
+
+    return index;
+}
+//===============================================================
 void InputVector(int vector[], int opt)
 {
     float num = 0;
@@ -154,6 +192,31 @@ void InputVector(int vector[], int opt)
         }
 
         printf("\n\nA MAIOR DIFERENCA EH: %d na posicao %d e %d", biggerDifference, posBiggerDifference, posBiggerDifference + 1);
+    }else if(opt == 3)
+    {
+        while(numInt != 0 && i < len)
+        {
+            if(i == 0)
+                printf("----------------Maior, Menor e suas Posicoes----------------");
+            do
+            {
+                printf("\nDigite um numero inteiro e positivo para Vetor[%d]: ", i);
+                fflush(stdin);
+                scanf("%f", &num);
+
+                numInt = num;
+
+                if(numInt != num || numInt < 0)
+                    printf("\nErro! Vc digitou um numero negativo ou com casas decimais!");
+
+            }while(numInt != num || numInt < 0);
+
+            if(numInt != 0)
+            {
+               vector[i] = numInt;
+               i++;
+            }
+        }
     }
 
 }
@@ -189,7 +252,33 @@ void ShowVector(int vector[], int opt)
             if(vector[i] != 0)
                 printf("%2d ", i);
         }
+    }
+    else if(opt == 3)
+    {
+        int smallestNum, biggerNum;
+        int smallestNumIndex, biggerNumIndex;
+        // Mostrar vetor de forma de entrada
+        printf("\nVETOR FORMA DE ENTRADA\n");
 
+        printf("VET: ");
+        for(int i = 0; i < len; i++)
+        {
+            if(vector[i] != 0)
+                printf("%2d ", vector[i]);
+        }
+        printf("\n-------------------------------------------------------------\n");
+        printf("POS: ");
+        for(int i = 0; i < len; i++)
+        {
+            if(vector[i] != 0)
+                printf("%2d ", i);
+        }
+
+        // Calcular o menor e o maior
+        smallestNum = GetSmallestNumber(vector);
+        smallestNumIndex = IndexOf(smallestNum, vector);
+
+        printf("\n\nO menor numero eh %d, que esta na posicao VET[%d]", smallestNum, smallestNumIndex);
     }
     printf("\n=============================================================");
 }
