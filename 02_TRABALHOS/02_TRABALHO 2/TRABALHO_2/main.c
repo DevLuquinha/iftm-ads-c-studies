@@ -84,23 +84,83 @@ int GetIntNumber()
 void GetSequenceNumbers(int vector[])
 {
     int biggestSequence = 0;
-    int indexEndSequence = 0;
+    int indexStartSequence = 0;
     int sequenceLen = 0;
-    int i = 0;
+    int auxI, auxJ = 0;
 
+    // Calcular a maior sequencia
     for(int i = 0; i < size; i++)
     {
-        if(vector[i] != 0)
+        for(int j = i + 1; j < size; j++)
         {
-            // Verificar se [i] é igual a [i + 1]
-            if(vector[i] == vector[i+1])
+            if(vector[i] != 0)
             {
-                biggestSequence++;
-                indexEndSequence = i + 1;
+                // Pega a primeira sequencia repetida e atribui como maior
+                if(vector[i] == vector[j] && biggestSequence == 0)
+                {
+                    // Copia as propriedades de i e j
+                    auxI = i;
+                    auxJ = j;
+
+                    // Laço para contabilizar o tamanho da sequencia
+                    while(vector[auxI] == vector[auxJ])
+                    {
+                        sequenceLen++;
+                        auxI++;
+                        auxJ++;
+                    }
+
+                    biggestSequence = sequenceLen + 1;
+                    indexStartSequence = i;
+                }
+                else if(vector[i] == vector[j])
+                {
+                    auxI = i;
+                    auxJ = j;
+                    sequenceLen = 1;
+
+                    while(vector[auxI] == vector[auxJ])
+                    {
+                        sequenceLen++;
+                        auxI++;
+                        auxJ++;
+                    }
+
+                    if(sequenceLen > biggestSequence)
+                    {
+                        biggestSequence = sequenceLen;
+                        indexStartSequence = i;
+                    }
+                }
             }
         }
     }
-    printf("\n O index Final eh %d", indexEndSequence);
+
+    // Mostragem da sequencia repetida
+    printf("\n=================================================");
+    if(biggestSequence == 0)
+    {
+        printf("\nNao foi digitado nenhuma sequencia numerica! ");
+    }
+    else
+    {
+        printf("\nA maior sequencia foi: ");
+        for(int i = 0; i < biggestSequence; i++)
+        {
+            if(i + 1 == biggestSequence)
+            {
+                Sleep(100);
+                printf("%d. ", vector[i+indexStartSequence]);
+            }
+
+            else
+            {
+                Sleep(100);
+                printf("%d, ", vector[i+indexStartSequence]);
+            }
+
+        }
+    }
 }
 //===============================================================
 void InputVector(int vector[])
@@ -125,12 +185,14 @@ void ShowVector(int vector[])
 {
 
     printf("\n========== VETOR EM FORMA DE ENTRADA ============\n");
+
     int col = 1;
 
     for(int i = 0; i < size; i++)
     {
         if(vector[i] != 0)
         {
+            Sleep(50);
             printf("     %3d ", vector[i]);
 
             if(col % 5 == 0)
@@ -174,7 +236,7 @@ int main()
 
             ShowVector(vector);
 
-            printf("\nPARA VOLTAR AO MENU, APERTE QUALQUER TECLA ");
+            printf("\n\nPARA VOLTAR AO MENU, APERTE QUALQUER TECLA ");
             getch();
         }
     }while(optMenu != 3);
