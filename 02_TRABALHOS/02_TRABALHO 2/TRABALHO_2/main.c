@@ -1,7 +1,7 @@
 /*===============================================================
 
     CURSO: ANALISE E DESENVOLVIMENTO DE SISTEMAS - ADS
-    1¬∫ PER√çODO - DISCIPLINA DE ALGORITMO E L√ìGICA DE PROGRAMA√á√ÉO
+    1∫ PERÕODO - DISCIPLINA DE ALGORITMO E L”GICA DE PROGRAMA«√O
     Nome do aluno(a): Lucas Emmanuel Rodrigues Firmino de Paula
     1 SEMESTRE 2025
     Prof. Ernani Claudio Borges
@@ -27,7 +27,7 @@
 //===============================================================
 
 //===============================================================
-//============== LOCAL PARA CRIAR OS M√ìDULOS DE FUN√á√ïES =========
+//============== LOCAL PARA CRIAR OS M”DULOS DE FUN«’ES =========
 //===============================================================
 int InputMenu()
 {
@@ -68,14 +68,19 @@ int GetIntNumber()
 
     do
     {
-        printf("\nDigite um numero inteiro entre (1-9). OBS: 0 FINALIZA A ENTRADA...: ");
+        printf("\nDigite um numero INTEIRO entre (1-9). OBS: 0 FINALIZA A ENTRADA...: ");
         fflush(stdin);
         scanf("%f", &num);
 
         numInt = num;
 
         if(numInt != num || numInt < 0 || numInt > 9)
-            printf("\nErro! Vc digitou um numero invalido!");
+        {
+            printf("\n================================================================");
+            printf("\nErro! Vc digitou um numero invalido! NUMERO NAO CONTABILIZADO!!!");
+            printf("\n================================================================");
+        }
+
     }while(numInt != num || numInt < 0 || numInt > 9);
 
     return numInt;
@@ -102,7 +107,7 @@ void GetSequenceNumbers(int vector[])
                     auxI = i;
                     auxJ = j;
 
-                    // La√ßo para contabilizar o tamanho da sequencia
+                    // LaÁo para contabilizar o tamanho da sequencia
                     while(vector[auxI] == vector[auxJ])
                     {
                         sequenceLen++;
@@ -140,7 +145,7 @@ void GetSequenceNumbers(int vector[])
     printf("\n=================================================");
     if(biggestSequence == 0)
     {
-        printf("\nNao foi digitado nenhuma sequencia numerica! ");
+        printf("\nNao foi digitado nenhuma sequencia numerica consecutiva! ");
     }
     else
     {
@@ -163,60 +168,69 @@ void GetSequenceNumbers(int vector[])
     }
 }
 //===============================================================
-void InputVector(int vector[])
+void InputVector(int vector[], int opt)
 {
     system("cls");
-    printf("1 - Maior sequencia de numeros iguais consecutivos");
-    int num = 0;
-    int i = 0;
 
-    do
+    if(opt == 1)
     {
-        num = GetIntNumber();
-        if(num != 0)
+        printf("1 - Maior sequencia de numeros iguais consecutivos");
+        int num = 0;
+        int i = 0;
+
+        do
         {
-            vector[i] = num;
-            i++;
-        }
-    }while(num != 0);
+            num = GetIntNumber();
+            if(num != 0)
+            {
+                vector[i] = num;
+                i++;
+            }
+        }while(num != 0);
+    }
 }
 //===============================================================
-void ShowVector(int vector[])
+void ShowVector(int vector[], int opt)
 {
 
-    printf("\n========== VETOR EM FORMA DE ENTRADA ============\n");
-
-    int col = 1;
-
-    for(int i = 0; i < size; i++)
+    if(opt == 1)
     {
-        if(vector[i] != 0)
+        printf("\n========== VETOR EM FORMA DE ENTRADA ============\n");
+
+        int col = 1;
+
+        for(int i = 0; i < size; i++)
         {
-            Sleep(50);
-            printf("     %3d ", vector[i]);
-
-            if(col % 5 == 0)
+            if(vector[i] != 0)
             {
-                printf("\n");
-                col = 0;
-            }
-            col++;
-        }
-    }
+                Sleep(50);
+                printf("     %3d ", vector[i]);
 
-    // Pegar qual a maior sequencia de numeros
-    GetSequenceNumbers(vector);
+                if(col % 5 == 0)
+                {
+                    printf("\n");
+                    col = 0;
+                }
+                col++;
+            }
+        }
+
+        // Pegar qual a maior sequencia de numeros
+        GetSequenceNumbers(vector);
+    }
 }
 //===============================================================
 //==============  CODIGO PRINCIPAL ==============================
 //===============================================================
 int main()
 {
-    // OBSERVA√á√ïES Exercicio 1:
-    // A) Criar pelo menos duas fun√ß√µes
+    // OBSERVA«’ES EX 1:
+    // A) Criar pelo menos duas funÁıes
     // B) Usar somente 1 vetor
-    // C) Mostrar somente as posi√ß√µes que tiveram entradas via teclado
-    // D) Dar uma mensagem caso n√£o tenha sequencia de numeros iguais consecutivos
+    // C) Mostrar somente as posiÁıes que tiveram entradas via teclado
+    // D) Dar uma mensagem caso n„o tenha sequencia de numeros iguais consecutivos
+
+    // OBSERVA«’ES EX 2:
 
     // CRIAR VARIAVEIS
     int vector[size], optMenu;
@@ -232,9 +246,9 @@ int main()
 
         if(optMenu != 3)
         {
-            InputVector(vector);
+            InputVector(vector, optMenu);
 
-            ShowVector(vector);
+            ShowVector(vector, optMenu);
 
             printf("\n\nPARA VOLTAR AO MENU, APERTE QUALQUER TECLA ");
             getch();
