@@ -231,6 +231,12 @@ int main()
     // D) Dar uma mensagem caso não tenha sequencia de numeros iguais consecutivos
 
     // OBSERVAÇÕES EX 2:
+    // A) Mostrar o vetor em sua forma de entrada
+    // B) No mínimo 2 funções
+    // C) Usar somente vetor
+    // D) Mostrar somente as posições que tiverem entradas via teclado
+    // E) Validar Corretivamente na entrada.
+
 
     // CRIAR VARIAVEIS
     int vector[size], optMenu;
