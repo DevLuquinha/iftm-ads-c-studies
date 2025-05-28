@@ -86,6 +86,50 @@ int GetIntNumber()
     return numInt;
 }
 //===============================================================
+int GetSingleIntNumber(int vector[])
+{
+    float num;
+    int numInt;
+    int hasNumber;
+    do
+    {
+        hasNumber = 0;
+
+        printf("\nDigite um numero INTEIRO positivo. OBS: 0 FINALIZA A ENTRADA...: ");
+        fflush(stdin);
+        scanf("%f", &num);
+
+        numInt = num;
+
+        if(numInt != num || numInt < 0)
+        {
+            printf("\n================================================================");
+            printf("\nErro! Vc digitou um numero invalido! NUMERO NAO CONTABILIZADO!!!");
+            printf("\n================================================================");
+        }
+
+        for(int i = 0; i < size; i++)
+        {
+            if(vector[i] != 0)
+            {
+                if(vector[i] == numInt)
+                {
+                    hasNumber = 1;
+                }
+            }
+        }
+
+        if(hasNumber == 1)
+        {
+            printf("\n========================================================================");
+            printf("\nErro! Vc digitou um numero %d que ja EXISTE! NUMERO NAO CONTABILIZADO!!!", numInt);
+            printf("\n========================================================================");
+        }
+    }while(numInt != num || numInt < 0 || hasNumber == 1);
+
+    return numInt;
+}
+//===============================================================
 void GetSequenceNumbers(int vector[])
 {
     int biggestSequence = 0;
@@ -168,6 +212,46 @@ void GetSequenceNumbers(int vector[])
     }
 }
 //===============================================================
+int GetDifference(int num1, int num2)
+{
+    int module = 0;
+
+    if(num1 - num2 < 0)
+        module = (num1 - num2) * -1;
+    else if(num1 - num2 > 0)
+        module = num1 - num2;
+
+    return module;
+}
+//===============================================================
+void DifferenceNumbersByVector(int vector[], int lastIndex)
+{
+    int mostDifference = 0;
+    int difference;
+
+    for(int i = 0; i < lastIndex -1; i++)
+    {
+        difference = 0;
+
+        if(i == 0)
+            mostDifference = GetDifference(vector[i], vector[i+1]);
+        else
+        {
+            difference = GetDifference(vector[i], vector[i+1]);
+            if(difference > mostDifference)
+                mostDifference = difference;
+        }
+    }
+
+    // Mostragem da maior diferença
+    printf("\n=================================================");
+
+    if(mostDifference == 0)
+        printf("\nNAO EXISTE DIFERENCA! DIGITE PELO MENOS DOIS NUMEROS!!!");
+    else
+        printf("\n\nA MAIOR DIFERENCA EH: %d", mostDifference);
+}
+//===============================================================
 void InputVector(int vector[], int opt)
 {
     system("cls");
@@ -188,36 +272,56 @@ void InputVector(int vector[], int opt)
             }
         }while(num != 0);
     }
+    else if(opt == 2)
+    {
+        printf("2 - Maior diferenca entre dois numeros consecutivos");
+        int num = 0;
+        int i = 0;
+
+        do
+        {
+            num = GetSingleIntNumber(vector);
+            if(num != 0)
+            {
+                vector[i] = num;
+                i++;
+            }
+        }while(num != 0);
+    }
 }
 //===============================================================
 void ShowVector(int vector[], int opt)
 {
+    int endI = 0;
 
-    if(opt == 1)
+    printf("\n========== VETOR EM FORMA DE ENTRADA ============\n");
+
+    int col = 1;
+
+    for(int i = 0; i < size; i++)
     {
-        printf("\n========== VETOR EM FORMA DE ENTRADA ============\n");
+        if(endI == 0 && vector[i] == 0)
+            endI = i;
 
-        int col = 1;
-
-        for(int i = 0; i < size; i++)
+        if(vector[i] != 0)
         {
-            if(vector[i] != 0)
+            Sleep(50);
+            printf("     %3d ", vector[i]);
+
+            if(col % 5 == 0)
             {
-                Sleep(50);
-                printf("     %3d ", vector[i]);
-
-                if(col % 5 == 0)
-                {
-                    printf("\n");
-                    col = 0;
-                }
-                col++;
+                printf("\n");
+                col = 0;
             }
+            col++;
         }
-
-        // Pegar qual a maior sequencia de numeros
-        GetSequenceNumbers(vector);
     }
+
+
+    if(opt == 1) // Pegar qual a maior sequencia de numeros
+        GetSequenceNumbers(vector);
+    else if(opt == 2) // Pegar maior diferenca entre dois numeros
+        DifferenceNumbersByVector(vector, endI);
 }
 //===============================================================
 //==============  CODIGO PRINCIPAL ==============================
@@ -236,7 +340,6 @@ int main()
     // C) Usar somente vetor
     // D) Mostrar somente as posições que tiverem entradas via teclado
     // E) Validar Corretivamente na entrada.
-
 
     // CRIAR VARIAVEIS
     int vector[size], optMenu;
