@@ -201,7 +201,6 @@ void GetSequenceNumbers(int vector[], int lastIndex)
                 Sleep(100);
                 printf("%d, ", vector[i+indexStartSequence]);
             }
-
         }
     }
 }
@@ -318,6 +317,22 @@ void ShowVector(int vector[], int opt)
         DifferenceNumbersByVector(vector, endI);
 }
 //===============================================================
+void EndProgram()
+{
+    Sleep(500);
+    printf("\nFIM?\n");
+    Sleep(1000);
+
+    printf("\nOU SERA QUE NAO ^-^\n");
+    Sleep(2500);
+
+    printf("\nVC AINDA TA AQUI (0_0)?\n");
+    Sleep(2500);
+
+    printf("\nTA BOM... CANSEI :-( \n");
+    Sleep(2500);
+}
+//===============================================================
 //==============  CODIGO PRINCIPAL ==============================
 //===============================================================
 int main()
@@ -359,7 +374,30 @@ int main()
     }while(optMenu != 3);
 
     //FINALIZAR PROGRAMA
-    printf ("\n\n\n FIM DO PROGRAMA - VAI EMBORA DAQUI :/ \n\n\n");
+    printf("\nFINALIZANDO PROGRAMA..........: ");
+    for(int i = 5; i >= 1; i--)
+    {
+        Sleep(500);
+        printf("%d", i);
+
+        if(i == 1)
+            printf(".");
+        else
+            printf(", ");
+    }
+
+    // Mostra a tela de carregamento
+    printf("\n");
+    for(int i = 0; i <= 45; i++)
+    {
+        Sleep(25);
+        printf("%c", 220);
+    }
+
+    printf("\n");
+    EndProgram();
+
+    printf ("\n\nFIM DO PROGRAMA - OBRIGADO POR USAR O PROGRAMA :) \n\n\n");
 
     return 0;
 }
