@@ -20,7 +20,7 @@
 #include <time.h>
 #include <windows.h>
 #include <conio.h>
-#define size 49
+#define size 300
 
 //===============================================================
 //============== LOCAL PARA DECLARAR OS PROTOTIPOS ==============
@@ -130,7 +130,7 @@ int GetSingleIntNumber(int vector[])
     return numInt;
 }
 //===============================================================
-void GetSequenceNumbers(int vector[])
+void GetSequenceNumbers(int vector[], int lastIndex)
 {
     int biggestSequence = 0;
     int indexStartSequence = 0;
@@ -138,49 +138,63 @@ void GetSequenceNumbers(int vector[])
     int auxI, auxJ = 0;
 
     // Calcular a maior sequencia
-    for(int i = 0; i < size; i++)
+    for(int i = 0; i < lastIndex; i++)
     {
-        for(int j = i + 1; j < size; j++)
+        printf("\nMAIOR SEQ(i): %d", biggestSequence);
+        getch();
+        for(int j = i + 1; j < lastIndex - 1; j++)
         {
-            if(vector[i] != 0)
+            printf("\nMAIOR SEQ(j) [%d e %d]: %d", vector[i], vector[j], biggestSequence);
+            getch();
+
+            // Pega a primeira sequencia repetida e atribui como maior
+            if(vector[i] == vector[j] && biggestSequence == 0)
             {
-                // Pega a primeira sequencia repetida e atribui como maior
-                if(vector[i] == vector[j] && biggestSequence == 0)
+                // Copia as propriedades de i e j
+                auxI = i;
+                auxJ = j;
+
+                // Laço para contabilizar o tamanho da sequencia
+                while(vector[auxI] == vector[auxJ])
                 {
-                    // Copia as propriedades de i e j
-                    auxI = i;
-                    auxJ = j;
+                    sequenceLen++;
+                    auxI++;
+                    auxJ++;
+                }
 
-                    // Laço para contabilizar o tamanho da sequencia
-                    while(vector[auxI] == vector[auxJ])
-                    {
-                        sequenceLen++;
-                        auxI++;
-                        auxJ++;
-                    }
+                biggestSequence = sequenceLen + 1;
+                indexStartSequence = i;
 
-                    biggestSequence = sequenceLen + 1;
+                printf("\nPRIMEIRA SEQ, MAIOR e INDEX: %d, %d", biggestSequence, indexStartSequence);
+                getch();
+            }
+            else if(vector[i] == vector[j])
+            {
+                printf("\nV[i]==V[j]. MAIOR e INDEX: %d, %d", biggestSequence, indexStartSequence);
+                getch();
+
+                auxI = i;
+                auxJ = j;
+                sequenceLen = 1;
+
+                while(vector[auxI] == vector[auxJ])
+                {
+                    sequenceLen++;
+                    auxI++;
+                    auxJ++;
+                }
+
+                printf("\nTAMANHO SEQUENCIA: %d", sequenceLen);
+                getch();
+
+                if(sequenceLen > biggestSequence)
+                {
+                    biggestSequence = sequenceLen;
                     indexStartSequence = i;
                 }
-                else if(vector[i] == vector[j])
-                {
-                    auxI = i;
-                    auxJ = j;
-                    sequenceLen = 1;
 
-                    while(vector[auxI] == vector[auxJ])
-                    {
-                        sequenceLen++;
-                        auxI++;
-                        auxJ++;
-                    }
-
-                    if(sequenceLen > biggestSequence)
-                    {
-                        biggestSequence = sequenceLen;
-                        indexStartSequence = i;
-                    }
-                }
+                printf("\nV[i]==V[j] FIM. MAIOR e INDEX: %d, %d", biggestSequence, indexStartSequence);
+                getch();
             }
         }
     }
@@ -201,7 +215,6 @@ void GetSequenceNumbers(int vector[])
                 Sleep(100);
                 printf("%d. ", vector[i+indexStartSequence]);
             }
-
             else
             {
                 Sleep(100);
@@ -319,7 +332,7 @@ void ShowVector(int vector[], int opt)
 
 
     if(opt == 1) // Pegar qual a maior sequencia de numeros
-        GetSequenceNumbers(vector);
+        GetSequenceNumbers(vector, endI);
     else if(opt == 2) // Pegar maior diferenca entre dois numeros
         DifferenceNumbersByVector(vector, endI);
 }
