@@ -136,65 +136,48 @@ void GetSequenceNumbers(int vector[], int lastIndex)
     int indexStartSequence = 0;
     int sequenceLen = 0;
     int auxI, auxJ = 0;
+    int isFirst = 1;
 
-    // Calcular a maior sequencia
-    for(int i = 0; i < lastIndex; i++)
+    for(int i = 0; i < lastIndex - 1; i++)
     {
-        printf("\nMAIOR SEQ(i): %d", biggestSequence);
-        getch();
-        for(int j = i + 1; j < lastIndex - 1; j++)
+        if(vector[i] == vector[i+1]) // Caso sejam iguais e seja a primeira
         {
-            printf("\nMAIOR SEQ(j) [%d e %d]: %d", vector[i], vector[j], biggestSequence);
-            getch();
-
-            // Pega a primeira sequencia repetida e atribui como maior
-            if(vector[i] == vector[j] && biggestSequence == 0)
+            if(isFirst == 1)
             {
-                // Copia as propriedades de i e j
+                isFirst = 0; // Sim ele eh o primeiro então desmarca
+
+                // Copia as propriedades das posições
                 auxI = i;
-                auxJ = j;
+                auxJ = i+1;
 
                 // Laço para contabilizar o tamanho da sequencia
                 while(vector[auxI] == vector[auxJ])
                 {
                     sequenceLen++;
-                    auxI++;
                     auxJ++;
                 }
 
                 biggestSequence = sequenceLen + 1;
                 indexStartSequence = i;
-
-                printf("\nPRIMEIRA SEQ, MAIOR e INDEX: %d, %d", biggestSequence, indexStartSequence);
-                getch();
             }
-            else if(vector[i] == vector[j])
+            else
             {
-                printf("\nV[i]==V[j]. MAIOR e INDEX: %d, %d", biggestSequence, indexStartSequence);
-                getch();
-
                 auxI = i;
-                auxJ = j;
+                auxJ = i+1;
                 sequenceLen = 1;
 
+                // Laço para contabilizar o tamanho da sequencia
                 while(vector[auxI] == vector[auxJ])
                 {
                     sequenceLen++;
-                    auxI++;
                     auxJ++;
                 }
-
-                printf("\nTAMANHO SEQUENCIA: %d", sequenceLen);
-                getch();
 
                 if(sequenceLen > biggestSequence)
                 {
                     biggestSequence = sequenceLen;
                     indexStartSequence = i;
                 }
-
-                printf("\nV[i]==V[j] FIM. MAIOR e INDEX: %d, %d", biggestSequence, indexStartSequence);
-                getch();
             }
         }
     }
@@ -202,9 +185,7 @@ void GetSequenceNumbers(int vector[], int lastIndex)
     // Mostragem da sequencia repetida
     printf("\n=================================================");
     if(biggestSequence == 0)
-    {
         printf("\nNao foi digitado nenhuma sequencia numerica consecutiva! ");
-    }
     else
     {
         printf("\nA maior sequencia foi: ");
