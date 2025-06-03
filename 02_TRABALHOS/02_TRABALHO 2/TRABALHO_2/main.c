@@ -1,7 +1,7 @@
 /*===============================================================
 
     CURSO: ANALISE E DESENVOLVIMENTO DE SISTEMAS - ADS
-    1∫ PERÕODO - DISCIPLINA DE ALGORITMO E L”GICA DE PROGRAMA«√O
+    1¬∫ PER√çODO - DISCIPLINA DE ALGORITMO E L√ìGICA DE PROGRAMA√á√ÉO
     Nome do aluno(a): Lucas Emmanuel Rodrigues Firmino de Paula
     1 SEMESTRE 2025
     Prof. Ernani Claudio Borges
@@ -27,7 +27,7 @@
 //===============================================================
 
 //===============================================================
-//============== LOCAL PARA CRIAR OS M”DULOS DE FUN«’ES =========
+//============== LOCAL PARA CRIAR OS M√ìDULOS DE FUN√á√ïES =========
 //===============================================================
 int InputMenu()
 {
@@ -144,13 +144,13 @@ void GetSequenceNumbers(int vector[], int lastIndex)
         {
             if(isFirst == 1)
             {
-                isFirst = 0; // Sim ele eh o primeiro ent„o desmarca
+                isFirst = 0; // Sim ele eh o primeiro ent√£o desmarca
 
-                // Copia as propriedades das posiÁıes
+                // Copia as propriedades das posi√ß√µes
                 auxI = i;
                 auxJ = i+1;
 
-                // LaÁo para contabilizar o tamanho da sequencia
+                // La√ßo para contabilizar o tamanho da sequencia
                 while(vector[auxI] == vector[auxJ])
                 {
                     sequenceLen++;
@@ -166,7 +166,7 @@ void GetSequenceNumbers(int vector[], int lastIndex)
                 auxJ = i+1;
                 sequenceLen = 1;
 
-                // LaÁo para contabilizar o tamanho da sequencia
+                // La√ßo para contabilizar o tamanho da sequencia
                 while(vector[auxI] == vector[auxJ])
                 {
                     sequenceLen++;
@@ -221,6 +221,7 @@ void DifferenceNumbersByVector(int vector[], int lastIndex)
 {
     int mostDifference = 0;
     int difference;
+    int index = 0;
 
     for(int i = 0; i < lastIndex -1; i++)
     {
@@ -232,17 +233,20 @@ void DifferenceNumbersByVector(int vector[], int lastIndex)
         {
             difference = GetDifference(vector[i], vector[i+1]);
             if(difference > mostDifference)
+            {
                 mostDifference = difference;
+                index = i;
+            }
         }
     }
 
-    // Mostragem da maior diferenÁa
+    // Mostragem da maior diferen√ßa
     printf("\n=================================================");
 
     if(mostDifference == 0)
         printf("\nNAO EXISTE DIFERENCA! DIGITE PELO MENOS DOIS NUMEROS!!!");
     else
-        printf("\n\nA MAIOR DIFERENCA EH: %d", mostDifference);
+        printf("\n\nA MAIOR DIFERENCA EH: %d. Equivalente a V[%d] e V[%d]", mostDifference, index, index + 1);
 }
 //===============================================================
 void InputVector(int vector[], int opt)
@@ -337,17 +341,17 @@ void EndProgram()
 //===============================================================
 int main()
 {
-    // OBSERVA«’ES EX 1:
-    // A) Criar pelo menos duas funÁıes
+    // OBSERVA√á√ïES EX 1:
+    // A) Criar pelo menos duas fun√ß√µes
     // B) Usar somente 1 vetor
-    // C) Mostrar somente as posiÁıes que tiveram entradas via teclado
-    // D) Dar uma mensagem caso n„o tenha sequencia de numeros iguais consecutivos
+    // C) Mostrar somente as posi√ß√µes que tiveram entradas via teclado
+    // D) Dar uma mensagem caso n√£o tenha sequencia de numeros iguais consecutivos
 
-    // OBSERVA«’ES EX 2:
+    // OBSERVA√á√ïES EX 2:
     // A) Mostrar o vetor em sua forma de entrada
-    // B) No mÌnimo 2 funÁıes
+    // B) No m√≠nimo 2 fun√ß√µes
     // C) Usar somente vetor
-    // D) Mostrar somente as posiÁıes que tiverem entradas via teclado
+    // D) Mostrar somente as posi√ß√µes que tiverem entradas via teclado
     // E) Validar Corretivamente na entrada.
 
     // CRIAR VARIAVEIS
