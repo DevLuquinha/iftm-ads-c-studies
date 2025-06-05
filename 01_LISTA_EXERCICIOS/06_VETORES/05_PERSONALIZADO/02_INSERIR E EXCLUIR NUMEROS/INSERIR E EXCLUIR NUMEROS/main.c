@@ -19,7 +19,7 @@
 #include <time.h>
 #include <windows.h>
 #include <conio.h>
-#define len 20
+#define len 10
 //===============================================================
 //============== LOCAL PARA DECLARAR OS PROTOTIPOS ==============
 //===============================================================
@@ -69,13 +69,13 @@ int GetLastIndex(int vector[])
     return index - 1;
 }
 //===============================================================
-void OrderVector(int vector[])
+void OrderVector(int vector[], int lastIndex)
 {
-    int lastIndex = GetLastIndex(vector); // O index do último item da lista
+    int auxValue;
 
     for(int j = 0; j < lastIndex; j++) // Repete a quantidade de vezes do vetor
     {
-        for(int i = 0; i < lastIndex - 1; i++)
+        for(int i = 0; i < lastIndex; i++)
         {
             auxValue = 0;
             if(vector[i] > vector[i+1])
@@ -112,12 +112,89 @@ void ShowVector(int vector[])
                 printf("\n");
                 col = 0;
             }
-            Sleep(75);
+            Sleep(25);
             printf("%6d", vector[i]);
             col++;
         }
     }
 }
+//===============================================================
+int ShowMenu()
+{
+    int indexMenu;
+
+    printf("\n\n===========MENU DE OPCOES===========");
+    printf("\n1 - INSERIR NUMERO");
+    printf("\n2 - EXCLUIR NUMERO");
+    printf("\n3 - SAIR");
+    printf("\n====================================");
+    do
+    {
+        printf("\nEscolha o numero de uma das opcoes acima...: ");
+        fflush(stdin);
+        scanf("%d", &indexMenu);
+
+        if(indexMenu < 1 || indexMenu > 3)
+            printf("\nOPCAO INVALIDA! ESCOLHA NOVAMENTE!!!");
+    }while(indexMenu < 1 || indexMenu > 3);
+
+    return indexMenu;
+}
+//===============================================================
+int NumberInVector(int num, int vector[], int vectorLen)
+{
+    int index = -1;
+    for(int i = 0; i < vectorLen; i++)
+    {
+        if(vector[i] == num)
+            index = i;
+    }
+
+    return index;
+}
+//===============================================================
+int GetNumber()
+{
+    int num = 0;
+
+    do
+    {
+        printf("\nDigite o numero maior que 1 que deseje inserir: ");
+        fflush(stdin);
+        scanf("%d", &num);
+
+        if(num < 1)
+            printf("\nDIGITE UM NUMERO VALIDO!!!");
+    }while(num < 1);
+
+    return num;
+}
+//===============================================================
+int GetIndexInsertNumber(int num, int vector[], int vectorLen)
+{
+    int index = -1;
+    int findIndex = 0;
+
+    for(int i = 0; i <= vectorLen; i++)
+    {
+        if(findIndex == 0 && vector[i] > num)
+        {
+            findIndex = 1;
+            index = i;
+        }
+    }
+
+    return index;
+}
+//===============================================================
+void UpdateVector(int index, int vector[], int vectorLen)
+{
+    for(int i = vectorLen; i >= index; i--)
+    {
+        vector[i+1] = vector[i];
+    }
+}
+//===============================================================
 //===============================================================
 //==============  CODIGO PRINCIPAL ==============================
 //===============================================================
@@ -141,23 +218,74 @@ int main()
 
     // CRIAR VARIAVEIS
     int vector[len];
-
-    // LIMPA O VETOR
-    ClearVector(vector);
+    int lastIndex, option;
 
     printf("======VETOR EM FORMA DE ENTRADA======");
 
     // Preencher vetor com numeros aleatorios até a metade
     FillRandomNumbers(vector, len/2);
 
-    // VETOR EM FORMA DE ENTRADA
+    // Vetor em forma de entrada
     ShowVector(vector);
 
-    // VETOR ORDENADO
-    printf("\n===========VETOR ORDENADO===========");
-    OrderVector(vector);
+    // Pega o index do ultimo item usado
+    lastIndex = GetLastIndex(vector);
+
+    // Vetor Ordenado
+    printf("\n\n===========VETOR ORDENADO===========");
+    OrderVector(vector, lastIndex);
     ShowVector(vector);
 
+    do
+    {
+        // LIMPA O VETOR
+        ClearVector(vector);
+
+        option = ShowMenu();
+
+        if(option != 3)
+        {
+            if(option == 1)
+            {
+                // Variaveis para o EX 1
+                int indexNum, num = 0;
+                int posiNum = 0;
+
+                do
+                {
+                    num = GetNumber(); // Recebe um numero maior do que 1
+
+                    indexNum = NumberInVector(num, vector, lastIndex + 1); // Caso não exista, retorna -1
+
+                    if(indexNum == -1)
+                    {
+                        printf("\nNAO EXISTE O NUMERO INFORMADO! %d", num);
+
+                        // Verificar o index onde será adicionado o numero
+                        posiNum = GetIndexInsertNumber(num, vector, lastIndex);
+
+                        //printf("\n%d devera ser posicionado no index V[%d]", num, posiNum);
+
+                        // Passar todo o vetor para frente
+                        UpdateVector(posiNum, vector, lastIndex);
+
+                        // Inserir o numero no index
+                        vector[posiNum] = num;
+
+                        // Vetor Ordenado
+                        printf("\n\n===========NOVO VETOR===========");
+                        ShowVector(vector);
+                    }
+                    else
+                        printf("\nO NUMERO INFORMADO EXISTE NA POSICAO V[%d]. POR FAVOR DIGITE OUTRO!!!\n", indexNum, vector[indexNum]);
+                }while(indexNum != -1);
+
+            }
+
+            printf("\nAPERTE QUALQUER TECLA PARA VOLTAR PARA O MENU ");
+            getch();
+        }
+    }while(option != 3);
 
     // FINALIZAR PROGRAMA
     printf ("\n\n\n FIM DO PROGRAMA - VAI EMBORA DAQUI :/ \n\n\n");

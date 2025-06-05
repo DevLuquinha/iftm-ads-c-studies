@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1748903937 source:c:\users\lucas\onedrive\desktop\estudo c\01_lista_exercicios\06_vetores\05_personalizado\02_inserir e excluir numeros\inserir e excluir numeros\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<math.h>
+	<time.h>
+	<windows.h>
+	<conio.h>
+
