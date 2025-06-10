@@ -30,9 +30,25 @@
 //===============================================================
 
 //===============================================================
+void GetName(char name[])
+{
+    // Receber o nome do usuário
+    printf("\nDigite o seu nome: ");
+    fflush(stdin);
+    gets(name);
 
+}
 //===============================================================
-
+void FillMatriz(float matriz[][col])
+{
+    for(int r = 0; r < row; r++)
+    {
+        for(int c = 0; c < col; c++)
+        {
+            matriz[r][c] = rand() % 50;
+        }
+    }
+}
 //===============================================================
 void ClearMatriz(float matriz[][col])
 {
@@ -61,17 +77,37 @@ void ShowMatriz(float matriz[][col])
 //===============================================================
 int main()
 {
-    // CRIAR VARIAVEIS
+    // Criar variáveis
     float matriz[row][col];
+    char name[100];
 
+    // Limpar a matriz e as variáveis
     ClearMatriz(matriz);
+    fflush(stdin);
+    strcpy(name, "");
 
+    // Exibir Matriz
+    printf("============================\n");
     printf(" MATRIZ NA FORMA DE ENTRADA");
     printf("\n============================\n");
 
     ShowMatriz(matriz);
-
     printf("============================");
+
+    FillMatriz(matriz);
+
+    printf("\n     MATRIZ PREENCHIDA");
+    printf("\n============================\n");
+
+    ShowMatriz(matriz);
+    printf("============================");
+
+    // Receber nome
+    GetName(name);
+
+    // Exibir nome
+    printf("\nSeu nome: %s", name);
+
     // FINALIZAR PROGRAMA
     printf ("\n\n\n FIM DO PROGRAMA - VAI EMBORA DAQUI :/ \n\n\n");
 
