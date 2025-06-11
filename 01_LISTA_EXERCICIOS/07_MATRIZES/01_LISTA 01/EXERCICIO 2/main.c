@@ -1,6 +1,6 @@
 /*===============================================================
     CURSO: ANALISE E DESENVOLVIMENTO DE SISTEMAS - ADS
-    1∫ PERÕODO - DISCIPLINA DE ALGORITMO E L”GICA DE PROGRAMA«√O
+    1¬∫ PER√çODO - DISCIPLINA DE ALGORITMO E L√ìGICA DE PROGRAMA√á√ÉO
     Nome do aluno(a): Lucas Emmanuel Rodrigues Firmino de Paula
     1 SEMESTRE 2025
     Prof. Ernani Claudio Borges
@@ -26,7 +26,7 @@
 //===============================================================
 
 //===============================================================
-//============== LOCAL PARA CRIAR OS M”DULOS DE FUN«’ES =========
+//============== LOCAL PARA CRIAR OS M√ìDULOS DE FUN√á√ïES =========
 //===============================================================
 
 //===============================================================
@@ -45,7 +45,7 @@ void GetName(char name[])
     system("cls");
 }
 //===============================================================
-void FillMatriz(float matriz[][col])
+void FillMatriz(int matriz[][col])
 {
     for(int r = 0; r < row; r++)
     {
@@ -56,7 +56,7 @@ void FillMatriz(float matriz[][col])
     }
 }
 //===============================================================
-void ClearMatriz(float matriz[][col])
+void ClearMatriz(int matriz[][col])
 {
     for(int r = 0; r < row; r++)
     {
@@ -67,28 +67,28 @@ void ClearMatriz(float matriz[][col])
     }
 }
 //===============================================================
-void ShowMatriz(float matriz[][col])
+void ShowMatriz(int matriz[][col])
 {
     for(int r = 0; r < row; r++)
     {
         for(int c = 0; c < col; c++)
         {
-            printf("%9.0f ", matriz[r][c]);
-            Sleep(5);
+            printf("%9d ", matriz[r][c]);
+            Sleep(50);
         }
         printf("\n");
     }
 }
 //===============================================================
-void ClearVectorRow(float vector[], int length)
+void ClearVectorRow(int vector[], int length)
 {
     for(int i = 0; i < length; i++)
         vector[i] = 0.0;
 }
 //===============================================================
-void GetVectorRow(float matriz[][row], float vector[], int length)
+void GetVectorRow(int matriz[][row], int vector[], int length)
 {
-    float sum = 0;
+    int sum = 0;
 
     for(int r = 0; r < row; r++)
     {
@@ -101,31 +101,31 @@ void GetVectorRow(float matriz[][row], float vector[], int length)
     }
 }
 //===============================================================
-void ShowVectorRow(float vector[], int length)
+void ShowVectorRow(int vector[], int length)
 {
     printf("\nVETOR LINHAS:  [ ");
 
     for(int i = 0; i < length; i++)
     {
         if(i + 1 == length)
-            printf("%.0f ]", vector[i]);
+            printf("%d ]", vector[i]);
         else
-            printf("%.0f, ", vector[i]);
+            printf("%d, ", vector[i]);
 
         Sleep(100);
     }
 }
 //===============================================================
 //===============================================================
-void ClearVectorColumn(float vector[], int length)
+void ClearVectorColumn(int vector[], int length)
 {
     for(int i = 0; i < length; i++)
         vector[i] = 0.0;
 }
 //===============================================================
-void GetVectorColumn(float matriz[][row], float vector[], int length)
+void GetVectorColumn(int matriz[][row], int vector[], int length)
 {
-    float sum = 0;
+    int sum = 0;
 
     for(int c = 0; c < col; c++)
     {
@@ -138,34 +138,30 @@ void GetVectorColumn(float matriz[][row], float vector[], int length)
     }
 }
 //===============================================================
-void ShowVectorColumn(float vector[], int length)
+void ShowVectorColumn(int vector[], int length)
 {
     printf("\nVETOR COLUNAS: [ ");
 
     for(int i = 0; i < length; i++)
     {
         if(i + 1 == length)
-            printf("%.0f ]", vector[i]);
+            printf("%d ]", vector[i]);
         else
-            printf("%.0f, ", vector[i]);
+            printf("%d, ", vector[i]);
 
         Sleep(100);
     }
 }
 //===============================================================
-float SumAllElements(float matriz[][row])
+void SumMatrices(int matrizA[][row], int matrizB[][row], int matrizResult[][row])
 {
-    float sum = 0;
-
     for(int r = 0; r < row; r++)
     {
         for(int c = 0; c < col; c++)
         {
-            sum += matriz[r][c];
+            matrizResult[r][c] = matrizA[r][c] + matrizB[r][c];
         }
     }
-
-    return sum;
 }
 //===============================================================
 //===============================================================
@@ -173,15 +169,21 @@ float SumAllElements(float matriz[][row])
 //===============================================================
 int main()
 {
-    // Criar vari·veis
-    float matriz[row][col];
+    // Criar vari√°veis
+    int matrizA[row][col];
+    int matrizB[row][col];
+    int matrizC[row][col];
+
     char name[100];
     float sumVecRows[row];
     float sumVecCols[col];
-    float totSum;
 
-    // Limpar a matriz e as vari·veis
-    ClearMatriz(matriz);
+    float totSum; // Apagar
+
+    // Limpar as matrizes e as vari√°veis
+    ClearMatriz(matrizA);
+    ClearMatriz(matrizB);
+    ClearMatriz(matrizC);
 
     fflush(stdin);
     strcpy(name, "");
@@ -189,41 +191,56 @@ int main()
     ClearVectorRow(sumVecRows, row);
     ClearVectorColumn(sumVecCols, col);
 
-    // Atribuir a variavel por referÍncia
+    // Atribuir a variavel por refer√™ncia
     GetName(name);
 
-    // LÛgica crÌtica
-    FillMatriz(matriz);
-    GetVectorRow(matriz, sumVecRows, row);
-    GetVectorColumn(matriz, sumVecCols, col);
-    totSum = SumAllElements(matriz);
+    // L√≥gica cr√≠tica
+    FillMatriz(matrizA);
+    FillMatriz(matrizB);
+    SumMatrices(matrizA, matrizB, matrizC);
 
-    // ExibiÁ„o do video
+//    GetVectorRow(matriz, sumVecRows, row);
+//    GetVectorColumn(matriz, sumVecCols, col);
+//    totSum = SumAllElements(matriz);
+
+    // Exibi√ß√£o do video
     printf("=======================================================");
     printf("\nOla meu querido usuario(a): %s", name);
     printf("\n=======================================================");
 
-    printf("\n              MATRIZ NA FORMA DE ENTRADA");
+    printf("\n                       MATRIZ A");
     printf("\n=======================================================\n");
 
-    ShowMatriz(matriz);
+    ShowMatriz(matrizA);
     printf("=======================================================");
 
-    printf("\n               VETOR DA SOMA DAS LINHAS");
-    printf("\n=======================================================");
+    printf("\n                       MATRIZ B");
+    printf("\n=======================================================\n");
 
-    ShowVectorRow(sumVecRows, row);
+    ShowMatriz(matrizB);
+    printf("=======================================================");
 
-    printf("\n=======================================================");
+    printf("\n                       MATRIZ C");
+    printf("\n=======================================================\n");
 
-    printf("\n               VETOR DA SOMA DAS COLUNAS");
-    printf("\n=======================================================");
+    ShowMatriz(matrizC);
+    printf("=======================================================");
 
-    ShowVectorColumn(sumVecCols, col);
-
-    printf("\n=======================================================");
-
-    printf("\nA soma de todos os elementos da matriz: %.0f", totSum);
+//    printf("\n               VETOR DA SOMA DAS LINHAS");
+//    printf("\n=======================================================");
+//
+//    ShowVectorRow(sumVecRows, row);
+//
+//    printf("\n=======================================================");
+//
+//    printf("\n               VETOR DA SOMA DAS COLUNAS");
+//    printf("\n=======================================================");
+//
+//    ShowVectorColumn(sumVecCols, col);
+//
+//    printf("\n=======================================================");
+//
+//    printf("\nA soma de todos os elementos da matriz: %.0f", totSum);
 
     // FINALIZAR PROGRAMA
     printf ("\n\n\n FIM DO PROGRAMA - VAI EMBORA DAQUI :/ \n\n\n");
