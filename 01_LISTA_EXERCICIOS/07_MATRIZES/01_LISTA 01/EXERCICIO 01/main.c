@@ -19,8 +19,8 @@
 #include <time.h>
 #include <windows.h>
 #include <conio.h>
-#define row 5
-#define col 5
+#define row 50
+#define col 50
 //===============================================================
 //============== LOCAL PARA DECLARAR OS PROTOTIPOS ==============
 //===============================================================
@@ -103,7 +103,7 @@ void GetVectorRow(float matriz[][row], float vector[], int length)
 //===============================================================
 void ShowVectorRow(float vector[], int length)
 {
-    printf("\nVETOR LINHAS: [ ");
+    printf("\nVETOR LINHAS:  [ ");
 
     for(int i = 0; i < length; i++)
     {
@@ -114,11 +114,6 @@ void ShowVectorRow(float vector[], int length)
 
         Sleep(100);
     }
-
-//    for(int i = 0; i < length; i++)
-//    {
-//        printf("\n%.0f", vector[i]);
-//    }
 }
 //===============================================================
 //===============================================================
@@ -158,6 +153,21 @@ void ShowVectorColumn(float vector[], int length)
     }
 }
 //===============================================================
+float SumAllElements(float matriz[][row])
+{
+    float sum = 0;
+
+    for(int r = 0; r < row; r++)
+    {
+        for(int c = 0; c < col; c++)
+        {
+            sum += matriz[r][c];
+        }
+    }
+
+    return sum;
+}
+//===============================================================
 //===============================================================
 //==============  CODIGO PRINCIPAL ==============================
 //===============================================================
@@ -168,6 +178,7 @@ int main()
     char name[100];
     float sumVecRows[row];
     float sumVecCols[col];
+    float totSum;
 
     // Limpar a matriz e as variáveis
     ClearMatriz(matriz);
@@ -181,14 +192,16 @@ int main()
     // Atribuir a variavel por referência
     GetName(name);
 
+    // Lógica crítica
+    FillMatriz(matriz);
+    GetVectorRow(matriz, sumVecRows, row);
+    GetVectorColumn(matriz, sumVecCols, col);
+    totSum = SumAllElements(matriz);
+
     // Exibição do video
     printf("=======================================================");
     printf("\nOla meu querido usuario(a): %s", name);
     printf("\n=======================================================");
-
-    FillMatriz(matriz);
-    GetVectorRow(matriz, sumVecRows, row);
-    GetVectorColumn(matriz, sumVecCols, col);
 
     printf("\n              MATRIZ NA FORMA DE ENTRADA");
     printf("\n=======================================================\n");
@@ -209,6 +222,9 @@ int main()
     ShowVectorColumn(sumVecCols, col);
 
     printf("\n=======================================================");
+
+    printf("\nA soma de todos os elementos da matriz: %.0f", totSum);
+
     // FINALIZAR PROGRAMA
     printf ("\n\n\n FIM DO PROGRAMA - VAI EMBORA DAQUI :/ \n\n\n");
 
