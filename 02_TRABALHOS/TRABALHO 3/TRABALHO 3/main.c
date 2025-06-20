@@ -164,6 +164,8 @@ void SortMatriz(int matriz[][col], int rowLen, int colLen)
     int j, jAux = 0;
     int num;
 
+    int qtdNum;
+
     do
     {
         jAux = 0;
@@ -176,13 +178,6 @@ void SortMatriz(int matriz[][col], int rowLen, int colLen)
                 j = 0;
                 num = matriz[iAux][jAux];
 
-                if(i == 0 && j == 0)
-                {
-                    printf("\n=============================");
-                    printf("\nTROCOU DE NUMERO, AGORA EH: %d", num);
-                    printf("\n=============================");
-                }
-
                 do
                 {
                     printf("\nMAT[%d][%d]: %d <=> NUM[%d][%d]: %d", i, j, matriz[i][j], iAux, jAux, num);
@@ -194,8 +189,14 @@ void SortMatriz(int matriz[][col], int rowLen, int colLen)
                 i++;
             }while(i < rowLen);
 
+            printf("\n==========CHEGOU 1==========");
+            printf("\nTROCOU DE NUMERO: ");
+
             jAux++;
         }while(jAux < colLen);
+
+        printf("\n==========CHEGOU 2==========");
+        printf("\nTROCOU DE LINHA");
 
         iAux++;
     }while(iAux < rowLen);
