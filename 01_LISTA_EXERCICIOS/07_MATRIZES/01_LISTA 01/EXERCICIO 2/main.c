@@ -24,7 +24,14 @@
 //===============================================================
 //============== LOCAL PARA DECLARAR OS PROTOTIPOS ==============
 //===============================================================
-
+void GetName(char name[]);
+void FillMatriz(int matriz[][col]);
+void ClearMatriz(int matriz[][col]);
+void ShowMatriz(int matriz[][col]);
+void ClearVectorColumn(int vector[], int length);
+void GetVectorColumn(int matriz[][row], int vector[], int length);
+void ShowVectorColumn(int vector[], int length);
+void SumMatrices(int matrizA[][row], int matrizB[][row], int matrizResult[][row]);
 //===============================================================
 //============== LOCAL PARA CRIAR OS MÓDULOS DE FUNÇÕES =========
 //===============================================================
@@ -80,43 +87,6 @@ void ShowMatriz(int matriz[][col])
     }
 }
 //===============================================================
-void ClearVectorRow(int vector[], int length)
-{
-    for(int i = 0; i < length; i++)
-        vector[i] = 0.0;
-}
-//===============================================================
-void GetVectorRow(int matriz[][row], int vector[], int length)
-{
-    int sum = 0;
-
-    for(int r = 0; r < row; r++)
-    {
-        sum = 0;
-
-        for(int c = 0; c < col; c++)
-            sum += matriz[r][c];
-
-        vector[r] = sum;
-    }
-}
-//===============================================================
-void ShowVectorRow(int vector[], int length)
-{
-    printf("\nVETOR LINHAS:  [ ");
-
-    for(int i = 0; i < length; i++)
-    {
-        if(i + 1 == length)
-            printf("%d ]", vector[i]);
-        else
-            printf("%d, ", vector[i]);
-
-        Sleep(100);
-    }
-}
-//===============================================================
-//===============================================================
 void ClearVectorColumn(int vector[], int length)
 {
     for(int i = 0; i < length; i++)
@@ -169,16 +139,15 @@ void SumMatrices(int matrizA[][row], int matrizB[][row], int matrizResult[][row]
 //===============================================================
 int main()
 {
-    // Criar variáveis
+    // Matrizes do Exercicio
     int matrizA[row][col];
     int matrizB[row][col];
     int matrizC[row][col];
 
     char name[100];
-    float sumVecRows[row];
-    float sumVecCols[col];
 
-    float totSum; // Apagar
+    float sumEvenRows = 0;
+    float sumOddColumns = 0;
 
     // Limpar as matrizes e as variáveis
     ClearMatriz(matrizA);
@@ -188,8 +157,8 @@ int main()
     fflush(stdin);
     strcpy(name, "");
 
-    ClearVectorRow(sumVecRows, row);
-    ClearVectorColumn(sumVecCols, col);
+//    ClearV ectorRow(sumVecRows, row);
+//    ClearVectorColumn(sumVecCols, col);
 
     // Atribuir a variavel por referência
     GetName(name);

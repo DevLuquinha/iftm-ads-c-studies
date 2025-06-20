@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1750445005 source:c:\users\lucas\onedrive\desktop\estudo c\02_trabalhos\trabalho 3\trabalho 3\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<math.h>
+	<time.h>
+	<windows.h>
+	<conio.h>
+
