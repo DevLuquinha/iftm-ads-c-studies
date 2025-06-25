@@ -236,7 +236,7 @@ int main()
 
     ShowMatriz(matriz, rows, columns);
 
-    SortMatriz(matriz, rows, columns);
+    // SortMatriz(matriz, rows, columns);
     // Finalizar Programa
     printf ("\n\n\n FIM DO PROGRAMA - VAI EMBORA DAQUI :/ \n\n\n");
     return 0;
