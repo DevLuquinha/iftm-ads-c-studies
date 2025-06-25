@@ -19,20 +19,20 @@
 #include <time.h>
 #include <windows.h>
 #include <conio.h>
-#define row 50
-#define col 50
+#define ROW 50
+#define COLUMN 50
 //===============================================================
 //============== LOCAL PARA DECLARAR OS PROTOTIPOS ==============
 //===============================================================
-void ClearMatriz(int matriz[][col], int rowLen, int colLen);
-void ShowMatriz(int matriz[][col], int rowLen, int colLen);
+void ClearMatriz(int matriz[][COLUMN], int rowLen, int colLen);
+void ShowMatriz(int matriz[][COLUMN], int rowLen, int colLen);
 int GetDimension();
 void GetName(char name[100]);
-void FillMatriz(int matriz[][col], int rowLen, int colLen);
+void FillMatriz(int matriz[][COLUMN], int rowLen, int colLen);
 //===============================================================
 //============== LOCAL PARA CRIAR OS MÓDULOS DE FUNÇÕES =========
 //===============================================================
-void ClearMatriz(int matriz[][col], int rowLen, int colLen)
+void ClearMatriz(int matriz[][COLUMN], int rowLen, int colLen)
 {
     for(int i = 0; i < rowLen; i++)
     {
@@ -43,9 +43,9 @@ void ClearMatriz(int matriz[][col], int rowLen, int colLen)
     }
 }
 //===============================================================
-void ShowMatriz(int matriz[][col], int rowLen, int colLen)
+void ShowMatriz(int matriz[][COLUMN], int rowLen, int colLen)
 {
-    system("cls");
+
     printf("===========================================================");
     printf("\n                       MATRIZ %dx%d", rowLen, colLen);
     printf("\n===========================================================\n");
@@ -102,7 +102,7 @@ void GetName(char name[100])
     }while(strcmp(name, "") == 0);
 }
 //===============================================================
-void FillMatriz(int matriz[][col], int rowLen, int colLen)
+void FillMatriz(int matriz[][COLUMN], int rowLen, int colLen)
 {
     int num;
 
@@ -121,7 +121,7 @@ void FillMatriz(int matriz[][col], int rowLen, int colLen)
     }
 }
 //===============================================================
-void ShowRepeatedNumbers(int matriz[][col], int rowLen, int colLen)
+void ShowRepeatedNumbers(int matriz[][COLUMN], int rowLen, int colLen)
 {
     int isRepeated = 0;  // False
     int repeatedNum = 0; // Nenhum numero repetido por padrão
@@ -158,48 +158,41 @@ void ShowRepeatedNumbers(int matriz[][col], int rowLen, int colLen)
     }
 }
 //===============================================================
-void SortMatriz(int matriz[][col], int rowLen, int colLen)
+void SortMatriz(int matriz[][COLUMN], int rowLen, int colLen)
 {
-    int i, iAux = 0;
-    int j, jAux = 0;
-    int num;
-
-    int qtdNum;
-
-    do
+    int auxNum;
+    int i;
+    int j;
+    for(int indexElem = 1; indexElem <= rowLen * colLen; indexElem++)
     {
-        jAux = 0;
-        do
+        for(i = 0; i < rowLen; i++)
         {
-            i = 0;
-
-            do
+            for(j = 0; j < colLen - 1; j++) // col - 1 pois será compensado com o j + 1
             {
-                j = 0;
-                num = matriz[iAux][jAux];
-
-                do
+                // Elemento atual ser maior que o da frente
+                // Troca de lugar com o da frente
+                auxNum = 0;
+                if(matriz[i][j] > matriz[i][j+1])
                 {
-                    printf("\nMAT[%d][%d]: %d <=> NUM[%d][%d]: %d", i, j, matriz[i][j], iAux, jAux, num);
-                    getch();
+                    auxNum = matriz[i][j];
+                    matriz[i][j] = matriz[i][j+1];
+                    matriz[i][j+1] = auxNum;
+                }
+            }
 
-                    j++;
-                }while(j < colLen);
-
-                i++;
-            }while(i < rowLen);
-
-            printf("\n==========CHEGOU 1==========");
-            printf("\nTROCOU DE NUMERO: ");
-
-            jAux++;
-        }while(jAux < colLen);
-
-        printf("\n==========CHEGOU 2==========");
-        printf("\nTROCOU DE LINHA");
-
-        iAux++;
-    }while(iAux < rowLen);
+            // Caso o i == rowLen, não entra
+            if(i < rowLen - 1)
+            {
+                // Verificar o ultimo elemento é maior que o da linha debaixo
+                if(matriz[i][j] > matriz[i+1][0])
+                {
+                    auxNum = matriz[i][j];
+                    matriz[i][j] = matriz[i+1][0];
+                    matriz[i+1][0] = auxNum;
+                }
+            }
+        }
+    }
 }
 //===============================================================
 //===============================================================
@@ -209,12 +202,12 @@ void SortMatriz(int matriz[][col], int rowLen, int colLen)
 int main()
 {
     // Criar Variaveis
-    int matriz[row][col];
+    int matriz[ROW][COLUMN];
     int rows, columns = 0;
     char name[100];
 
     // Limpar a matriz base 50x50
-    ClearMatriz(matriz, row, col);
+    ClearMatriz(matriz, ROW, COLUMN);
 
     printf("Digite a quantidade de LINHAS da matriz");
     printf("\n==========================================");
@@ -234,9 +227,14 @@ int main()
 
     // printf("\nOLA %s. A matriz de dimensao [%d][%d]\n", name, rows, columns);
 
+    system("cls");
     ShowMatriz(matriz, rows, columns);
 
-    // SortMatriz(matriz, rows, columns);
+    SortMatriz(matriz, rows, columns);
+
+    printf("MATRIZ ORDENADA \n");
+
+    ShowMatriz(matriz, rows, columns);
     // Finalizar Programa
     printf ("\n\n\n FIM DO PROGRAMA - VAI EMBORA DAQUI :/ \n\n\n");
     return 0;
