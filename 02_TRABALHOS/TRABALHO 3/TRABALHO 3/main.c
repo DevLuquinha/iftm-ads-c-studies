@@ -21,6 +21,7 @@
 #include <conio.h>
 #define ROW 50
 #define COLUMN 50
+#define RANGE 15
 //===============================================================
 //============== LOCAL PARA DECLARAR OS PROTOTIPOS ==============
 //===============================================================
@@ -113,7 +114,7 @@ void FillMatriz(int matriz[][COLUMN], int rowLen, int colLen)
             num = 0;
             do
             {
-                num = rand() % 15;
+                num = rand() % RANGE;
             }while(num <= 0);
 
             matriz[i][j] = num;
@@ -202,6 +203,8 @@ void ShowRepeatedNumbers(int matriz[][COLUMN], int rowLen, int colLen)
     }
     if(existRepeatedNumber == 0)
         printf("\nInfelizmente, nao existe numero repetido na matriz!");
+
+    printf("\n===========================================================");
 }
 //===============================================================
 void SortMatriz(int matriz[][COLUMN], int rowLen, int colLen)
@@ -247,38 +250,77 @@ void SortMatriz(int matriz[][COLUMN], int rowLen, int colLen)
 //===============================================================
 int main()
 {
-    // Criar Variaveis
+    // Declaração Variaveis
+    int generateNewMatriz = 0;
+    int keyPressed = 0;
     int matriz[ROW][COLUMN];
     int rows, columns = 0;
     char name[100];
 
-    // Limpar a matriz base 50x50
-    ClearMatriz(matriz, ROW, COLUMN);
+    // Setar o rand como aleatorio
+    srand(time(NULL));
 
-    printf("Digite a quantidade de LINHAS da matriz");
-    printf("\n==========================================");
-    rows = GetDimension();
+    // Inicio do Trabalho
+    printf("====================== TRABALHO 03 =====================");
 
-    printf("\n==========================================");
+    GetName(name);
 
-    printf("\nDigite a quantidade de COLUNAS da matriz");
-    printf("\n==========================================");
-    columns = GetDimension();
+    printf("========================================================\n");
+    do
+    {
+        ClearMatriz(matriz, ROW, COLUMN);
 
-    // GetName(name);
+        printf("%s, digite a quantidade de LINHAS da matriz", name);
+        printf("\n========================================================");
+        rows = GetDimension();
 
-    FillMatriz(matriz, rows, columns);
+        printf("========================================================");
 
-    // Mostrar quais numeros aparecem repetidas vezes
+        printf("\n%s, digite a quantidade de COLUNAS da matriz", name);
+        printf("\n========================================================");
+        columns = GetDimension();
 
-    // printf("\nOLA %s. A matriz de dimensao [%d][%d]\n", name, rows, columns);
+        FillMatriz(matriz, rows, columns);
 
-    system("cls");
-    ShowMatriz(matriz, rows, columns);
+        system("cls");
+        ShowMatriz(matriz, rows, columns);
 
-    ShowRepeatedNumbers(matriz, rows, columns);
+        ShowRepeatedNumbers(matriz, rows, columns);
+
+        printf("\n%s, deseja gerar uma nova matriz?", name);
+        printf("\nGerar matriz..........[ENTER]");
+        printf("\nFinalizar programa....[ESC]\n");
+
+        do
+        {
+            keyPressed = getch();
+        }while(keyPressed != 13 && keyPressed != 27);
+
+        if(keyPressed == 27)
+        {
+            generateNewMatriz = 0;
+            printf("\n\nVc que manda %s, finalizando o programa....:\n", name);
+            for(int i = 0; i < 56; i++)
+            {
+                printf("%c", 219);
+                Sleep(25);
+            }
+        }
+
+        if(keyPressed == 13)
+        {
+            generateNewMatriz = 1;
+            printf("\nBeleza %s, reiniciando programa....:\n", name);
+            for(int i = 0; i < 40; i++)
+            {
+                printf("%c", 219);
+                Sleep(25);
+            }
+            system("cls");
+        }
+    }while(generateNewMatriz == 1);
 
     // Finalizar Programa
-    printf ("\n\n\n FIM DO PROGRAMA - VAI EMBORA DAQUI :/ \n\n\n");
+    printf ("\n\nFIM DO TRABALHO 03 - OBRIGADO POR TESTAR :) \n\n\n");
     return 0;
 }
