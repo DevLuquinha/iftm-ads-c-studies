@@ -208,7 +208,46 @@ void ShowRepeatedNumbers(int matriz[][COLUMN], int rowLen, int colLen)
     printf("\n===========================================================");
 }
 //===============================================================
-//===================== CODIGO PRINCIPAL ========================
+void SortMatriz(int matriz[][COLUMN], int rowLen, int colLen)
+{
+    int auxNum;
+    int i;
+    int j;
+    for(int indexElem = 1; indexElem <= rowLen * colLen; indexElem++)
+    {
+        for(i = 0; i < rowLen; i++)
+        {
+            for(j = 0; j < colLen - 1; j++) // col - 1 pois será compensado com o j + 1
+            {
+                // Elemento atual ser maior que o da frente
+                // Troca de lugar com o da frente
+                auxNum = 0;
+                if(matriz[i][j] > matriz[i][j+1])
+                {
+                    auxNum = matriz[i][j];
+                    matriz[i][j] = matriz[i][j+1];
+                    matriz[i][j+1] = auxNum;
+                }
+            }
+
+            // Caso o i == rowLen, não entra
+            if(i < rowLen - 1)
+            {
+                // Verificar o ultimo elemento é maior que o da linha debaixo
+                if(matriz[i][j] > matriz[i+1][0])
+                {
+                    auxNum = matriz[i][j];
+                    matriz[i][j] = matriz[i+1][0];
+                    matriz[i+1][0] = auxNum;
+                }
+            }
+        }
+    }
+}
+//===============================================================
+//===============================================================
+//===============================================================
+//==============  CODIGO PRINCIPAL ==============================
 //===============================================================
 int main()
 {
@@ -222,7 +261,7 @@ int main()
     // Setar o rand() como aleatorio
     srand(time(NULL));
 
-    printf("====================== TRABALHO 03 =====================");
+    printf("====================== ORDENAR MATRIZ =====================");
 
     GetName(name);
 
@@ -246,7 +285,11 @@ int main()
         system("cls");
         ShowMatriz(matriz, rows, columns);
 
-        ShowRepeatedNumbers(matriz, rows, columns);
+        SortMatriz(matriz, rows, columns);
+
+        printf("\n");
+
+        ShowMatriz(matriz, rows, columns);
 
         printf("\n%s, deseja gerar uma nova matriz?", name);
         printf("\nGerar matriz..........[ENTER]");
@@ -282,6 +325,6 @@ int main()
     }while(generateNewMatriz == 1);
 
     // Finalizar Programa
-    printf ("\n\nFIM DO TRABALHO 03 - OBRIGADO POR TESTAR :) \n\n\n");
+    printf ("\n\nOBRIGADO POR TESTAR :) \n\n\n");
     return 0;
 }
