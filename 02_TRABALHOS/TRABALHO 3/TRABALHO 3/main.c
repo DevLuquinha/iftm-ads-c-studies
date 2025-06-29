@@ -59,7 +59,7 @@ void ShowMatriz(int matriz[][COLUMN], int rowLen, int colLen)
         }
         printf("\n");
     }
-    printf("===========================================================\n");
+    printf("===========================================================");
 }
 //===============================================================
 int GetDimension()
@@ -124,62 +124,84 @@ void FillMatriz(int matriz[][COLUMN], int rowLen, int colLen)
 void ShowRepeatedNumbers(int matriz[][COLUMN], int rowLen, int colLen)
 {
     int currentElem = 0;
+    int existRepeatedNumber = 0;
     int countEquals = 0;
     int auxI, auxJ = 0;
-    int isCounted = 0;
+    int isThereBack = 0; // Existe numero para trás?
+
     for(int i = 0; i < rowLen; i++)
     {
         for(int j = 0; j < colLen; j++)
         {
             currentElem = matriz[i][j];
-            isCounted = 0;
-            printf("\nO Elemento atual [%d][%d]: %d", i, j, currentElem);
-            getch();
+            isThereBack = 0;
+
             //===============================================
             // BLOCO VERIFICAÇÃO ANTES DO NUMERO SELECIONADO
             //===============================================
-            auxI = i - i; // Sempre eh 0, aqui está o pulo do gato
-            auxJ = j - j;
 
-            while(auxI <= i)
+            auxJ = 0;
+            for(auxI = 0; auxI < rowLen; auxI++)
             {
-                while(auxJ < j)
+                if(auxJ == colLen)
+                    auxJ = 0;
+
+                while(auxJ < colLen)
                 {
-                    printf("\nAUX: [%d][%d]", auxI, auxJ);
+                    // Caso exista um numero igual, atribui como verdadeiro
+                    if(currentElem == matriz[auxI][auxJ])
+                    {
+                        if(auxI != i || auxJ != j)
+                            isThereBack = 1;
+                    }
+
+                    // Caso chegue na posição do elemento, finaliza o laço
+                    if(auxI == i && auxJ == j)
+                    {
+                        auxI = rowLen;
+                        auxJ = colLen;
+                    }
                     auxJ++;
                 }
-                auxI++;
             }
 
-            //================================================
-            // BLOCO VERIFICAÇÃO DEPOIS DO NUMERO SELECIONADO
-            //================================================
-//            auxJ = j;
-//            countEquals = 1;
-//
-//            for(auxI = i; auxI < rowLen; auxI++)
-//            {
-//                // Caso chegue no final da linha, quebra pra debaixo
-//                if(auxJ == colLen)
-//                    auxJ = 0;
-//
-//                while(auxJ < colLen)
-//                {
-//                    // Existe um outro igual
-//                    if(currentElem == matriz[auxI][auxJ])
-//                    {
-//                        if(auxI != i || auxJ != j)
-//                            countEquals++;
-//                        //printf("\nEXISTE UM IGUAL NA POSICAO [%d][%d]", auxI, auxJ);
-//                    }
-//                    auxJ++;
-//                }
-//            }
-//
-//            if(countEquals > 1)
-//                printf("\nO numero %d aparece %d vezes;", currentElem, countEquals);
+            // Caso não exista numero iguais para trás
+            if(isThereBack == 0)
+            {
+                //================================================
+                // BLOCO VERIFICAÇÃO DEPOIS DO NUMERO SELECIONADO
+                //================================================
+                auxJ = j;
+                countEquals = 1;
+
+                for(auxI = i; auxI < rowLen; auxI++)
+                {
+                    // Caso chegue no final da linha, quebra pra debaixo
+                    if(auxJ == colLen)
+                        auxJ = 0;
+
+                    while(auxJ < colLen)
+                    {
+                        // Existe um outro igual
+                        if(currentElem == matriz[auxI][auxJ])
+                        {
+                            if(auxI != i || auxJ != j)
+                                countEquals++;
+                        }
+                        auxJ++;
+                    }
+                }
+
+                if(countEquals > 1)
+                {
+                    printf("\nO numero %d aparece %d vezes;", currentElem, countEquals);
+                    existRepeatedNumber = 1;
+                }
+            }
         }
     }
+    if(existRepeatedNumber == 0)
+        printf("\nInfelizmente, nao existe numero repetido na matriz!");
 }
 //===============================================================
 void SortMatriz(int matriz[][COLUMN], int rowLen, int colLen)
@@ -255,6 +277,7 @@ int main()
     ShowMatriz(matriz, rows, columns);
 
     ShowRepeatedNumbers(matriz, rows, columns);
+
     // Finalizar Programa
     printf ("\n\n\n FIM DO PROGRAMA - VAI EMBORA DAQUI :/ \n\n\n");
     return 0;
