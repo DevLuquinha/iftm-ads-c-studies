@@ -54,6 +54,14 @@ Account GetAccount()
     return account;
 }
 
+void ShowAccountData(Account account)
+{
+    printf("\n=================================================");
+    printf("\nNUMERO DA CONTA: %i", account.num);
+    printf("\nNOME DA CONTA:   %s", account.name);
+    printf("\nSALDO DA CONTA:  R$%.2f", account.balance);
+}
+
 int main()
 {
     // Inicializar contas
@@ -63,7 +71,8 @@ int main()
     account1 = GetAccount();
 
     // Mostrar os dados de cada conta
-    printf("\nNumero: %i, Nome: %s, Salario: %.2f", account1.num, account1.name, account1.balance);
+    printf("\nCONTA 1:");
+    ShowAccountData(account1);
     return 0;   
 }
 
