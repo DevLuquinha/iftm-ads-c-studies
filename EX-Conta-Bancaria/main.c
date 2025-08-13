@@ -10,21 +10,46 @@ struct account
 };
 typedef struct account Account;
 
+int GetNumber()
+{
+    int num;
+
+    printf("\nDigite um numero: ");
+    fflush(stdin);
+    scanf("%i", &num);
+
+    return num;
+}
+
+void GetName(char nameOut[30])
+{
+    char name[30];
+
+    printf("\nDigite um nome: ");
+    fflush(stdin);
+    gets(name);
+
+    strcpy(nameOut, name);
+}
+
+float GetBalance()
+{
+    float balance;
+
+    printf("\nDigite o saldo: ");
+    fflush(stdin);
+    scanf("%f", &balance);
+
+    return balance;
+}
+
 Account GetAccount()
 {
     Account account;
 
-    // Atribui a propriedade num
-    fflush(stdin);
-    scanf("%i", &account.num);
-
-    // Atribui a propriedade name
-    fflush(stdin);
-    gets(account.name);
-
-    // Atribui a propriedade balance
-    fflush(stdin);
-    scanf("%f", &account.balance);
+    account.num = GetNumber();
+    GetName(account.name);
+    account.balance = GetBalance();
 
     return account;
 }
@@ -37,11 +62,12 @@ int main()
     // Ler os dados de duas contas
     account1 = GetAccount();
 
+    // Mostrar os dados de cada conta
+    printf("\nNumero: %i, Nome: %s, Salario: %.2f", account1.num, account1.name, account1.balance);
     return 0;   
 }
 
 // Esse programa deve:
-// Mostrar os dados de cada conta
 // Permitir que se realize uma transferência de valores de uma conta para a outra
 // Mostrar os dados de cada conta novamente
 
