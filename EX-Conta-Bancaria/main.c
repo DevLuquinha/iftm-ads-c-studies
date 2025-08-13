@@ -25,7 +25,7 @@ void GetName(char nameOut[30])
 {
     char name[30];
 
-    printf("\nDigite um nome: ");
+    printf("Digite um nome: ");
     fflush(stdin);
     gets(name);
 
@@ -36,7 +36,7 @@ float GetBalance()
 {
     float balance;
 
-    printf("\nDigite o saldo: ");
+    printf("Digite o saldo: ");
     fflush(stdin);
     scanf("%f", &balance);
 
@@ -68,11 +68,20 @@ int main()
     Account account1, account2;
 
     // Ler os dados de duas contas
+    printf("DIGITE OS DADOS DA CONTA 1:");
     account1 = GetAccount();
-
+    
+    printf("\nDIGITE OS DADOS DA CONTA 2:");
+    account2 = GetAccount();
+    
     // Mostrar os dados de cada conta
+    printf("\n=================================================");
     printf("\nCONTA 1:");
     ShowAccountData(account1);
+
+    printf("\n=================================================");
+    printf("\nCONTA 2:");
+    ShowAccountData(account2);
     return 0;   
 }
 
