@@ -84,9 +84,6 @@ void ShowAccountData(Account account)
 
 Account RemoveValue(Account account, float value)
 {
-    printf("\n=================================================");
-    printf("\nVALOR CONTA 1: %.2f", account.balance);
-    printf("\n=================================================");
     account.balance -= value;
 
     return account;
@@ -94,10 +91,6 @@ Account RemoveValue(Account account, float value)
 
 Account AddValue(Account account, float value)
 {
-    printf("\n=================================================");
-    printf("\nVALOR CONTA 2: %.2f", account.balance);
-    printf("\n=================================================");
-
     account.balance += value;
 
     return account;
@@ -124,13 +117,27 @@ int main()
     printf("\nCONTA 2:");
     ShowAccountData(account2);
 
-    // Permitir que se realize uma transferência de valores de uma conta para a outra
+    // Escolher qual conta transferir
+    int accountChosen = 1; // Default: 1
+
+    printf("\nESCOLHA QUAL CONTA TRANSFERIR. [1] ou 2: ");
+    scanf("%i", &accountChosen);
+    
     float valueTransfer = GetValue();
-    account1 = RemoveValue(account1, valueTransfer);
-    account2 = AddValue(account2, valueTransfer);
+
+    // Permitir que se realize uma transferência de valores de uma conta para a outra
+    if(accountChosen == 1)
+    {
+        account1 = RemoveValue(account1, valueTransfer);
+        account2 = AddValue(account2, valueTransfer);
+    }
+    else
+    {
+        account2 = RemoveValue(account2, valueTransfer);
+        account1 = AddValue(account1, valueTransfer);
+    }
 
     // Mostrar os dados de cada conta novamente
-    // Mostrar os dados de cada conta
     printf("\n=================================================");
     printf("\nCONTA 1:");
     ShowAccountData(account1);
