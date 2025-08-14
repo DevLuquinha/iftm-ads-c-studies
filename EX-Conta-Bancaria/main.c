@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define LEN 100
+
 struct account
 {
     int num;
@@ -96,10 +98,24 @@ Account AddValue(Account account, float value)
     return account;
 }
 
+void IniatilizeVector(Account accountVec[])
+{
+    for(int i = 0; i < LEN; i++)
+    {
+        accountVec[i].num = 0;
+        strcpy(accountVec[i].name, "");
+        accountVec[i].balance = 0.0;
+    }
+}
+
 int main()
 {
-    // Inicializar contas
+    // Criar Variaveis
+    Account accountVec[LEN];
     Account account1, account2;
+    
+    // Inicializar Variaveis
+    IniatilizeVector(accountVec);
 
     // Ler os dados de duas contas
     printf("DIGITE OS DADOS DA CONTA 1:");
@@ -108,14 +124,18 @@ int main()
     printf("\nDIGITE OS DADOS DA CONTA 2:");
     account2 = GetAccount();
     
+    // Adiciona no vetor de contas
+    accountVec[0] = account1;
+    accountVec[1] = account2;
+
     // Mostrar os dados de cada conta
     printf("\n=================================================");
     printf("\nCONTA 1:");
-    ShowAccountData(account1);
+    ShowAccountData(accountVec[0]);
 
     printf("\n=================================================");
     printf("\nCONTA 2:");
-    ShowAccountData(account2);
+    ShowAccountData(accountVec[1]);
 
     // Escolher qual conta transferir
     int accountChosen = 1; // Default: 1
@@ -128,23 +148,23 @@ int main()
     // Permitir que se realize uma transferência de valores de uma conta para a outra
     if(accountChosen == 1)
     {
-        account1 = RemoveValue(account1, valueTransfer);
-        account2 = AddValue(account2, valueTransfer);
+        accountVec[0] = RemoveValue(accountVec[0], valueTransfer);
+        accountVec[1] = AddValue(accountVec[1], valueTransfer);
     }
     else
     {
-        account2 = RemoveValue(account2, valueTransfer);
-        account1 = AddValue(account1, valueTransfer);
+        account2 = RemoveValue(accountVec[1], valueTransfer);
+        accountVec[0] = AddValue(accountVec[0], valueTransfer);
     }
 
     // Mostrar os dados de cada conta novamente
     printf("\n=================================================");
     printf("\nCONTA 1:");
-    ShowAccountData(account1);
+    ShowAccountData(accountVec[0]);
 
     printf("\n=================================================");
     printf("\nCONTA 2:");
-    ShowAccountData(account2);
+    ShowAccountData(accountVec[1]);
     return 0;   
 }
 
