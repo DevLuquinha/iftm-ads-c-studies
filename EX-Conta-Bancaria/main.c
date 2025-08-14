@@ -10,6 +10,16 @@ struct account
 };
 typedef struct account Account;
 
+// Prototipos
+int GetNumber();
+float GetValue();
+void GetName(char nameOut[30]);
+float GetBalance();
+Account GetAccount();
+void ShowAccountData(Account account);
+Account RemoveValue(Account account, float value);
+Account AddValue(Account account, float value);
+
 int GetNumber()
 {
     int num;
@@ -19,6 +29,16 @@ int GetNumber()
     scanf("%i", &num);
 
     return num;
+}
+
+float GetValue()
+{
+    float value = 0;
+    printf("\nDigite o valor da transferencia: ");
+    fflush(stdin);
+    scanf("%f", &value);
+
+    return value;
 }
 
 void GetName(char nameOut[30])
@@ -62,6 +82,27 @@ void ShowAccountData(Account account)
     printf("\nSALDO DA CONTA:  R$%.2f", account.balance);
 }
 
+Account RemoveValue(Account account, float value)
+{
+    printf("\n=================================================");
+    printf("\nVALOR CONTA 1: %.2f", account.balance);
+    printf("\n=================================================");
+    account.balance -= value;
+
+    return account;
+}
+
+Account AddValue(Account account, float value)
+{
+    printf("\n=================================================");
+    printf("\nVALOR CONTA 2: %.2f", account.balance);
+    printf("\n=================================================");
+
+    account.balance += value;
+
+    return account;
+}
+
 int main()
 {
     // Inicializar contas
@@ -82,12 +123,25 @@ int main()
     printf("\n=================================================");
     printf("\nCONTA 2:");
     ShowAccountData(account2);
+
+    // Permitir que se realize uma transferência de valores de uma conta para a outra
+    float valueTransfer = GetValue();
+    account1 = RemoveValue(account1, valueTransfer);
+    account2 = AddValue(account2, valueTransfer);
+
+    // Mostrar os dados de cada conta novamente
+    // Mostrar os dados de cada conta
+    printf("\n=================================================");
+    printf("\nCONTA 1:");
+    ShowAccountData(account1);
+
+    printf("\n=================================================");
+    printf("\nCONTA 2:");
+    ShowAccountData(account2);
     return 0;   
 }
 
 // Esse programa deve:
-// Permitir que se realize uma transferência de valores de uma conta para a outra
-// Mostrar os dados de cada conta novamente
 
 // Sugestões para as funções do programa:
 // • uma função para ler os dados de uma conta
