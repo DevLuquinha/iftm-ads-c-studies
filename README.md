@@ -1,3 +1,28 @@
+# 📚 Algorithms - 1st Semester Computer Systems Analysis and Development/IFTM
+
+This directory contains the code and projects developed during the **Algorithms** course, in the 1st semester of the Computer Systems Analysis and Development program at IFTM.
+
+Here you will find:
+
+* **Basic exercises:** Control structures (if/else, switch), loops (for, while), and variable manipulation.
+* **Problem sets:** Solutions for the exercise lists assigned in class.
+* **Assignments and exams:** More complex implementations, such as programs involving functions and arrays.
+
+---
+
+### Topics Covered:
+
+* Programming logic and pseudocode
+* Variables and data types
+* Decision structures
+* Repetition structures
+* Functions
+* Arrays and Matrices
+
+This content reflects my learning and evolution in solving logical problems and structuring code in C.
+
+---
+
 # 📚 Algoritmos - 1º Período ADS/IFTM
 
 Este diretório contém os códigos e projetos desenvolvidos durante a disciplina de **Algoritmos**, no 1º período do curso de Análise e Desenvolvimento de Sistemas (ADS) no IFTM.
