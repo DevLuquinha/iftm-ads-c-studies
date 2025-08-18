@@ -21,6 +21,7 @@ Account GetAccount();
 void ShowAccountData(Account account);
 Account RemoveValue(Account account, float value);
 Account AddValue(Account account, float value);
+void TransferValue(Account *account1Origin, Account *accountDestin);
 
 int GetNumber()
 {
@@ -98,6 +99,14 @@ Account AddValue(Account account, float value)
     return account;
 }
 
+void TransferValue(Account *account1Origin, Account *accountDestin)
+{
+    float value = GetValue();
+
+    account1Origin->balance -= value;
+    accountDestin->balance += value;
+}
+
 void IniatilizeVector(Account accountVec[])
 {
     for(int i = 0; i < LEN; i++)
@@ -139,22 +148,16 @@ int main()
 
     // Escolher qual conta transferir
     int accountChosen = 1; // Default: 1
-
     printf("\nESCOLHA QUAL CONTA TRANSFERIR. [1] ou 2: ");
     scanf("%i", &accountChosen);
     
-    float valueTransfer = GetValue();
-
-    // Permitir que se realize uma transferência de valores de uma conta para a outra
     if(accountChosen == 1)
     {
-        accountVec[0] = RemoveValue(accountVec[0], valueTransfer);
-        accountVec[1] = AddValue(accountVec[1], valueTransfer);
+        TransferValue(&accountVec[0], &accountVec[1]);
     }
     else
     {
-        account2 = RemoveValue(accountVec[1], valueTransfer);
-        accountVec[0] = AddValue(accountVec[0], valueTransfer);
+        TransferValue(&accountVec[1], &accountVec[2]);
     }
 
     // Mostrar os dados de cada conta novamente
@@ -167,10 +170,3 @@ int main()
     ShowAccountData(accountVec[1]);
     return 0;   
 }
-
-// Esse programa deve:
-
-// Sugestões para as funções do programa:
-// • uma função para ler os dados de uma conta
-// • uma função para mostrar os dados de uma conta
-// • uma função para transferir valor de uma conta para outra
