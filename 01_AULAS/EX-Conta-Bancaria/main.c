@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define LEN 100
+#define LEN 5
 
 struct account
 {
@@ -19,9 +19,7 @@ void GetName(char nameOut[30]);
 float GetBalance();
 Account GetAccount();
 void ShowAccountData(Account account);
-Account RemoveValue(Account account, float value);
-Account AddValue(Account account, float value);
-void TransferValue(Account *account1Origin, Account *accountDestin);
+void TransferValue(Account *accountOrigin, Account *accountDestin);
 
 int GetNumber()
 {
@@ -85,25 +83,11 @@ void ShowAccountData(Account account)
     printf("\nSALDO DA CONTA:  R$%.2f", account.balance);
 }
 
-Account RemoveValue(Account account, float value)
-{
-    account.balance -= value;
-
-    return account;
-}
-
-Account AddValue(Account account, float value)
-{
-    account.balance += value;
-
-    return account;
-}
-
-void TransferValue(Account *account1Origin, Account *accountDestin)
+void TransferValue(Account *accountOrigin, Account *accountDestin)
 {
     float value = GetValue();
 
-    account1Origin->balance -= value;
+    accountOrigin->balance -= value;
     accountDestin->balance += value;
 }
 
@@ -155,9 +139,9 @@ int main()
     {
         TransferValue(&accountVec[0], &accountVec[1]);
     }
-    else
+    else if(accountChosen == 2)
     {
-        TransferValue(&accountVec[1], &accountVec[2]);
+        TransferValue(&accountVec[1], &accountVec[0]);
     }
 
     // Mostrar os dados de cada conta novamente
@@ -168,5 +152,6 @@ int main()
     printf("\n=================================================");
     printf("\nCONTA 2:");
     ShowAccountData(accountVec[1]);
+    
     return 0;   
 }
