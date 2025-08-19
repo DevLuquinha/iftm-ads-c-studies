@@ -4,6 +4,24 @@
 
 #define LEN 5
 
+struct address
+{
+    char street[50];
+    int number;
+    char neighborhood[100];
+    char city[50];
+};
+typedef struct address Address;
+
+struct client
+{
+    char name[30];
+    char cpf[11];
+    int age;
+    Address homeAddress;
+};
+typedef struct client Client;
+
 struct account
 {
     int num;
