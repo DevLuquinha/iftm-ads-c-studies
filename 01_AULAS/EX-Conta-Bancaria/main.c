@@ -87,7 +87,7 @@ Account GetAccount()
     Account account;
 
     account.num = GetNumber();
-    GetName(account.name);
+    GetName(account.holderAccount.name);
     account.balance = GetBalance();
 
     return account;
@@ -97,7 +97,7 @@ void ShowAccountData(Account account)
 {
     printf("\n=================================================");
     printf("\nNUMERO DA CONTA: %i", account.num);
-    printf("\nNOME DA CONTA:   %s", account.name);
+    printf("\nNOME DA CONTA:   %s", account.holderAccount.name);
     printf("\nSALDO DA CONTA:  R$%.2f", account.balance);
 }
 
@@ -114,7 +114,7 @@ void IniatilizeVector(Account accountVec[])
     for(int i = 0; i < LEN; i++)
     {
         accountVec[i].num = 0;
-        strcpy(accountVec[i].name, "");
+        strcpy(accountVec[i].holderAccount.name, "");
         accountVec[i].balance = 0.0;
     }
 }
