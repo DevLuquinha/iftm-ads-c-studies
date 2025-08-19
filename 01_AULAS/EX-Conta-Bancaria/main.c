@@ -25,7 +25,7 @@ typedef struct client Client;
 struct account
 {
     int num;
-    char name[30];
+    Client holderAccount;
     float balance;
 };
 typedef struct account Account;
