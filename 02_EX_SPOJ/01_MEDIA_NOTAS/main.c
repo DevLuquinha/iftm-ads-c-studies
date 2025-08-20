@@ -18,12 +18,10 @@ Student GetDataStudent();
 void GetDataStudents(Student students[], int amountStd);
 void ShowDataStudent(Student student, int index);
 void ShowDataStudents(Student students[], int amountStd);
-void ClearStudents(Student students[], int amountStd);
 
 int GetAmountStudents()
 {
     int q;
-    fflush(stdin);
     scanf("%i", &q);
 
     return q;
@@ -45,15 +43,15 @@ Student GetDataStudent()
 {
     Student student;
 
-    fflush(stdin);
-    gets(student.name);
+    getchar();
+    scanf("%s", student.name);
 
-    fflush(stdin);
+    getchar();
     scanf("%i", &student.registry);
 
     for(int i = 0; i < lenGrades; i++)
     {
-        fflush(stdin);
+        getchar();
         scanf("%f", &student.grades[i]);
     }    
 
@@ -83,20 +81,6 @@ void ShowDataStudents(Student students[], int amountStd)
     }
 }
 
-void ClearStudents(Student students[], int amountStd)
-{
-    for(int i = 0; i < amountStd; i++)
-    {
-        fflush(stdin);
-        strcpy(students[i].name, "");
-        students[i].registry = 0;
-        students[i].grades[0] = 0.0;
-        students[i].grades[1] = 0.0;
-        students[i].grades[2] = 0.0;
-        students[i].average = 0;
-    }
-}
-
 int main()
 {
     Student students[1000];
@@ -104,9 +88,7 @@ int main()
     // Quantidade N de estudantes
     int amountS;
     amountS = GetAmountStudents();    
-    
-    ClearStudents(students, amountS); // OPCIONAL
-    
+        
     // Pegar as (nome, matricula, n1, n2 e n3) dos N estudantes
     GetDataStudents(students, amountS);
 
