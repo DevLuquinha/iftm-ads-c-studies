@@ -10,6 +10,15 @@ struct student
 };
 typedef struct student Student;
 
+// Protótipos
+int GetAmountStudents();
+float AverageStudent(float grades[]);
+Student GetDataStudent();
+void GetDataStudents(Student students[], int amountStd);
+void ShowDataStudent(Student student, int index);
+void ShowDataStudents(Student students[], int amountStd);
+void ClearStudents(Student students[], int amountStd);
+
 int GetAmountStudents()
 {
     int q;
@@ -62,7 +71,7 @@ void GetDataStudents(Student students[], int amountStd)
 
 void ShowDataStudent(Student student, int index)
 {
-    printf("\n%i. %s (%i): %.2f\n", index, student.name, student.registry, student.average);
+    printf("%i. %s (%i): %.2f\n", index, student.name, student.registry, student.average);
 }
 
 void ShowDataStudents(Student students[], int amountStd)
@@ -73,14 +82,29 @@ void ShowDataStudents(Student students[], int amountStd)
     }
 }
 
+void ClearStudents(Student students[], int amountStd)
+{
+    for(int i = 0; i < amountStd; i++)
+    {
+        fflush(stdin);
+        strcpy(students[i].name, "");
+        students[i].registry = 0;
+        students[i].grades[0] = 0.0;
+        students[i].grades[1] = 0.0;
+        students[i].grades[2] = 0.0;
+        students[i].average = 0;
+    }
+}
+
 int main()
 {
-    // Vetor de estudantes
     Student students[1000];
-
+    
     // Quantidade N de estudantes
     int amountS;
     amountS = GetAmountStudents();    
+    
+    ClearStudents(students, amountS); // OPCIONAL
     
     // Pegar as (nome, matricula, n1, n2 e n3) dos N estudantes
     GetDataStudents(students, amountS);
