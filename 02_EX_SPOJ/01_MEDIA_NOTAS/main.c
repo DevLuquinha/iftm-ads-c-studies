@@ -52,6 +52,14 @@ Student GetDataStudent()
     return student;
 }
 
+void GetDataStudents(Student students[], int amountStd)
+{
+    for(int i = 0; i < amountStd; i++)
+    {
+        students[i] = GetDataStudent();
+    }
+}
+
 void ShowDataStudent(Student student, int index)
 {
     printf("\n%i. %s (%i): %.2f\n", index, student.name, student.registry, student.average);
@@ -67,11 +75,13 @@ int main()
     
     amountS = GetAmountStudents();
 
-    Student student = GetDataStudent(students[0]);
+    // Student student = GetDataStudent(students[0]);
     
     // Pegar as (nome, matricula, n1, n2 e n3) dos N estudantes
+    GetDataStudents(students, amountS);
+
 
     // Imprimir no formato posicao. nome (matricula): media
-    ShowDataStudent(student, 1);
+    ShowDataStudent(students[1], 2);
     return 0;
 }
