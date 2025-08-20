@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <string.h>
+#define lenGrades 3
 
 struct student
 {
     char name[50];
     int registry;
-    float grades[3];
+    float grades[lenGrades];
     float average;    
 };
 typedef struct student Student;
@@ -32,12 +33,12 @@ float AverageStudent(float grades[])
 {
     float sum;
 
-    for(int i = 0; i < 3; i++)
+    for(int i = 0; i < lenGrades; i++)
     {
         sum += grades[i];
     }
 
-    return sum / 3;
+    return sum / lenGrades;
 }
 
 Student GetDataStudent()
@@ -50,7 +51,7 @@ Student GetDataStudent()
     fflush(stdin);
     scanf("%i", &student.registry);
 
-    for(int i = 0; i < 3; i++)
+    for(int i = 0; i < lenGrades; i++)
     {
         fflush(stdin);
         scanf("%f", &student.grades[i]);
