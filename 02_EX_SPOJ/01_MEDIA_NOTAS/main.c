@@ -5,7 +5,8 @@ struct student
 {
     char name[50];
     int registry;
-    float grades[3];    
+    float grades[3];
+    float average;    
 };
 typedef struct student Student;
 
@@ -16,6 +17,18 @@ int GetAmountStudents()
     scanf("%i", &q);
 
     return q;
+}
+
+float AverageStudent(float grades[])
+{
+    float sum;
+
+    for(int i = 0; i < 3; i++)
+    {
+        sum += grades[i];
+    }
+
+    return sum / 3;
 }
 
 Student GetDataStudent()
@@ -37,6 +50,11 @@ Student GetDataStudent()
     return student;
 }
 
+void ShowDataStudent(Student student, int index)
+{
+    printf("\n%s. %s (%i): %f", index, student.name, student.registry, student.average);
+}
+
 int main()
 {
     // Quantidade N de estudantes
@@ -48,12 +66,10 @@ int main()
     amountS = GetAmountStudents();
 
     Student student = GetDataStudent(students[0]);
-
-    printf("\nA quantidade estudantes eh %i", amountS);
-    printf("\n1. %s (%i): %f", student.name, student.registry);
+    
     // Pegar as (nome, matricula, n1, n2 e n3) dos N estudantes
 
     // Imprimir no formato posicao. nome (matricula): media
-
+    ShowDataStudent(student, 1);
     return 0;
 }
