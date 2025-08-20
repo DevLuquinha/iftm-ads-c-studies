@@ -47,12 +47,14 @@ Student GetDataStudent()
         scanf("%f", &student.grades[i]);
     }    
 
+    student.average = AverageStudent(student.grades);
+
     return student;
 }
 
 void ShowDataStudent(Student student, int index)
 {
-    printf("\n%s. %s (%i): %f", index, student.name, student.registry, student.average);
+    printf("\n%i. %s (%i): %.2f\n", index, student.name, student.registry, student.average);
 }
 
 int main()
