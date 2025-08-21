@@ -97,6 +97,16 @@ void OrderByAverage(Student students[], int amountStd)
                 students[j+1] = students[j];
                 students[j] = aux;
             }
+            else if(students[j].average == students[j+1].average)
+            {
+                if(students[j].registry < students[j+1].registry)
+                {
+                    aux = students[j+1];
+                
+                    students[j+1] = students[j];
+                    students[j] = aux;
+                }
+            }
         }
     }
 }
