@@ -26,10 +26,10 @@ int main()
 {
     // Inicializar a estrutura
     Node* node = NULL;
+    node = NewNode(10);
 
-    
-
-    printf("Hello World!");
+    printf("TESTE\n");
+    printf("%i", node->info);
 
     return 0;
 }
