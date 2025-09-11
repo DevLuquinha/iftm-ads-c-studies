@@ -1,28 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void SortByAlph(char vecNames[][20], int vecLen)
 {
-    int vec[5] = {3, 1, 8, 2, 5};
-    int aux;
+    char aux[20];
 
     // Repetir o vecLen vezes
     for(int i = 0; i < 5; i++)
     {
         for (int j = i; j < vecLen - 1; j++)
         {
-            if (vec[i] < vec[j+1])
+            if (strcmp(vecNames[i], vecNames[j+1]) > 0)
             {
-                aux = vec[j+1];
-                vec[j+1] = vec[i];
-                vec[i] = aux;
+                strcpy(aux, vecNames[j+1]);
+                strcpy(vecNames[j+1], vecNames[i]);
+                strcpy(vecNames[i], aux);
             }
         }
-    }
-
-    for(int i = 0; i < 5; i++)
-    {
-        printf("%i, ", vec[i]);
     }
 }
 
@@ -36,15 +31,15 @@ void ShowVector(char vecNames[][20], int vecLen)
 
 int main()
 {
-    char names[5][20] = {"Alice", "Bob", "Charlie", "Diana", "Eve"};
+    char names[5][20] = {"Charlie", "Bob", "Alice", "Eve", "Diana"};
     
-    // printf("================ NOMES ================\n");
-    // ShowVector(names, 5);
+    printf("================ NOMES ================\n");
+    ShowVector(names, 5);
 
     SortByAlph(names, 5);
 
-    // printf("================ NOMES ORDENADOS ================\n");
-    // ShowVector(names, 5);
+    printf("================ NOMES ORDENADOS ================\n");
+    ShowVector(names, 5);
 
     return 0;
 }
