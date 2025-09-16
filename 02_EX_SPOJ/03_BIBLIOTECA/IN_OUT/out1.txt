@@ -1,0 +1,10 @@
+Categoria: Computacao
+- AlgoritmosEstruturaDados (1): 3/5 exemplares
+
+Autor: Cormen
+- AlgoritmosEstruturaDados (Computacao): 3/5 exemplares
+
+Livro: AlgoritmosEstruturaDados
+Categoria: Computacao
+Autores: Cormen, Leiserson
+Exemplares: 3/5 (60% disponibilidade)

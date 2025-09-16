@@ -1,0 +1,19 @@
+Categoria: Matematica
+- AlgebraLinear (1): 1/3 exemplares
+- GeometriaAnalitica (5): 2/3 exemplares
+
+Autor: Alberts
+- BiologiaCelular (Biologia): 0/2 exemplares
+
+Livro: BiologiaCelular
+Categoria: Biologia
+Autores: Alberts, Johnson, Lewis
+Exemplares: 0/2 (0% disponibilidade)
+
+Autor: Brown
+- QuimicaGeral (Quimica): 3/4 exemplares
+
+Livro: AlgebraLinear
+Categoria: Matematica
+Autores: Anton
+Exemplares: 1/3 (33% disponibilidade)

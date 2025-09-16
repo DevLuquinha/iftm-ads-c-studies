@@ -1,0 +1,13 @@
+Categoria: Computacao
+- EstruturaDados (4): 5/6 exemplares
+- IntroducaoProgramacao (1): 4/4 exemplares
+
+Categoria: Matematica
+
+Autor: Stewart
+- CalculoDiferencial (Matematica): 0/2 exemplares
+
+Livro: EstruturaDados
+Categoria: Computacao
+Autores: Cormen, Rivest
+Exemplares: 5/6 (83% disponibilidade)
