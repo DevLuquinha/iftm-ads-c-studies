@@ -77,16 +77,40 @@ void ShowList(Node* list)
     printf("]");
 }
 
+Node* RemoveInitialValue(Node* list)
+{
+    Node* firstElem = list;
+
+    // 1. Verificar se a lista é NULL
+    if(list != NULL)
+    {
+        // 2. Verificar se só tem 1 elemento
+        if(firstElem->next != NULL) 
+        {
+            firstElem = firstElem->next;
+        }
+        else
+        {
+            firstElem = NULL;
+        }
+    }
+
+    return firstElem;
+}
+
 int main()
 {
     // Inicializar a lista
     Node* list = NULL;
     list = AddStartValue(list, 10);
+    list = AddStartValue(list, 20);
     list = AddEndValue(list, 3);
     
+    printf("LISTA INICIAL:");
     ShowList(list);
     
-    // list = AddStartValue(list, 20);
-
+    printf("\nLISTA SEM O 1");
+    list = RemoveInitialValue(list);
+    ShowList(list);
     return 0;
 }
