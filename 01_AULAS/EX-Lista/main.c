@@ -64,15 +64,29 @@ Node* AddEndValue(Node* list, int value)
     return list;
 }
 
+void ShowList(Node* list)
+{
+    printf("\n[");
+    while(list != NULL)
+    {
+        printf("%i", list->info);
+        list = list->next;
+        if(list != NULL)
+            printf(", ");
+    }
+    printf("]");
+}
+
 int main()
 {
     // Inicializar a lista
     Node* list = NULL;
-    
     list = AddStartValue(list, 10);
-    list = AddStartValue(list, 20);
-
     list = AddEndValue(list, 3);
+    
+    ShowList(list);
+    
+    // list = AddStartValue(list, 20);
 
     return 0;
 }
