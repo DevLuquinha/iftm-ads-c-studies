@@ -66,7 +66,7 @@ Node* AddEndValue(Node* list, int value)
 
 void ShowList(Node* list)
 {
-    printf("\n[");
+    printf("[");
     while(list != NULL)
     {
         printf("%i", list->info);
@@ -85,17 +85,48 @@ Node* RemoveInitialValue(Node* list)
     if(list != NULL)
     {
         // 2. Verificar se só tem 1 elemento
-        if(firstElem->next != NULL) 
+        if(firstElem->next == NULL) 
         {
-            firstElem = firstElem->next;
+            firstElem = NULL;
         }
         else
         {
-            firstElem = NULL;
+            firstElem = firstElem->next;
         }
     }
 
     return firstElem;
+}
+
+Node* RemoveLastValue(Node** list)
+{
+    Node* currentValue = *list;
+    Node* beforeValue, *return_value = NULL; 
+
+    // 1. Verificar se a lista é NULL
+    if(*list != NULL)
+    {
+        // 2. Percorrer até o último node
+        while(currentValue->next != NULL)
+        {
+            beforeValue = currentValue;
+            currentValue = currentValue->next;
+        }
+
+        // 3. Verificar se a lista tem mais de 1 elemento
+        if(*list != currentValue) // Possui mais de um elemento
+        {
+            beforeValue->next = currentValue->next;
+        }
+        else // Possui apenas um elemento
+        {
+            *list = currentValue->next;
+        }        
+            
+        return_value = currentValue;
+    }
+
+    return return_value;
 }
 
 int main()
@@ -106,11 +137,14 @@ int main()
     list = AddStartValue(list, 20);
     list = AddEndValue(list, 3);
     
-    printf("LISTA INICIAL:");
+    printf("LISTA INICIAL: ");
     ShowList(list);
     
-    printf("\nLISTA SEM O 1");
-    list = RemoveInitialValue(list);
+    printf("\n\nLISTA FINAL: ");
+    Node* last =  RemoveLastValue(&list);
     ShowList(list);
+
+    printf("\nULTIMO: ");
+    ShowList(last);
     return 0;
 }
