@@ -69,6 +69,23 @@ Node* Minimum(Node* list)
     return minimum;
 }
 
+Node* Maximum(Node* list)
+{
+    Node* maximum = list;
+    Node* aux;
+
+    while(list != NULL)
+    {
+        if(list->value > maximum->value)
+        {
+            maximum = list;
+        }
+        list = list->next;
+    }
+
+    return maximum;
+}
+
 int main()
 {
     // Create the List Functions
@@ -79,10 +96,15 @@ int main()
     AddValue(&list, 4);
     
     Node* minimum = Minimum(list);
-
-    printf("LISTA: ");
+    Node* maximum = Maximum(list);
+    
+    printf("\nLISTA: ");
     ShowList(list);
 
-    printf("\nO MENOR VALOR: %i", minimum->value);
+    printf("\n\n============ RESULTADOS ============");
+    printf("\n1.MINIMUM/MAXIMUM");
+    printf("\nO menor valor: %i", minimum->value);
+    printf("\nO maior valor: %i", maximum->value);
+    printf("\n====================================");
     return 0;
 }
