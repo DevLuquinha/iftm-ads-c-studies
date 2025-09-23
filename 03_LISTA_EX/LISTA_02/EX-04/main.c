@@ -139,6 +139,19 @@ void ReverseList(Node** list)
     *list = prev;
 }
 
+Node* Copy(Node* list)
+{
+    Node* newList = NULL;
+
+    while (list != NULL)
+    {
+        AddValue(&newList, list->value);
+        list = list->next;
+    }
+    
+    return newList;
+}
+
 int main()
 {
     // Create the List Functions
@@ -148,17 +161,22 @@ int main()
     AddValue(&list, 3);
     AddValue(&list, 4);
     
-    // Show Default List
-    printf("\nLISTA: ");
-    ShowList(list);
-
     // 1. MINIMUM/MAXIMUM
     Node* minimum = Minimum(list);
     Node* maximum = Maximum(list);
     
     // 2. REVERSE
     Node* reverse = Reverse(list);
-    ReverseList(&list);
+    
+    // 3. REVERSE
+    // ReverseList(&list); Ex 3
+    
+    // 4. COPY
+    Node* listCopied = Copy(list);
+    
+    // Show Default List
+    printf("\nLISTA: ");
+    ShowList(list);
 
     printf("\n\n============ RESULTADOS ============");
     printf("\n1.MINIMUM/MAXIMUM");
@@ -167,7 +185,11 @@ int main()
     printf("\n====================================");
     printf("\n2.REVERSE");
     printf("\nLista Reverse:");
-    ShowList(list);
+    ShowList(reverse);
+    printf("\n====================================");
+    printf("\n4.Copy");
+    printf("\nLista Copy:");
+    ShowList(listCopied);
     printf("\n====================================");
     return 0;
 }
