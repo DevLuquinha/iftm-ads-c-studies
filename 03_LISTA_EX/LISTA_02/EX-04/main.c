@@ -116,13 +116,36 @@ Node* Reverse(Node* list)
     return newList;
 }
 
+void ReverseList(Node** list)
+{
+    Node* prev = NULL;
+    Node* current = *list;
+    Node* next;
+
+    while(current != NULL)
+    {
+        // Store next
+        next = current->next;
+        
+        // Invert the next
+        current->next = prev;
+        
+        // Advance the pointers
+        prev = current;
+        current = next;
+    }
+
+    // Update the list
+    *list = prev;
+}
+
 int main()
 {
     // Create the List Functions
     Node* list = NULL;
-    AddValue(&list, 6);
-    AddValue(&list, 10);
-    AddValue(&list, 8);
+    AddValue(&list, 1);
+    AddValue(&list, 2);
+    AddValue(&list, 3);
     AddValue(&list, 4);
     
     // Show Default List
@@ -135,7 +158,8 @@ int main()
     
     // 2. REVERSE
     Node* reverse = Reverse(list);
-    
+    ReverseList(&list);
+
     printf("\n\n============ RESULTADOS ============");
     printf("\n1.MINIMUM/MAXIMUM");
     printf("\nO menor valor: %i", minimum->value);
@@ -143,7 +167,7 @@ int main()
     printf("\n====================================");
     printf("\n2.REVERSE");
     printf("\nLista Reverse:");
-    ShowList(reverse);
+    ShowList(list);
     printf("\n====================================");
     return 0;
 }
