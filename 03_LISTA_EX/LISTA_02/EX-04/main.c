@@ -39,6 +39,23 @@ void AddValue(Node** list, int value)
     }
 }
 
+Node* AddInitValue(Node* list, int value)
+{
+    Node* aux;
+    if(list != NULL)
+    {
+        aux = list;
+        list = NewNode(value);
+        list->next = aux;
+    }
+    else
+    {
+        list = NewNode(value);
+    }
+
+    return list;
+}
+
 void ShowList(Node* list)
 {
     printf("[");
@@ -86,6 +103,19 @@ Node* Maximum(Node* list)
     return maximum;
 }
 
+Node* Reverse(Node* list)
+{
+    Node* newList = NULL;    
+
+    while(list != NULL)
+    {
+        newList = AddInitValue(newList, list->value);
+        list = list->next;
+    }
+
+    return newList;
+}
+
 int main()
 {
     // Create the List Functions
@@ -95,16 +125,25 @@ int main()
     AddValue(&list, 8);
     AddValue(&list, 4);
     
-    Node* minimum = Minimum(list);
-    Node* maximum = Maximum(list);
-    
+    // Show Default List
     printf("\nLISTA: ");
     ShowList(list);
 
+    // 1. MINIMUM/MAXIMUM
+    Node* minimum = Minimum(list);
+    Node* maximum = Maximum(list);
+    
+    // 2. REVERSE
+    Node* reverse = Reverse(list);
+    
     printf("\n\n============ RESULTADOS ============");
     printf("\n1.MINIMUM/MAXIMUM");
     printf("\nO menor valor: %i", minimum->value);
     printf("\nO maior valor: %i", maximum->value);
+    printf("\n====================================");
+    printf("\n2.REVERSE");
+    printf("\nLista Reverse:");
+    ShowList(reverse);
     printf("\n====================================");
     return 0;
 }
