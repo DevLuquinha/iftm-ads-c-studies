@@ -52,16 +52,37 @@ void ShowList(Node* list)
     printf("]");
 }
 
+Node* Minimum(Node* list)
+{
+    Node* minimum = list;
+    Node* aux;
+
+    while(list != NULL)
+    {
+        if(list->value < minimum->value)
+        {
+            minimum = list;
+        }
+        list = list->next;
+    }
+
+    return minimum;
+}
+
 int main()
 {
     // Create the List Functions
     Node* list = NULL;
-    AddValue(&list, 1);
-    AddValue(&list, 2);
-    AddValue(&list, 3);
+    AddValue(&list, 6);
+    AddValue(&list, 10);
+    AddValue(&list, 8);
     AddValue(&list, 4);
     
+    Node* minimum = Minimum(list);
+
     printf("LISTA: ");
     ShowList(list);
+
+    printf("\nO MENOR VALOR: %i", minimum->value);
     return 0;
 }
