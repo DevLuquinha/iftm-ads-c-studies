@@ -152,6 +152,39 @@ Node* Copy(Node* list)
     return newList;
 }
 
+Node* CopyList(Node* list)
+{
+    Node* newList = NULL;
+    Node* newNode = NULL;
+
+    Node* aux = NULL;
+
+    while(list != NULL)
+    {
+        // Create the new Node
+        newNode = malloc(sizeof(Node));
+        newNode->value = list->value;
+        newNode->next = NULL;
+
+        // Verify if list is NULL
+        if(newList == NULL)
+        {
+            newList = newNode;
+        }
+        else
+        {
+            aux->next = newNode;            
+        }
+
+        aux = newNode;
+
+        // Iterate over list
+        list = list->next;
+    }
+
+    return newList;
+}
+
 int main()
 {
     // Create the List Functions
@@ -172,7 +205,10 @@ int main()
     // ReverseList(&list); Ex 3
     
     // 4. COPY
-    Node* listCopied = Copy(list);
+    // Node* listCopied = Copy(list);
+
+    // 5. COPY
+    Node* listCopied = CopyList(list);
     
     // Show Default List
     printf("\nLISTA: ");
