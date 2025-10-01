@@ -17,6 +17,14 @@ struct list
 };
 typedef struct list List;
 
+List* NewList()
+{
+    List* list = malloc(sizeof(List));
+    list->init = NULL;
+    list->init = NULL;
+    return list;
+}
+
 int main()
 {
     // Escreva uma função que retire o último elemento de uma dada lista.
