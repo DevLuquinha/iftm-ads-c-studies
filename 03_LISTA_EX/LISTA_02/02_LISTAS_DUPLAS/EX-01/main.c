@@ -105,17 +105,29 @@ void AddEndValue(List* *list, int value)
 
 void ShowList(List* list)
 {    
-    printf("[");
-    while(list != NULL && list->init != NULL)
-    {
-        printf("%i", list->init->value);
-        
-        list->init = list->init->next;
+    Node* initNode = NULL;
 
-        if(list->init != NULL)
+    if(list != NULL && list->init != NULL)
+    {
+        initNode = list->init;
+    }
+
+    printf("[");
+    while(initNode != NULL)
+    {
+        printf("%i", initNode->value);
+        
+        initNode = initNode->next;
+
+        if(initNode != NULL)
             printf(", ");
     }
     printf("]");
+}
+
+void RemoveLastElement(List* *list)
+{
+   (*list)->end->prev->next = NULL; 
 }
 
 int main()
@@ -123,11 +135,19 @@ int main()
     // Escreva uma função que retire o último elemento de uma dada lista.
     // A função deve retornar o ponteiro para a lista alterada
 
-    List* defaultList = NewList();
-    AddEndValue(&defaultList, 1);
-    AddEndValue(&defaultList, 2);
-    AddEndValue(&defaultList, 3);
+    List* list = NewList();
+    AddEndValue(&list, 1);
+    AddEndValue(&list, 2);
+    AddEndValue(&list, 3);
+    AddEndValue(&list, 4);
 
-    ShowList(defaultList);
+    printf("LISTA INICIAL: ");
+    ShowList(list);
+
+    RemoveLastElement(&list);
+
+    printf("\nLISTA FINAL: ");
+    ShowList(list);
+
     return 0;
 }
