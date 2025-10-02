@@ -34,6 +34,39 @@ List* NewList()
     return list;
 }
 
+void AddStartValue(List* *list, int value)
+{
+    Node* node = NewNode(value);
+    Node* initNode = NULL;
+    Node* endNode = NULL;
+
+    // 1. If the default list is NULL
+    if(*list == NULL)
+    {
+        *list = NewList();
+
+        (*list)->init = node;
+        (*list)->end = node;
+    }
+    else
+    {
+        // 2. If there is a list but don't have any node
+        if((*list)->init == NULL && (*list)->end == NULL)
+        {
+            (*list)->init = node;
+            (*list)->end = node;
+        }
+        else
+        {
+            initNode = (*list)->init;
+
+            initNode->prev = node;
+            node->next = initNode;
+            (*list)->init = node;
+        }
+    }
+}
+
 void AddEndValue(List* *list, int value)
 {
     Node* node = NewNode(value);
