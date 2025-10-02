@@ -34,12 +34,11 @@ List* NewList()
     return list;
 }
 
-void AddValue(List* *list, int value)
+void AddEndValue(List* *list, int value)
 {
-    Node* prevNode = NULL;
-    Node* nextNode = NULL;
-    Node* currentNode = NULL;
     Node* node = NewNode(value);
+    Node* initNode = NULL;
+    Node* endNode = NULL;
 
     // 1. If the default list is NULL
     if(*list == NULL)
@@ -60,24 +59,19 @@ void AddValue(List* *list, int value)
         }
         else
         {
-            // node->next = (*list)->init->prev;
+            // 3. Support vars
+            initNode = (*list)->init;
+            endNode = (*list)->end;
 
-            // currentNode = (*list)->init;
-            // while(currentNode->next != NULL)
-            // {
-            //     currentNode = currentNode->next;
-            // }
-
-            // // The last node
-            // currentNode->next = node;
+            endNode->next = node;
+            node->prev = endNode;
+            (*list)->end = node;
         }
     }
 }
 
 void ShowList(List* list)
-{
-    // Node* init = list->init;
-    
+{    
     printf("[");
     while(list != NULL && list->init != NULL)
     {
@@ -97,8 +91,10 @@ int main()
     // A função deve retornar o ponteiro para a lista alterada
 
     List* defaultList = NewList();
-    AddValue(&defaultList, 1);
-    
+    AddEndValue(&defaultList, 1);
+    AddEndValue(&defaultList, 2);
+    AddEndValue(&defaultList, 3);
+
     ShowList(defaultList);
     return 0;
 }
