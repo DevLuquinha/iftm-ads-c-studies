@@ -113,34 +113,41 @@ void RemoveItensByList(List* *list, List* listRemove)
             startList = startList->next;
          }
 
-         if(nodeIn != NULL && nodeOut != NULL)
+         // If find the NodeIn and NodeOut
+         if(nodeIn != NULL && nodeOut != NULL && countAux == listRemoveLen)
          {
-            if(nodeIn->value == listRemove->start->value && 
-                nodeOut->value == listRemove->end->value && 
-                countAux == listRemoveLen)
+            // If the nodeIn is the start of the list
+            if(nodeIn->prev == NULL)
+            {
+                (*list)->start = nodeOut->next;
+            }
+            else
             {
                 nodeIn->prev->next = nodeOut->next;
             }
+        
+            // If the nodeOut is the end of the list
+            if(nodeOut->next != NULL)
+            {
+                nodeOut->next->prev = nodeIn->prev;
+            }
+            else
+            {
+                (*list)->end = nodeIn->prev;
+            }
          }
     }
-
-    // 10 4 6 8 9 1 {4 6 8 12} 3 - 4 6 8 12 -----> 10 4 6 8 9 1 3
-    
 }
 
 void ShowList(List* list)
 {
     Node* aux = list->start;
 
-    printf("[");
     while (aux != NULL)
     {
-        printf("%i", aux->value);
+        printf("%i ", aux->value);
         aux = aux->next;
-        if(aux != NULL)
-            printf(", ");
     }
-    printf("]");
 }
 
 int GetInt()
@@ -166,7 +173,7 @@ int main()
             AddValueList(&list, value);
     } while (value != -1);
 
-    // Get the listRemove
+    // Get the list with values to remove
     do
     {
         value = GetInt();
@@ -174,15 +181,8 @@ int main()
             AddValueList(&listRemove, value);
     } while (value != -1);
 
-    ShowList(list);
-
-    printf("\n");
-
-    ShowList(listRemove);
-
     RemoveItensByList(&list, listRemove);
 
-    printf("\n");
     ShowList(list);
 
     return 0;
