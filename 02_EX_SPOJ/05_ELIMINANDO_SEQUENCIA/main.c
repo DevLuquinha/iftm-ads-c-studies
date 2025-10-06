@@ -17,6 +17,15 @@ struct list
 };
 typedef struct list List;
 
+List* NewDefaultList()
+{
+    List* list = malloc(sizeof(List));
+    list->start = NULL;
+    list->end = NULL;
+
+    return list;
+}
+
 int GetInt()
 {
     int num;
@@ -27,5 +36,8 @@ int GetInt()
 
 int main()
 {
+    List* list = NewDefaultList();
+    
+    printf("Hello World");
     return 0;
 }
