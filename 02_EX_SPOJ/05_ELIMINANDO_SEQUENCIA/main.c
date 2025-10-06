@@ -36,6 +36,26 @@ Node* NewNode(int value)
     return node;
 }
 
+void AddValueList(List* *list, int value)
+{
+
+}
+
+void ShowList(List* list)
+{
+    Node* aux = list->start;
+
+    printf("[");
+    while (aux != NULL)
+    {
+        printf("%i");
+        if(aux != NULL)
+            printf(", ");
+        aux = aux->next;
+    }
+    printf("]");
+}
+
 int GetInt()
 {
     int num;
@@ -48,6 +68,8 @@ int main()
 {
     List* list = NewDefaultList();
     
-    printf("Hello World");
+    printf("LISTA: ");
+    ShowList(list);
+    
     return 0;
 }
