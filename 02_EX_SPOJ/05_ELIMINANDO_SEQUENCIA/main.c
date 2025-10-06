@@ -26,6 +26,16 @@ List* NewDefaultList()
     return list;
 }
 
+Node* NewNode(int value)
+{
+    Node* node = malloc(sizeof(Node));
+    node->next = NULL;
+    node->prev = NULL;
+    node->value = value;
+
+    return node;
+}
+
 int GetInt()
 {
     int num;
