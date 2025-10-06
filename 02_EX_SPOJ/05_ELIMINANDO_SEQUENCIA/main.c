@@ -71,14 +71,61 @@ int GetListLength(List* list)
 
 void RemoveItensByList(List* *list, List* listRemove)
 {
-    Node* startList;
-    Node* startListRemove;
+    Node* startList = (*list)->start;
+    Node* startListRemove = listRemove->start;
+
+    int listRemoveLen = GetListLength(listRemove);
+    int countAux = 0;
+
+    Node* nodeIn = NULL;
+    Node* nodeOut = NULL;
 
     // If has values to remove
-    if(listRemove->start == NULL && listRemove->end == NULL)
+    if(listRemove->start != NULL && listRemove->end != NULL)
     {
-        // 
+         // Iterate over list
+         while(startList != NULL)
+         {
+            if(startListRemove != NULL)
+            {
+                // Find the nodeIn
+                if(startList->value == startListRemove->value && nodeIn == NULL)
+                {
+                    nodeIn = startList;
+                    startListRemove = startListRemove->next;
+                    countAux++;
+                }
+                else if(startList->value == startListRemove->value)
+                {
+                    nodeOut = startList;
+                    startListRemove = startListRemove->next;
+                    countAux++;
+                }
+                else if(countAux < listRemoveLen)
+                {
+                    nodeIn = NULL;
+                    nodeOut = NULL;
+                    startListRemove = listRemove->start;
+                    countAux = 0;
+                }
+            }
+
+            startList = startList->next;
+         }
+
+         if(nodeIn != NULL && nodeOut != NULL)
+         {
+            if(nodeIn->value == listRemove->start->value && 
+                nodeOut->value == listRemove->end->value && 
+                countAux == listRemoveLen)
+            {
+                nodeIn->prev->next = nodeOut->next;
+            }
+         }
     }
+
+    // 10 4 6 8 9 1 {4 6 8 12} 3 - 4 6 8 12 -----> 10 4 6 8 9 1 3
+    
 }
 
 void ShowList(List* list)
@@ -132,6 +179,11 @@ int main()
     printf("\n");
 
     ShowList(listRemove);
+
+    RemoveItensByList(&list, listRemove);
+
+    printf("\n");
+    ShowList(list);
 
     return 0;
 }
