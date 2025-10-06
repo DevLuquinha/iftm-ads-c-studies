@@ -82,16 +82,28 @@ int GetInt()
 int main()
 {
     List* list = NewDefaultList();
-    
-    printf("LISTA PADRAO: ");
-    ShowList(list);
-    
-    AddValueList(&list, 1);
-    AddValueList(&list, 2);
-    AddValueList(&list, 3);
+    List* listRemove = NewDefaultList();
 
-    printf("\nLISTA FINAL: ");
+    int value = -1;
+    
+    // Get the defaultList 
+    do
+    {
+        value = GetInt();
+        AddValueList(&list, value);
+    } while (value != -1);
+
+    // Get the listRemove
+    do
+    {
+        value = GetInt();
+        AddValueList(&listRemove, value);
+    } while (value != -1);
+
     ShowList(list);
 
+    printf("\n");
+    
+    ShowList(listRemove);
     return 0;
 }
