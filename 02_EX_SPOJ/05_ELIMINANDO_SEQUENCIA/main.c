@@ -38,7 +38,22 @@ Node* NewNode(int value)
 
 void AddValueList(List* *list, int value)
 {
+    Node* node = NewNode(value);
+    Node* startNode = NULL;
+    Node* endNode = NULL;
 
+    // If the list no has values
+    if((*list)->start == NULL && ((*list)->end == NULL))
+    {
+        (*list)->start = node;
+        (*list)->end = node;
+    }
+    else
+    {
+        (*list)->end->next = node;
+        node->prev = (*list)->end;
+        (*list)->end = node;
+    }
 }
 
 void ShowList(List* list)
@@ -48,10 +63,10 @@ void ShowList(List* list)
     printf("[");
     while (aux != NULL)
     {
-        printf("%i");
+        printf("%i", aux->value);
+        aux = aux->next;
         if(aux != NULL)
             printf(", ");
-        aux = aux->next;
     }
     printf("]");
 }
@@ -68,8 +83,15 @@ int main()
 {
     List* list = NewDefaultList();
     
-    printf("LISTA: ");
+    printf("LISTA PADRAO: ");
     ShowList(list);
     
+    AddValueList(&list, 1);
+    AddValueList(&list, 2);
+    AddValueList(&list, 3);
+
+    printf("\nLISTA FINAL: ");
+    ShowList(list);
+
     return 0;
 }
