@@ -17,9 +17,18 @@ struct list
 };
 typedef struct list List;
 
+List* CreateList()
+{
+    List* list = malloc(sizeof(List));
+    list->start = NULL;
+    list->end = NULL;
+
+    return list;
+}
+
 int main()
 {
-    printf("Hello World");
+    List* list = CreateList();
 
     return 0;
 }
