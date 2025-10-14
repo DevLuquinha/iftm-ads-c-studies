@@ -103,7 +103,7 @@ Node* Minimum(List* list)
             {
                 nodeMin = startNode;
             }
-
+            
             startNode = startNode->next;
         }
     }
