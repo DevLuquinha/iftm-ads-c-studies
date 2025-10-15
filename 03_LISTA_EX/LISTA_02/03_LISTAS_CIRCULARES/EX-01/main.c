@@ -101,7 +101,7 @@ void ShowList(Node* list)
         {
             if(nextNode != list)
             {
-                printf(", ", nextNode->value);
+                printf(", ");
             }
             currentNode = nextNode;
             printf("%i", currentNode->value);
@@ -118,8 +118,7 @@ int main()
 
     AddValue(&list, 1);
     AddValue(&list, 2);
-    AddValue(&list, 3);
-    AddValue(&list, 4);
+    
 
     printf("LISTA PADRAO: ");
     ShowList(list);

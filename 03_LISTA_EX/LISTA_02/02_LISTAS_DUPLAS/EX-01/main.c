@@ -130,16 +130,32 @@ void RemoveLastElement(List* *list)
    (*list)->end->prev->next = NULL; 
 }
 
+void Append(List* list, int value)
+{
+    Node* newNode = NewNode(value);
+    if(list->init == NULL)
+    {
+        list->init = newNode;
+        list->end = newNode;
+    }
+    else
+    {
+        list->end->next = newNode;
+        newNode->prev = list->end;
+        list->end = newNode;
+    }
+}
+
 int main()
 {
     // Escreva uma função que retire o último elemento de uma dada lista.
     // A função deve retornar o ponteiro para a lista alterada
 
     List* list = NewList();
-    AddEndValue(&list, 1);
-    AddEndValue(&list, 2);
-    AddEndValue(&list, 3);
-    AddEndValue(&list, 4);
+    Append(list, 1);
+    Append(list, 2);
+    Append(list, 3);
+    Append(list, 4);
 
     printf("LISTA INICIAL: ");
     ShowList(list);
