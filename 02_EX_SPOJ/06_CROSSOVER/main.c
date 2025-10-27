@@ -1,10 +1,10 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 struct node
 {
-    int value;
+    char value;
     struct node* next;
     struct node* prev;
 };
@@ -17,15 +17,41 @@ struct doublyLinkedList
 };
 typedef struct doublyLinkedList DoubleLinkedList;
 
+// Prototipes
+char GetChar();
+int GetInt();
+Node* CreateNode(char value);
+DoubleLinkedList* CreateDoubleList();
+void AddValue(DoubleLinkedList* list, char value);
+DoubleLinkedList* GetGeneSequence();
+void ShowGeneSequence(DoubleLinkedList* list);
+void SwitchGenes(DoubleLinkedList** geneSequence1, DoubleLinkedList** geneSequence2, DoubleLinkedList* switchSequence1, DoubleLinkedList* switchSequence2);
+int GetListLength(DoubleLinkedList* list);
+int IsEquals(char c1, char c2);
+int CanSwitch(Node* startGenSeq, Node* startSwitchSeq, int lengthSwitchList);
+Node* GetEndNode(Node* startGenSeq, Node* startSwitchSeq, int lengthSwitchList);
+void SwitchInitNodes(Node* init1, Node* init2, DoubleLinkedList** list1, DoubleLinkedList** list2);
+void SwitchEndNodes(Node* end1, Node* end2, DoubleLinkedList** list1, DoubleLinkedList** list2);
+void SwitchGenes(DoubleLinkedList** geneSequence1, DoubleLinkedList** geneSequence2, DoubleLinkedList* switchSequence1, DoubleLinkedList* switchSequence2);
+DoubleLinkedList* FreeList(DoubleLinkedList* list);
+
+char GetChar()
+{
+    char c = ' ';
+    scanf("%c", &c);
+
+    return c;
+}
+
 int GetInt()
 {
-    int value = 0;
+    int value;
     scanf("%i", &value);
 
     return value;
 }
 
-Node* CreateNode(int value)
+Node* CreateNode(char value)
 {
     Node* newNode = malloc(sizeof(Node));
     newNode->next = NULL;
@@ -44,7 +70,7 @@ DoubleLinkedList* CreateDoubleList()
     return list;
 }
 
-void AddValue(DoubleLinkedList* list, int value)
+void AddValue(DoubleLinkedList* list, char value)
 {
     Node* newNode = CreateNode(value);
 
@@ -61,25 +87,43 @@ void AddValue(DoubleLinkedList* list, int value)
     }
 }
 
-DoubleLinkedList* GetList()
+DoubleLinkedList* GetGeneSequence()
 {
     DoubleLinkedList* list = CreateDoubleList();
 
-    int v = GetInt();
-    while (v != -1)
+    char c = ' ';
+    while(c != '\n')
     {
-        if(v != -1)
+        c = GetChar();
+        if(c != '\n')
         {
-            AddValue(list, v);
+            AddValue(list, c);
         }
-
-        v = GetInt();
     }
 
     return list;
 }
 
-void ShowList(DoubleLinkedList* list)
+int GetListLength(DoubleLinkedList* list)
+{
+    int length = 0;
+    Node* startList = NULL;
+
+    if(list != NULL && list->head != NULL)
+    {
+        startList = list->head;
+    }
+
+    while(startList != NULL)
+    {
+        length++;
+        startList = startList->next;
+    }
+
+    return length;
+}
+
+void ShowGeneSequence(DoubleLinkedList* list)
 {
     Node* start = NULL;
 
@@ -88,20 +132,20 @@ void ShowList(DoubleLinkedList* list)
         start = list->head;
     }
 
-    printf("[");
+//    printf("[");
     while(start != NULL)
     {
-        printf("%i", start->value);
+        printf("%c", start->value);
         start = start->next;
-        if(start != NULL)
-        {
-            printf(", ");
-        }
+//         if(start != NULL)
+//         {
+//             printf(", ");
+//         }
     }
-    printf("]");
+//    printf("]");
 }
 
-int IsEquals(int c1, int c2)
+int IsEquals(char c1, char c2)
 {
     int isEquals = 0; // Default value is FALSE
 
@@ -117,17 +161,21 @@ int IsEquals(int c1, int c2)
     return isEquals;
 }
 
-int CanSwitch(Node* startSeq, Node* startSwitchSeq, int lengthSwitchList)
+int CanSwitch(Node* startGenSeq, Node* startSwitchSeq, int lengthSwitchList)
 {
     int canSwitch = 0; // Default is FALSE or 0
 
     int isEqual = 0;
     int countSeq = 0;
-    
+
     while(startSwitchSeq != NULL)
     {
-        isEqual = IsEquals(startSeq->value, startSwitchSeq->value);
-        if(isEqual == 1) 
+        if(startGenSeq != NULL)
+        {
+            isEqual = IsEquals(startGenSeq->value, startSwitchSeq->value);
+        }
+
+        if(isEqual == 1)
         {
             countSeq++;
         }
@@ -138,8 +186,11 @@ int CanSwitch(Node* startSeq, Node* startSwitchSeq, int lengthSwitchList)
 
         if(startSwitchSeq != NULL)
         {
-            // Iterave over two lists
-            startSeq = startSeq->next;
+            if(startGenSeq->next != NULL)
+            {
+                startGenSeq = startGenSeq->next;
+            }
+
             startSwitchSeq = startSwitchSeq->next;
         }
     }
@@ -152,7 +203,6 @@ int CanSwitch(Node* startSeq, Node* startSwitchSeq, int lengthSwitchList)
     {
         canSwitch = 0;
     }
-    
     return canSwitch;
 }
 
@@ -162,11 +212,11 @@ Node* GetEndNode(Node* startGenSeq, Node* startSwitchSeq, int lengthSwitchList)
 
     int isEqual = 0;
     int countSeq = 0;
-    
+
     while(startSwitchSeq != NULL)
     {
         isEqual = IsEquals(startGenSeq->value, startSwitchSeq->value);
-        if(isEqual == 1) 
+        if(isEqual == 1)
         {
             countSeq++;
         }
@@ -186,61 +236,77 @@ Node* GetEndNode(Node* startGenSeq, Node* startSwitchSeq, int lengthSwitchList)
             startSwitchSeq = startSwitchSeq->next;
         }
     }
-    
+
     return endNode;
 }
 
-void SwitchInitNodes(Node* node1, Node* node2)
-{
-    Node* nodePrevCopy1 = node1->prev;
-    Node* nodePrevCopy2 = node2->prev;
-    
-    nodePrevCopy1->next = node2;
-    node2->prev = nodePrevCopy1;
+void SwitchInitNodes(Node* init1, Node* init2, DoubleLinkedList** list1, DoubleLinkedList** list2)
+{    
+    Node* nodePrev1 = init1->prev;
+    Node* nodePrev2 = init2->prev;
 
-    nodePrevCopy2->next = node1;
-    node1->prev = nodePrevCopy2;
+    // If the init1 was the first node of list
+    if(nodePrev1 == NULL)
+    {
+        (*list1)->head = init2;
+    }
+    else
+    {
+        nodePrev1->next = init2;
+    }
+    init2->prev = nodePrev1;
+
+    // if the init2 was the first node of list
+    if(nodePrev2 == NULL)
+    {
+        (*list2)->head = init1;
+    }
+    else
+    {
+        nodePrev2->next = init1;
+    }
+    init1->prev = nodePrev2;
 }
 
-void SwitchEndNodes(Node* node1, Node* node2)
+void SwitchEndNodes(Node* end1, Node* end2, DoubleLinkedList** list1, DoubleLinkedList** list2)
 {
-    Node* nodeNext1 = node1->next;
-    Node* nodeNext2 = node2->next;
-    
-    node1->next = nodeNext2;
-    nodeNext2->prev = node1;
+   Node* nodeNext1 = end1->next;
+   Node* nodeNext2 = end2->next;
 
-    node2->next = nodeNext1;
-    nodeNext1->prev = node2;
-}
-
-void Switch(Node* init1, Node* end1, Node* init2, Node* end2)
-{
-    // Switch first 
-    Node* nodePrevCopy1 = init1->prev;
-    Node* nodePrevCopy2 = init2->prev;
-    
-    Node* nodeNext1 = end1->next;
-    Node* nodeNext2 = end2->next;
-
-    nodePrevCopy1->next = init2;
-    init2->prev = nodePrevCopy1;
-
-    nodePrevCopy2->next = init1;
-    init1->prev = nodePrevCopy2;
-    
-    end1->next = nodeNext2;
+    if(nodeNext1 == NULL)
+    {
+        (*list1)->tail = end2;
+    }
+    else
+    {
+        end1->next = nodeNext2;
+    }
     nodeNext2->prev = end1;
 
-    end2->next = nodeNext1;
+    if(nodeNext2 == NULL)
+    {
+        (*list2)->tail = end1;
+    }
+    else
+    {
+        end2->next = nodeNext1;
+    }
     nodeNext1->prev = end2;
 }
 
-void SwitchSequence(DoubleLinkedList** list1, DoubleLinkedList** list2, DoubleLinkedList* switch1, DoubleLinkedList* switch2)
+void SwitchGenes(DoubleLinkedList** geneSequence1, DoubleLinkedList** geneSequence2, DoubleLinkedList* switchSequence1, DoubleLinkedList* switchSequence2)
 {
-    // Find the switch(start+end) nodes
-    Node* initList1 = (*list1)->head;
-    Node* initList2 = (*list2)->head;
+    // Start of genes lists default
+    Node* startGenSeq1 = (*geneSequence1)->head;
+    Node* startGenSeq2 = (*geneSequence2)->head;
+
+    // Start of char list of switch sequence
+    Node* startSwitchSeq1 = switchSequence1->head;
+    Node* startSwitchSeq2 = switchSequence2->head;
+
+    // Length of the SwitchSeq list
+    int lenSwitchSeq1 = GetListLength(switchSequence1);
+    int lenSwitchSeq2 = GetListLength(switchSequence2);
 
     // Init and End nodes of will switch
     Node* initRemoveSeq1 = NULL;
@@ -249,83 +315,117 @@ void SwitchSequence(DoubleLinkedList** list1, DoubleLinkedList** list2, DoubleLi
     Node* initRemoveSeq2 = NULL;
     Node* endRemoveSeq2 = NULL;
 
+    int count = 0;
     int canSwitchList1 = 0;
     int canSwitchList2 = 0;
 
-    while(initList1 != NULL)
+    while(startGenSeq1 != NULL)
     {
         canSwitchList1 = 0;
-        canSwitchList1 = CanSwitch(initList1, switch1->head, 2);
+        canSwitchList1 = CanSwitch(startGenSeq1, startSwitchSeq1, lenSwitchSeq1);
+
         if(canSwitchList1 == 1)
         {
-            initRemoveSeq1 = initList1; // Find 1° Node to Switch
-            endRemoveSeq1 = GetEndNode(initList1, switch1->head, 2);
+            initRemoveSeq1 = startGenSeq1;
+            endRemoveSeq1 = GetEndNode(startGenSeq1, startSwitchSeq1, lenSwitchSeq1);
 
-            while(initList2 != NULL)
+            // Verify if has value in 2° Sequence
+            while(startGenSeq2 != NULL)
             {
                 canSwitchList2 = 0;
-                canSwitchList2 = CanSwitch(initList2, switch2->head, 2);
+                canSwitchList2 = CanSwitch(startGenSeq2, startSwitchSeq2, lenSwitchSeq2);
 
                 if(canSwitchList2 == 1)
                 {
-                    initRemoveSeq2 = initList2;
-                    endRemoveSeq2 = GetEndNode(initList2, switch2->head, 2);
-                    
-                    // SWITCH NODES
-                    // SwitchInitNodes(initRemoveSeq1, initRemoveSeq2);
-                    // SwitchEndNodes(endRemoveSeq1, endRemoveSeq2);
+                    initRemoveSeq2 = startGenSeq2;
+                    endRemoveSeq2 = GetEndNode(startGenSeq2, startSwitchSeq2, lenSwitchSeq2);
 
-                    Switch(initRemoveSeq1, initRemoveSeq2, endRemoveSeq1, endRemoveSeq2);
 
-                    initList2 = NULL;
+                    startGenSeq2 = NULL;
                 }
-                
-                // Iterate over 2° list
-                if(initList2 != NULL)
+
+                if(canSwitchList2 != 1)
                 {
-                    initList2 = initList2->next;
+                    // Iterate over 2° list
+                    startGenSeq2 = startGenSeq2->next;
                 }
             }
         }
 
+        // SWWITCH NODES
         if(canSwitchList1 == 1 && canSwitchList2 == 1)
         {
-            initList1 = endRemoveSeq2;
+            SwitchInitNodes(initRemoveSeq1, initRemoveSeq2, geneSequence1, geneSequence2);
+            SwitchEndNodes(endRemoveSeq1, endRemoveSeq2, geneSequence1, geneSequence2);
+
+            startGenSeq1 = (*geneSequence1)->head;
+            startGenSeq2 = (*geneSequence2)->head;
+
+            canSwitchList1 = 0;
+            canSwitchList2 = 0;
         }
         else
         {
-            // Iterate over 1° list
-            initList1 = initList1->next;
+            startGenSeq1 = startGenSeq1->next;
         }
     }
 }
 
+DoubleLinkedList* FreeList(DoubleLinkedList* list)
+{
+    Node* start = list->head;
+    Node* aux = NULL;
+
+    if(list != NULL && list->head != NULL)
+    {
+        start = list->head;
+    }
+
+    while(start != NULL)
+    {
+         aux = start;
+         start = start->next;
+
+         if(aux != NULL)
+         {
+             free(aux);
+         }
+    }
+
+    list->head = NULL;
+    list->tail = NULL;
+
+    return list;
+}
+
 int main()
 {
+    DoubleLinkedList* geneSequence1 = GetGeneSequence();
+    DoubleLinkedList* geneSequence2 = GetGeneSequence();
 
-    DoubleLinkedList* list1 = GetList();
-    DoubleLinkedList* list2 = GetList();
-    
-    DoubleLinkedList* switch1 = GetList();
-    DoubleLinkedList* switch2 = GetList();
+    int pairsCount = GetInt();
+    getchar();
 
-    ShowList(list1);
+    DoubleLinkedList* switchSequence1 = NULL;
+    DoubleLinkedList* switchSequence2 = NULL;
 
+    // Foreach pair in pairsCount
+    for(int i = 0; i < pairsCount; i++)
+    {
+        switchSequence1 = GetGeneSequence();
+        switchSequence2 = GetGeneSequence();
+
+        SwitchGenes(&geneSequence1, &geneSequence2, switchSequence1, switchSequence2);
+
+        // Clear the temp lists
+        switchSequence1 = FreeList(switchSequence1);
+        switchSequence2 = FreeList(switchSequence2);
+    }
+
+    // Print the Gene Sequences
+    ShowGeneSequence(geneSequence1);
     printf("\n");
-
-    ShowList(list2);
-
-    printf("\n");
-
-    SwitchSequence(&list1, &list2, switch1, switch2);
-
-    ShowList(list1);
-
-    printf("\n");
-
-    ShowList(list2);
-
-    printf("\n");
-    
+    ShowGeneSequence(geneSequence2);
+    getchar();
     return 0;
 }
