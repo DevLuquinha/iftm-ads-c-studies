@@ -4,8 +4,8 @@
 struct leaf
 {
     int data;
-    struct leaf* left;
-    struct leaf* right;
+    struct leaf *left;
+    struct leaf *right;
 };
 typedef struct leaf Leaf;
 
@@ -17,9 +17,9 @@ int GetInt()
     return num;
 }
 
-Leaf* NewLeaf(int data)
+Leaf *NewLeaf(int data)
 {
-    Leaf* leaf = malloc(sizeof(Leaf));
+    Leaf *leaf = malloc(sizeof(Leaf));
     leaf->data = data;
     leaf->left = NULL;
     leaf->right = NULL;
@@ -27,27 +27,27 @@ Leaf* NewLeaf(int data)
     return leaf;
 }
 
-Leaf* InsertLeaf(Leaf* root, int data)
+Leaf *InsertLeaf(Leaf *root, int data)
 {
-    Leaf* newLeaf = NewLeaf(data);
+    Leaf *newLeaf = NewLeaf(data);
 
     // 1. Verify if the tree is empty
-    if(root == NULL)
+    if (root == NULL)
     {
         root = newLeaf;
     }
     else
     {
         // 2. Create auxiliar leafs
-        Leaf* lastParent = root;
-        Leaf* currentLeaf = root;
-        
+        Leaf *lastParent = root;
+        Leaf *currentLeaf = root;
+
         // 3. Iterate over tree
-        while(currentLeaf != NULL)
+        while (currentLeaf != NULL)
         {
             lastParent = currentLeaf;
             // The new leaf is shorter than current
-            if(newLeaf->data < currentLeaf->data)
+            if (newLeaf->data < currentLeaf->data)
             {
                 currentLeaf = currentLeaf->left;
             }
@@ -57,7 +57,7 @@ Leaf* InsertLeaf(Leaf* root, int data)
             }
         }
 
-        if(newLeaf->data < lastParent->data)
+        if (newLeaf->data < lastParent->data)
         {
             lastParent->left = newLeaf;
         }
@@ -70,9 +70,9 @@ Leaf* InsertLeaf(Leaf* root, int data)
     return root;
 }
 
-void ShowPreOrder(Leaf* root)
+void ShowPreOrder(Leaf *root)
 {
-    if(root != NULL)
+    if (root != NULL)
     {
         printf("%i ", root->data);
         ShowPreOrder(root->left);
@@ -80,9 +80,9 @@ void ShowPreOrder(Leaf* root)
     }
 }
 
-void ShowInOrder(Leaf* root)
+void ShowInOrder(Leaf *root)
 {
-    if(root != NULL)
+    if (root != NULL)
     {
         ShowInOrder(root->left);
         printf("%i ", root->data);
@@ -90,9 +90,9 @@ void ShowInOrder(Leaf* root)
     }
 }
 
-void ShowPostOrder(Leaf* root)
+void ShowPostOrder(Leaf *root)
 {
-    if(root != NULL)
+    if (root != NULL)
     {
         ShowPostOrder(root->left);
         ShowPostOrder(root->right);
@@ -100,12 +100,12 @@ void ShowPostOrder(Leaf* root)
     }
 }
 
-void GetLeafAmount(Leaf* root, int* amount)
+void GetLeafAmount(Leaf *root, int *amount)
 {
-    if(root != NULL)
+    if (root != NULL)
     {
         GetLeafAmount(root->left, amount);
-        if(root->left == NULL && root->right == NULL)
+        if (root->left == NULL && root->right == NULL)
         {
             (*amount)++;
         }
@@ -113,12 +113,12 @@ void GetLeafAmount(Leaf* root, int* amount)
     }
 }
 
-void ShowLeafs(Leaf* root)
+void ShowLeafs(Leaf *root)
 {
-    if(root != NULL)
+    if (root != NULL)
     {
         ShowLeafs(root->left);
-        if(root->left == NULL && root->right == NULL)
+        if (root->left == NULL && root->right == NULL)
         {
             printf("%i eh uma folha\n", root->data);
         }
@@ -126,22 +126,126 @@ void ShowLeafs(Leaf* root)
     }
 }
 
+Leaf *GetMinLeaf(Leaf *root)
+{
+    Leaf *current = root;
+    while (current != NULL && current->left != NULL)
+    {
+        current = current->left;
+    }
+
+    return current;
+}
+
+Leaf *RemoveLeaf(Leaf *root, int leafValue)
+{
+    // 1. If the tree is empty
+    if (root == NULL)
+    {
+        return root;
+    }
+
+    Leaf *lastParent = NULL;
+    Leaf *currentLeaf = root;
+
+    while (currentLeaf != NULL && currentLeaf->data != leafValue)
+    {
+        lastParent = currentLeaf;
+        if (leafValue < currentLeaf->data)
+        {
+            currentLeaf = currentLeaf->left;
+        }
+        else
+        {
+            currentLeaf = currentLeaf->right;
+        }
+    }
+
+    // 2. If dont find the value
+    if (currentLeaf == NULL)
+    {
+        return root;
+    }
+
+    // --- CASE 3 (Two children) ---
+    // Switch the current value by the sucessor
+    // and remove the sucessor leaf.
+    if (currentLeaf->left != NULL && currentLeaf->right != NULL)
+    {
+        // Find the Sucessor (smallest element of sub right tree)
+        Leaf *sucessorParent = currentLeaf;
+        Leaf *sucessor = currentLeaf->right;
+
+        while (sucessor->left != NULL)
+        {
+            sucessorParent = sucessor;
+            sucessor = sucessor->left;
+        }
+
+        // Copy the data of sucessor to current node
+        currentLeaf->data = sucessor->data;
+
+        // Now the remove target is the sucessor node (that have 0 or 1 child)
+        // Update the pointers for the node below remove the sucessor
+        currentLeaf = sucessor;
+        lastParent = sucessorParent;
+    }
+
+    // --- Cases 1 e 2 (0 ou 1 Child) ---
+    // Get the single child of exists (or NULL if leaf)
+    Leaf *childLeaf;
+    if (currentLeaf->left != NULL)
+    {
+        childLeaf = currentLeaf->left;
+    }
+    else
+    {
+        childLeaf = currentLeaf->right;
+    }
+
+    // If dont have parent, its removing the tree root
+    if (lastParent == NULL)
+    {
+        free(currentLeaf);
+        return childLeaf; // The new root is the son (or NULL)
+    }
+
+    // If has parent, do parent to apoint to grandson (childLeaf)
+    if (lastParent->left == currentLeaf)
+    {
+        lastParent->left = childLeaf;
+    }
+    else
+    {
+        lastParent->right = childLeaf;
+    }
+
+    free(currentLeaf);
+    return root;
+}
+
 int main()
 {
-    Leaf* root = NULL;
-    
+    Leaf *root = NULL;
+
     // Insert values in tree
-    int num = GetInt(); 
-    while (num != -1) 
-    { 
-        root = InsertLeaf(root, num); 
-        num = GetInt(); 
+    int num = GetInt();
+    while (num != -1)
+    {
+        root = InsertLeaf(root, num);
+        num = GetInt();
     }
 
     int leafAmount = 0;
 
     GetLeafAmount(root, &leafAmount);
-    
-    printf("%i", leafAmount);
+
+    ShowInOrder(root);
+
+    RemoveLeafRecursive(root, 60);
+
+    printf("\n");
+    ShowInOrder(root);
+
     return 0;
 }
