@@ -78,14 +78,16 @@ void InOrder(Leaf* root)
 
 int main()
 {
-    Leaf* root = NULL;
-    root = InsertLeaf(root, 7);
-    root = InsertLeaf(root, 4);
-    root = InsertLeaf(root, 3);
+    // Leaf* root = NULL;
+    // root = InsertLeaf(root, 7);
+    // root = InsertLeaf(root, 4);
+    // root = InsertLeaf(root, 3);
 
-    printf("[ ");
-    InOrder(root);
-    printf("]");
+    // printf("[ ");
+    // InOrder(root);
+    // printf("]");
+
+    printf("Hello, World!\n");
 
     return 0;
 }
