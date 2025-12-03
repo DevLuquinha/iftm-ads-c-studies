@@ -89,6 +89,21 @@ Leaf* GetMinLeaf(Leaf* root)
     return lastLeaf;
 }
 
+Leaf* GetMaxLeaf(Leaf* root)
+{
+    Leaf* lastLeaf = root;
+
+    if(root != NULL)
+    {
+        while(lastLeaf->right != NULL)
+        {
+            lastLeaf = lastLeaf->right;
+        }
+    }
+
+    return lastLeaf;
+}
+
 int main()
 {
     // Create tree and insert some values
@@ -103,6 +118,9 @@ int main()
     tree = InsertLeaf(tree, 7);
 
     Leaf* minLeaf = GetMinLeaf(tree);
-    printf("O menor valor da arvore eh: %i", minLeaf->data);
+    printf("- O menor valor da arvore eh: %i", minLeaf->data);
+    
+    Leaf* maxLeaf = GetMaxLeaf(tree);
+    printf("\n- O maior valor da arvore eh: %i", maxLeaf->data);
     return 0;
 }
