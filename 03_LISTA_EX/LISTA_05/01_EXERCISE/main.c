@@ -13,7 +13,7 @@ Leaf* NewLeaf(int data)
 {
     Leaf* leaf = malloc(sizeof(Leaf));
     leaf->data = data;
-    leaf->left = NULL;
+    leaf->left  = NULL;
     leaf->right = NULL;
 
     return leaf;
@@ -21,6 +21,7 @@ Leaf* NewLeaf(int data)
 
 Leaf* InsertLeaf(Leaf* root, int data)
 {
+    // 1. Create leaf
     Leaf* newLeaf = NewLeaf(data);
 
     if(root == NULL)
@@ -29,17 +30,17 @@ Leaf* InsertLeaf(Leaf* root, int data)
     }
     else
     {
-        Leaf* currentParent = NULL;
+        // 2. Create the auxiliars vars
+        Leaf* lastParent = NULL;
         Leaf* currentLeaf = root;
 
-        // Iterave over the tree to find the last leaf
         while(currentLeaf != NULL)
         {
-            // Storage the 'parent'
-            currentParent = currentLeaf;
+            // Save a copy of currentLeaf
+            lastParent = currentLeaf;
 
-            // The new leaf is smallest
-            if(newLeaf->data < currentLeaf->data)
+            // The new leaf is smallest?
+            if(data < currentLeaf->data)
             {
                 currentLeaf = currentLeaf->left;
             }
@@ -49,45 +50,42 @@ Leaf* InsertLeaf(Leaf* root, int data)
             }
         }
 
-        // Here the currentLeaf is null and his parent is the 
-        // last node of the tree
-        
-        // The new leaf needs to insert in left
-        if(newLeaf->data < currentParent->data)
+        // 3. Insert the new leaf in the right location
+        if(data < lastParent->data)
         {
-            currentParent->left = newLeaf;
+            lastParent->left = newLeaf;
         }
         else
         {
-            currentParent->right - newLeaf;
+            lastParent->right = newLeaf;
         }
     }
 
     return root;
 }
 
-void InOrder(Leaf* root)
+void ShowInOrder(Leaf* root)
 {
     if(root != NULL)
     {
-        InOrder(root->left);
+        ShowInOrder(root->left);
         printf("%i ", root->data);
-        InOrder(root->right);
+        ShowInOrder(root->right);
     }
 }
 
 int main()
 {
-    // Leaf* root = NULL;
-    // root = InsertLeaf(root, 7);
-    // root = InsertLeaf(root, 4);
-    // root = InsertLeaf(root, 3);
+    Leaf* tree = NULL;
+    tree = InsertLeaf(tree, 4);
+    tree = InsertLeaf(tree, 3);
+    tree = InsertLeaf(tree, 9);
+    tree = InsertLeaf(tree, 7);
 
-    // printf("[ ");
-    // InOrder(root);
-    // printf("]");
-
-    printf("Hello, World!\n");
+    // Show the Tree in Order
+    printf("[ ");
+    ShowInOrder(tree);
+    printf("]");
 
     return 0;
 }
