@@ -133,6 +133,25 @@ void IsTreeEquals(Leaf* tree1, Leaf* tree2, int* isEquals)
     }
 }
 
+void GetHeight(Leaf* startLeaf, int* height)
+{
+    if(startLeaf == NULL)
+    {
+        return;
+    }
+
+    if(startLeaf->left != NULL || startLeaf->right != NULL)
+    {
+        *height = (*height) + 1;
+    }
+
+    if(startLeaf != NULL)
+    {
+        GetHeight(startLeaf->left, height);
+        GetHeight(startLeaf->right, height);
+    }
+}
+
 int main()
 {
     // Create tree and insert some values
@@ -176,5 +195,10 @@ int main()
         printf("\nAS ARVORES NAO SAO IDENTICAS");
     }
 
+    // Get the tree height
+    int treeHeight = 0;
+    GetHeight(tree, &treeHeight);
+
+    printf("A altura da arvore eh: %i", treeHeight);
     return 0;
 }
