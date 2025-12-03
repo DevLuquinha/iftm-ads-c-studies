@@ -74,18 +74,35 @@ void ShowInOrder(Leaf* root)
     }
 }
 
+Leaf* GetMinLeaf(Leaf* root)
+{
+    Leaf* lastLeaf = root;
+
+    if(root != NULL)
+    {
+        while(lastLeaf->left != NULL)
+        {
+            lastLeaf = lastLeaf->left;
+        }
+    }
+
+    return lastLeaf;
+}
+
 int main()
 {
+    // Create tree and insert some values
     Leaf* tree = NULL;
-    tree = InsertLeaf(tree, 4);
+    tree = InsertLeaf(tree, 5);
     tree = InsertLeaf(tree, 3);
+    tree = InsertLeaf(tree, 8);
+    tree = InsertLeaf(tree, 4);
+    tree = InsertLeaf(tree, 6);
+    tree = InsertLeaf(tree, 1);
     tree = InsertLeaf(tree, 9);
     tree = InsertLeaf(tree, 7);
 
-    // Show the Tree in Order
-    printf("[ ");
-    ShowInOrder(tree);
-    printf("]");
-
+    Leaf* minLeaf = GetMinLeaf(tree);
+    printf("O menor valor da arvore eh: %i", minLeaf->data);
     return 0;
 }
