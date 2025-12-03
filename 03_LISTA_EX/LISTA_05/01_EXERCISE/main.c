@@ -104,6 +104,35 @@ Leaf* GetMaxLeaf(Leaf* root)
     return lastLeaf;
 }
 
+void IsTreeEquals(Leaf* tree1, Leaf* tree2, int* isEquals)
+{
+    // Just return, without change the result
+    if(tree1 == NULL && tree2 == NULL)
+    {
+        return;
+    }
+
+    // If one of leafs is NULL
+    if(tree1 == NULL || tree2 == NULL)
+    {
+        *isEquals = 1; // False
+        return;
+    }
+
+    // If the values are diferents
+    if(tree1->data != tree2->data)
+    {
+        *isEquals = 1; // False
+        return;
+    }
+
+    if(*isEquals == 0) // If until equals
+    {
+        IsTreeEquals(tree1->left, tree2->left, isEquals);
+        IsTreeEquals(tree1->right, tree2->right, isEquals);
+    }
+}
+
 int main()
 {
     // Create tree and insert some values
@@ -117,10 +146,35 @@ int main()
     tree = InsertLeaf(tree, 9);
     tree = InsertLeaf(tree, 7);
 
+    // The Second tree
+    Leaf* tree2 = NULL;
+    tree2 = InsertLeaf(tree2, 5);
+    tree2 = InsertLeaf(tree2, 3);
+    tree2 = InsertLeaf(tree2, 8);
+    tree2 = InsertLeaf(tree2, 4);
+    tree2 = InsertLeaf(tree2, 6);
+    tree2 = InsertLeaf(tree2, 1);
+    tree2 = InsertLeaf(tree2, 9);
+    tree2 = InsertLeaf(tree2, 7);
+
     Leaf* minLeaf = GetMinLeaf(tree);
     printf("- O menor valor da arvore eh: %i", minLeaf->data);
     
     Leaf* maxLeaf = GetMaxLeaf(tree);
     printf("\n- O maior valor da arvore eh: %i", maxLeaf->data);
+    
+    // Verify if the tree is equals
+    int isEqual = 0; // By default the tree are identics;
+    IsTreeEquals(tree, tree2, &isEqual);
+    
+    if(isEqual == 0)
+    {
+        printf("\nAS ARVORES SAO IDENTICAS");
+    }
+    else
+    {
+        printf("\nAS ARVORES NAO SAO IDENTICAS");
+    }
+
     return 0;
 }
