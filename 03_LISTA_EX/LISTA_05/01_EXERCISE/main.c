@@ -133,22 +133,28 @@ void IsTreeEquals(Leaf* tree1, Leaf* tree2, int* isEquals)
     }
 }
 
-void GetHeight(Leaf* startLeaf, int* height)
+void GetHeight(Leaf* root, int* height)
 {
-    if(startLeaf == NULL)
+    if(root == NULL)
     {
         return;
     }
-
-    if(startLeaf->left != NULL || startLeaf->right != NULL)
+    
+    int leftHeight = 0;
+    int rightHeight = 0;
+    
+    // Get the value of the sub-trees
+    GetHeight(root->left, &leftHeight);
+    GetHeight(root->right, &rightHeight);
+    
+    // The current height is 1 + the bigger sub-tree height 
+    if(leftHeight > rightHeight)
     {
-        *height = (*height) + 1;
+        *height = leftHeight + 1;
     }
-
-    if(startLeaf != NULL)
+    else
     {
-        GetHeight(startLeaf->left, height);
-        GetHeight(startLeaf->right, height);
+        *height = rightHeight + 1;
     }
 }
 
