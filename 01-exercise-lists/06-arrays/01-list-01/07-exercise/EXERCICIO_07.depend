@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+<<<<<<< HEAD
+1747251626 source:c:\users\lucas\onedrive\desktop\estudo c\01_lista_exercicios\06_vetores\01_lista 01\exercicio_07\main.c
+=======
+1747265046 source:c:\users\aluno\desktop\estudos-linguagem-c\01_lista_exercicios\06_vetores\01_lista 01\exercicio_07\main.c
+>>>>>>> 8be56a4d224877ca55979506e8573deef8e94748
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<math.h>
+	<time.h>
+	<windows.h>
+	<conio.h>
+

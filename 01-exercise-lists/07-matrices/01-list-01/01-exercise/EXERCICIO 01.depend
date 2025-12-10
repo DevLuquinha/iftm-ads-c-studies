@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1749515785 source:c:\users\aluno\desktop\estudos-linguagem-c\01_lista_exercicios\07_matrizes\01_lista 01\exercicio 01\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<math.h>
+	<time.h>
+	<windows.h>
+	<conio.h>
+
+1749686778 source:c:\users\lucas\onedrive\desktop\estudo c\01_lista_exercicios\07_matrizes\01_lista 01\exercicio 01\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<math.h>
+	<time.h>
+	<windows.h>
+	<conio.h>
+

@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1747102978 source:c:\users\lucas\onedrive\desktop\estudo c\01_lista_exercicios\06_vetores\01_lista 01\exercicio_02\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<math.h>
+	<time.h>
+	<windows.h>
+	<conio.h>
+
