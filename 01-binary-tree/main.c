@@ -48,8 +48,29 @@ Node* InsertNode(int value, Node* root)
     }
 }
 
+void ShowPreOrder(Node* root)
+{
+    if (root != NULL)
+    {
+        printf("%i, ", root->value);
+        ShowPreOrder(root->left);
+        ShowPreOrder(root->right);
+    }
+}
+
 int main()
 {
-    printf("Hello world!\n");
+    printf("The Binary Search Tree");
+    Node* root = NULL;
+    int values[11] = {50, 30, 70, 20, 40, 60, 80, 35, 45, 65, 85};
+
+    for(int i = 0; i < 11; i++)
+    {
+        root = InsertNode(values[i], root);
+    }
+
+    printf("\n\nShow Pre Order Binary Tree: ");
+    ShowPreOrder(root);
+
     return 0;
 }
