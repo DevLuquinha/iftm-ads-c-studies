@@ -60,6 +60,20 @@ void GetTreeHeight(Node* root, int* maxHeight)
     }
 }
 
+void GetMaxValue(Node* root, int* maxValue)
+{
+    if (root != NULL)
+    {
+        if (root->value > *maxValue)
+        {
+            *maxValue = root->value;
+        }
+
+        GetMaxValue(root->left, maxValue);
+        GetMaxValue(root->right, maxValue);
+    }
+}
+
 void ShowPreOrder(Node* root)
 {
     if (root != NULL)
@@ -80,6 +94,16 @@ void ShowInOrder(Node* root)
     }
 }
 
+void ShowPostOrder(Node* root)
+{
+    if (root != NULL)
+    {
+        ShowInOrder(root->left);
+        ShowInOrder(root->right);
+        printf("%i, ", root->value);
+    }
+}
+
 int main()
 {
     int values[LEN] = { 25, 12, 40, 9, 18, 33, 50, 29, 37, 45, 60, 15, 20, 48, 55 };
@@ -91,13 +115,20 @@ int main()
         root = InsertNode(root, values[i], 0);
     }
 
+    // 1. Show the tree in order
     printf("The tree IN ORDER: ");
     ShowInOrder(root);
 
+    // 2. Get the height
     int treeHeight = 0;
     GetTreeHeight(root, &treeHeight);
 
     printf("\nThe Tree Height is %i\n", treeHeight);
 
+    // 3. Get the max
+    int maxValue = 0;
+    GetMaxValue(root, &maxValue);
+
+    printf("\nThe max value on tree is %i", maxValue);
     return 0;
 }
