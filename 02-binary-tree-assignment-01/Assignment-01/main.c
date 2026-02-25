@@ -47,7 +47,7 @@ Node* InsertNode(Node* root, int value, int heightLevel)
     }
 }
 
-Node* GetTreeHeight(Node* root, int* maxHeight)
+void GetTreeHeight(Node* root, int* maxHeight)
 {
     if (root != NULL)
     {
@@ -88,7 +88,7 @@ int main()
 
     for(int i = 0; i < LEN; i++)
     {
-        root = InsertNode(root, values[i], 1);
+        root = InsertNode(root, values[i], 0);
     }
 
     printf("The tree IN ORDER: ");
