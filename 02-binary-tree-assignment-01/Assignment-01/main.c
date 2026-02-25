@@ -74,6 +74,46 @@ void GetMaxValue(Node* root, int* maxValue)
     }
 }
 
+int IsLeaf(Node* node)
+{
+    if (node == NULL)
+    {
+        return -1; // Error handling
+    }
+
+    if (node->left == NULL && node->right == NULL)
+    {
+        return 1; // True
+    }
+    else
+    {
+        return 0; // False
+    }
+}
+
+void IsFilled(Node* root, int* isFilled, int treeHeight)
+{
+    if (root != NULL)
+    {
+        // Check if the node is a leaf
+        if (IsLeaf(root) == 1 )
+        {
+            if (treeHeight == root->heightLevel)
+            {
+                *isFilled = 1; // True is filled
+            }
+            else
+            {
+                *isFilled = 0;
+                return;
+            }
+        }
+
+        IsFilled(root->left, isFilled, treeHeight);
+        IsFilled(root->right, isFilled, treeHeight);
+    }
+}
+
 void ShowPreOrder(Node* root)
 {
     if (root != NULL)
@@ -123,12 +163,26 @@ int main()
     int treeHeight = 0;
     GetTreeHeight(root, &treeHeight);
 
-    printf("\nThe Tree Height is %i\n", treeHeight);
+    printf("\n\nA. The Tree Height is %i", treeHeight);
 
     // 3. Get the max
     int maxValue = 0;
     GetMaxValue(root, &maxValue);
 
-    printf("\nThe max value on tree is %i", maxValue);
+    printf("\nB. The max value on tree is %i", maxValue);
+
+    // 4. Tree is filled?
+    int isFilled = 0; // False;
+    IsFilled(root, &isFilled, treeHeight);
+
+    if (isFilled == 0)
+    {
+        printf("\nC. The tree is NOT filled");
+    }
+    else if (isFilled == 1)
+    {
+        printf("\nC. The tree is filled");
+    }
+
     return 0;
 }
