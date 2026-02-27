@@ -109,6 +109,68 @@ void IsFilled(Node* root, int* isFilled, int treeHeight)
     }
 }
 
+Node* GetMinNode(Node* node)
+{
+    Node* current = node;
+    
+    // Always will be the max right possible 
+    while (current && current->left != NULL)
+    {
+        current = current->left;
+    }
+
+    return current;
+}
+
+Node* RemoveValue(Node* root, int value)
+{
+    // 1. Empty tree or node not found
+    if (root == NULL)
+    {
+        return root;
+    }
+
+    // The node is left
+    if (value < root->value)
+    {
+        root->left = RemoveValue(root->left, value);
+    }
+    else if (value > root->value)
+    {
+        root->right = RemoveValue(root->right, value);
+    }
+    else // FIND THE NODE!
+    {
+        // A CASE: Node with just one subtree
+        if (root->left == NULL)
+        {
+            Node* temp = root->right;
+            free(root); 
+
+            return temp;
+        }   
+        else if (root->right == NULL)
+        {
+            Node* temp = root->left;
+            free(root);
+
+            return temp;
+        }
+        
+        // B CASE: Node with two subtrees
+        // Find the smalest value on right;
+        Node* temp = GetMinNode(root->right);
+
+        // Copy the value for current node
+        root->value = temp->value;
+
+        // Remove the "original" node
+        root->right = RemoveValue(root->right, temp->value);
+    }
+
+    return root;
+}
+
 void ShowPreOrder(Node* root)
 {
     if (root != NULL)
@@ -154,19 +216,19 @@ int main()
     printf("The tree IN ORDER: ");
     ShowInOrder(root);
 
-    // 2. Get the height
+    // 2. Get the height (A)
     int treeHeight = 0;
     GetTreeHeight(root, &treeHeight);
 
     printf("\n\nA. The Tree Height is %i", treeHeight);
 
-    // 3. Get the max
+    // 3. Get the max (B)
     int maxValue = 0;
     GetMaxValue(root, &maxValue);
 
     printf("\nB. The max value on tree is %i", maxValue);
 
-    // 4. Tree is filled?
+    // 4. Tree is filled? (C)
     int isFilled = 1; // True;
     IsFilled(root, &isFilled, treeHeight);
 
@@ -178,6 +240,17 @@ int main()
     {
         printf("\nC. The tree is filled");
     }
+
+    // 5. Remove a value on tree (D)
+    int valueToRemove = 45;
+
+    printf("\nD. Tree before ( with %d ): ", valueToRemove);
+    ShowInOrder(root);
+
+    root = RemoveValue(root, valueToRemove);
+
+    printf("\nD. Tree after  (remove %d): ", valueToRemove);
+    ShowInOrder(root);
 
     return 0;
 }
