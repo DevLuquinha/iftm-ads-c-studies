@@ -98,14 +98,9 @@ void IsFilled(Node* root, int* isFilled, int treeHeight)
         // Check if the node is a leaf
         if (IsLeaf(root) == 1 )
         {
-            if (treeHeight == root->heightLevel)
+            if (treeHeight != root->heightLevel)
             {
-                *isFilled = 1; // True is filled
-            }
-            else
-            {
-                *isFilled = 0;
-                return;
+                *isFilled = 0; 
             }
         }
 
@@ -172,7 +167,7 @@ int main()
     printf("\nB. The max value on tree is %i", maxValue);
 
     // 4. Tree is filled?
-    int isFilled = 0; // False;
+    int isFilled = 1; // True;
     IsFilled(root, &isFilled, treeHeight);
 
     if (isFilled == 0)
