@@ -22,8 +22,7 @@ Node* NewNode(int value)
 
 int GetHeight(Node* root)
 {
-    if (root == NULL)
-    {
+    if (root == NULL){
         return 0;
     }
 
@@ -33,8 +32,7 @@ int GetHeight(Node* root)
     if (leftHeight > rightHeight){
         return leftHeight + 1;
     }
-    else 
-    {
+    else {
         return rightHeight + 1;
     }
 }
@@ -64,7 +62,7 @@ Node* RotationLeft(Node* unbalanced)
 {
     Node* child = unbalanced->right;
     unbalanced->right = child->left;
-    child->left - unbalanced;
+    child->left = unbalanced;
 
     return child;
 }
