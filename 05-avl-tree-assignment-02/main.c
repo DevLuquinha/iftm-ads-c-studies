@@ -196,6 +196,17 @@ int isStrict(Node* root){
     return 0;
 }
 
+int getSmallestValue(Node* root){
+    int smallestValue = 0;
+    
+    while(root != NULL){
+        smallestValue = root->value;
+        root = root->left;
+    }
+
+    return smallestValue;
+}
+
 int main(){
     int values[LEN] = { 30, 10, 20, 40, 50, 25, 45, 43, 41, 70, 65, 15, 5, 8, 55, 58, 57, 75, 80, 78 };
     Node* tree1 = NULL;
@@ -205,28 +216,39 @@ int main(){
         tree1 = insertNode(tree1, values[i]);
         tree2 = insertNode(tree2, values[i]);
     }
-    
-    printf("The BST 1: ");
+    printf("===============================================================================================");
+
+    printf("\nThe BST 1: ");
     showInOrder(tree1);
 
     printf("\nThe BST 2: ");
     showInOrder(tree2);
 
+    printf("\n===============================================================================================");
+
     // 1. Verify if the trees are identical
     int isIdentical = isSameTree(tree1, tree2);
     if (isIdentical == 1){
-        printf("\nThe trees are identical!");
+        printf("\n1. The trees are identical!");
     } else {
-        printf("\nOPS! The trees are not identical!");
+        printf("\n1. OPS! The trees are not identical!");
     }
 
     // 2. Verify if the tree is strict
     int isStrictTree = isStrict(tree1);
     if (isStrictTree == 1){
-        printf("\nThe tree is STRICT!");
+        printf("\n2. The tree is STRICT!");
     } else {
-        printf("\nOPS! The tree is not STRICT!");
+        printf("\n2. OPS! The tree is not STRICT!");
     }
 
+    // 3. Find the smallest value on tree
+    int smallestValue = getSmallestValue(tree1);
+    printf("\n3. The smallest value on tree is %d", smallestValue);
+
+    printf("\n===============================================================================================");
+
+    // 4. Rotation left and right was implemented and
+    //    they are being used in insertNode() function 
     return 0;
 }
