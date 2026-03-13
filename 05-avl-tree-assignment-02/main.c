@@ -128,22 +128,105 @@ Node* getNode(Node* root, int value){
     return root;
 }
 
+int isSameTree(Node* t1, Node* t2){
+    if (t1 == NULL && t2 == NULL){
+        return 1; // True
+    }
+
+    if (t1 == NULL || t2 == NULL){
+        return 0; // False
+    }
+
+    if (t1->value != t2->value){
+        return 0; // False
+    }
+
+    int isSameLeft = isSameTree(t1->left, t2->left);
+    int isSameRight = isSameTree(t1->right, t2->right);
+
+    if (isSameLeft == 1 && isSameRight == 1){
+        return 1; // True
+    } else {
+        return 0; // False
+    }
+}
+
+int isLeaf(Node* node){
+    if (node == NULL){
+        return 0; // False
+    }
+
+    if (node->left == NULL && node->right == NULL){
+        return 1; // True
+    } else {
+        return 0; // False
+    }
+}
+
+int hasChildren(Node* node){
+    if (node == NULL){
+        return 0; // False
+    }
+
+    if (node->left != NULL && node->right != NULL){
+        return 1; // True
+    } else {
+        return 0; // False
+    }
+}
+
+int isStrict(Node* root){
+    if (root == NULL){
+        return 1;
+    }
+
+    if (isLeaf(root) == 1){
+        return 1;
+    }
+
+    if (hasChildren(root) == 1){
+        int isStrictLeft = isStrict(root->left);
+        int isStrictRight = isStrict(root->right);
+
+        if (isStrictLeft == 1 && isStrictRight == 1){
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
 int main(){
     int values[LEN] = { 30, 10, 20, 40, 50, 25, 45, 43, 41, 70, 65, 15, 5, 8, 55, 58, 57, 75, 80, 78 };
-    Node* root = NULL;
+    Node* tree1 = NULL;
+    Node* tree2 = NULL;
 
     for(int i = 0; i < LEN; i++){
-        root = insertNode(root, values[i]);
+        tree1 = insertNode(tree1, values[i]);
+        tree2 = insertNode(tree2, values[i]);
+    }
+    
+    printf("The BST 1: ");
+    showInOrder(tree1);
+
+    printf("\nThe BST 2: ");
+    showInOrder(tree2);
+
+    // 1. Verify if the trees are identical
+    int isIdentical = isSameTree(tree1, tree2);
+    if (isIdentical == 1){
+        printf("\nThe trees are identical!");
+    } else {
+        printf("\nOPS! The trees are not identical!");
     }
 
-    Node* targetNode = getNode(root, 45);
-    if (targetNode != NULL){
-        int height = getHeight(targetNode);
-        printf("The height is %d", height);
+    // 2. Verify if the tree is strict
+    int isStrictTree = isStrict(tree1);
+    if (isStrictTree == 1){
+        printf("\nThe tree is STRICT!");
+    } else {
+        printf("\nOPS! The tree is not STRICT!");
     }
-
-    // printf("The BST: ");
-    // showInOrder(root);
 
     return 0;
 }
