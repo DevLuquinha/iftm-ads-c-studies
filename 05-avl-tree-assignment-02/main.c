@@ -234,6 +234,8 @@ int main(){
         printf("\n1. OPS! The trees are not identical!");
     }
 
+    // Implementei uma função
+
     // 2. Verify if the tree is strict
     int isStrictTree = isStrict(tree1);
     if (isStrictTree == 1){
