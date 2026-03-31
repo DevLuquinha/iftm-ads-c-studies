@@ -15,7 +15,6 @@ int main()
     }
 
     emOrdem(tree->raiz);
-    tree=libera_arvoreb(tree);
 
     printf("\n\n\n");
     return 0;

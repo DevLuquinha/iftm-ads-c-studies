@@ -17,32 +17,22 @@ void set_filho(Nod* aux, Nob* pont) {
     ((Chave*)aux->info)->filho = pont;
 }
 
-void mostrarEmOrdem(Node* node){
-    if (node != NULL){
-        mostrarEmOrdem(node->left);
-        prinf("pinto");
-        mostrarEmOrdem(node->right);
-    }
-}
 
 void emOrdem(Nob* raiz) {
-    Nob *aux = raiz;
-    Nod *aux_lista;
+    Nod *aux = NULL;
+    Nob *filho = NULL;
 
-    if (aux != NULL) {
-        while (!aux->folha) {
-            aux = aux->listaChaves->
+    if (raiz != NULL) {
+        *aux = *raiz->listaChaves->ini;
 
-            aux_lista = aux->listaChaves->ini;
-            while (aux_lista != NULL && k > get_chave(aux_lista) ){
-                aux_lista = aux_lista->prox;
-            }
-
-            if (aux_lista == NULL)
-                aux = aux->direita;
-            else
-                aux = get_filho(aux_lista);
+        while (aux != NULL){
+            filho = get_filho(aux);
+            emOrdem(filho);
+            printf("%i, ", get_chave(aux));
+            *aux = *aux->prox;
         }
+
+        emOrdem(raiz->direita);
     }
 }
 
