@@ -23,13 +23,13 @@ void emOrdem(Nob* raiz) {
     Nob *filho = NULL;
 
     if (raiz != NULL) {
-        *aux = *raiz->listaChaves->ini;
+        aux = raiz->listaChaves->ini;
 
         while (aux != NULL){
             filho = get_filho(aux);
             emOrdem(filho);
             printf("%i, ", get_chave(aux));
-            *aux = *aux->prox;
+            aux = aux->prox;
         }
 
         emOrdem(raiz->direita);

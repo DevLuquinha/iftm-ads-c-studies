@@ -11,7 +11,7 @@ int main()
     tree = cria_arvoreb(3);
 
     for (int i=0; i<tam; i++){
-        insere_valor_arvore(tree,vet[i]);
+        insere_valor_arvore(tree, vet[i]);
     }
 
     emOrdem(tree->raiz);
