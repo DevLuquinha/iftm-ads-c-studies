@@ -1,0 +1,111 @@
+# depslib dependency file v1.0
+1743547137 source:c:\users\guilherme\desktop\professor if 2025\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\main.c
+	<stdio.h>
+	<stdlib.h>
+	"arvoreb.h"
+
+1743191049 source:c:\users\guilherme\desktop\professor if 2025\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\listadupla.c
+	"listadupla.h"
+
+1743191506 c:\users\guilherme\desktop\professor if 2025\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\listadupla.h
+	<stdlib.h>
+	<stdio.h>
+
+1743547195 c:\users\guilherme\desktop\professor if 2025\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\arvoreb.h
+	<stdbool.h>
+	<stdio.h>
+	<stdlib.h>
+	"listadupla.h"
+
+1744827363 source:c:\users\guilherme\desktop\professor if 2025\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\arvoreb.c
+	"arvoreB.h"
+	<math.h>
+
+1758666413 source:c:\users\guilherme\desktop\professor if 2025\material de aula\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\arvoreb.c
+	"arvoreB.h"
+	<math.h>
+
+1743547195 c:\users\guilherme\desktop\professor if 2025\material de aula\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\arvoreb.h
+	<stdbool.h>
+	<stdio.h>
+	<stdlib.h>
+	"listadupla.h"
+
+1743191506 c:\users\guilherme\desktop\professor if 2025\material de aula\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\listadupla.h
+	<stdlib.h>
+	<stdio.h>
+
+1743191049 source:c:\users\guilherme\desktop\professor if 2025\material de aula\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\listadupla.c
+	"listadupla.h"
+
+1744827407 source:c:\users\guilherme\desktop\professor if 2025\material de aula\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\main.c
+	<stdio.h>
+	<stdlib.h>
+	"arvoreb.h"
+
+1758674694 source:c:\users\guilherme\desktop\professor if 2025\material de aula\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\sem print\arvoreb\arvoreb.c
+	"arvoreB.h"
+	<math.h>
+
+1743547195 c:\users\guilherme\desktop\professor if 2025\material de aula\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\sem print\arvoreb\arvoreb.h
+	<stdbool.h>
+	<stdio.h>
+	<stdlib.h>
+	"listadupla.h"
+
+1743191506 c:\users\guilherme\desktop\professor if 2025\material de aula\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\sem print\arvoreb\listadupla.h
+	<stdlib.h>
+	<stdio.h>
+
+1743191049 source:c:\users\guilherme\desktop\professor if 2025\material de aula\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\sem print\arvoreb\listadupla.c
+	"listadupla.h"
+
+1744827407 source:c:\users\guilherme\desktop\professor if 2025\material de aula\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\sem print\arvoreb\main.c
+	<stdio.h>
+	<stdlib.h>
+	"arvoreb.h"
+
+1774398672 source:d:\01_faculdade_ads\03_periodo_2026\03_po\03_anexos\arvoreb - inserção sem print\arvoreb\arvoreb.c
+	"arvoreB.h"
+	<math.h>
+
+1743547196 d:\01_faculdade_ads\03_periodo_2026\03_po\03_anexos\arvoreb - inserção sem print\arvoreb\arvoreb.h
+	<stdbool.h>
+	<stdio.h>
+	<stdlib.h>
+	"listadupla.h"
+
+1743191508 d:\01_faculdade_ads\03_periodo_2026\03_po\03_anexos\arvoreb - inserção sem print\arvoreb\listadupla.h
+	<stdlib.h>
+	<stdio.h>
+
+1743191050 source:d:\01_faculdade_ads\03_periodo_2026\03_po\03_anexos\arvoreb - inserção sem print\arvoreb\listadupla.c
+	"listadupla.h"
+
+1744827408 source:d:\01_faculdade_ads\03_periodo_2026\03_po\03_anexos\arvoreb - inserção sem print\arvoreb\main.c
+	<stdio.h>
+	<stdlib.h>
+	"arvoreb.h"
+
+1743191050 source:c:\users\devluquinha\source\repos\iftm-ads-c-studies\06-b-tree-study\listadupla.c
+	"listadupla.h"
+
+1743191508 c:\users\devluquinha\source\repos\iftm-ads-c-studies\06-b-tree-study\listadupla.h
+	<stdlib.h>
+	<stdio.h>
+
+1774997351 source:c:\users\devluquinha\source\repos\iftm-ads-c-studies\06-b-tree-study\main.c
+	<stdio.h>
+	<stdlib.h>
+	"arvoreb.h"
+
+1743547196 c:\users\devluquinha\source\repos\iftm-ads-c-studies\06-b-tree-study\arvoreb.h
+	<stdbool.h>
+	<stdio.h>
+	<stdlib.h>
+	"listadupla.h"
+
+1774997334 source:c:\users\devluquinha\source\repos\iftm-ads-c-studies\06-b-tree-study\arvoreb.c
+	"arvoreB.h"
+	<math.h>
+
