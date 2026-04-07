@@ -54,20 +54,33 @@ Nod* pegarNoComValor(Nod* ini, int valor){
 
 int get_ant_imediato(Nob* raiz, int valorBase){
     Nob* noAtual = raiz;
-    Listad* listaChaves = NULL;
-    Nod* noComValor = NULL;
+    Nod* aux_lista = NULL;
 
+    // 1. Achar o valor na árvore
     while(noAtual != NULL){
-        listaChaves = noAtual->listaChaves;
-        noComValor = pegarNoComValor(listaChaves->ini);
-        // Achou o nó
-        if (noComValor != NULL){
+        aux_lista = noAtual->listaChaves->ini;
 
+        // 2. Percorrer entre a lista de chaves do nó
+        while(aux_lista != NULL && valorBase > get_chave(aux_lista)){
+            aux_lista = aux_lista->prox;
         }
-        else {
-            // Percorrer sobre a árvore
+
+        // 3. Achou a chave
+        if (aux_lista != NULL && get_chave(aux_lista) == valorBase) {
+            break;
+        }
+
+        // 4. Passou por toda a lista e não achou a chave :(
+        if (aux_lista == NULL){
+            // 4.1 O valor base é maior do que todos os anteriores
+            noAtual = noAtual->direita;
+        } else {
+            // 4.2 O valor base é menor do que todos :(
+            noAtual = get_filho(aux_lista);
         }
     }
+
+
 }
 
 Arvoreb* cria_arvoreb(int m) {
