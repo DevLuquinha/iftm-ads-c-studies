@@ -16,6 +16,10 @@ int main()
 
     emOrdem(tree->raiz);
 
-    printf("\n\n\n");
+    printf("\n\n");
+
+    int antImediato = get_ant_imediato(tree->raiz, 48);
+    printf("O antecessor de 48 eh: %d", antImediato);
+
     return 0;
 }

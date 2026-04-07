@@ -65,7 +65,7 @@ int get_ant_imediato(Nob* raiz, int valorBase){
             aux_lista = aux_lista->prox;
         }
 
-        // 3. Achou a chave
+        // 3. Achou a chave ---> aux_lista
         if (aux_lista != NULL && get_chave(aux_lista) == valorBase) {
             break;
         }
@@ -80,7 +80,26 @@ int get_ant_imediato(Nob* raiz, int valorBase){
         }
     }
 
+    // SEGURANÇA 1: Se não achou a chave na árvore, aborta.
+    if (noAtual == NULL) {
+        return -999;
+    }
 
+    // 5. Descer para o filho e ir para o máximo direita até chegar na folha
+    noAtual = get_filho(aux_lista);
+
+    while(noAtual != NULL && !noAtual->folha){
+        noAtual = noAtual->direita;
+    }
+
+    // SEGURANÇA 2: Não tem filho à esquerda "a chave estava numa folha"
+    if (noAtual == NULL){
+        return -999;
+    }
+
+    // 6. Achou o nó onde está a chave do antecessor imediato
+    // Buscar o valor dá última chave
+    return get_chave(noAtual->listaChaves->fim);
 }
 
 Arvoreb* cria_arvoreb(int m) {
