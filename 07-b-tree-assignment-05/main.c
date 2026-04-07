@@ -5,7 +5,7 @@
 int main()
 {
     printf("\nArvore B\n\n");
-    Arvoreb *tree;
+        Arvoreb *tree;
     int vet[] = {25, 12, 40, 9, 18, 33, 50, 29, 37, 45, 60, 15, 20, 48, 55};
     int tam=15;
     tree = cria_arvoreb(3);

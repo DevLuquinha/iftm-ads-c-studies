@@ -17,13 +17,12 @@ void set_filho(Nod* aux, Nob* pont) {
     ((Chave*)aux->info)->filho = pont;
 }
 
-
 void emOrdem(Nob* raiz) {
     Nod *aux = NULL;
     Nob *filho = NULL;
 
     if (raiz != NULL) {
-        aux = lraiz->listaChaves->ini;
+        aux = raiz->listaChaves->ini;
 
         while (aux != NULL){
             filho = get_filho(aux);
@@ -36,6 +35,40 @@ void emOrdem(Nob* raiz) {
     }
 }
 
+Nod* pegarNoComValor(Nod* ini, int valor){
+    bool valorEncontrado = false;
+    Nod* no = ini;
+
+    while(no != NULL && !valorEncontrado){
+        if (get_chave(no) == valor){
+            valorEncontrado = true;
+        }
+
+        if (!valorEncontrado){
+            no = no->prox;
+        }
+    }
+
+    return no;
+}
+
+int get_ant_imediato(Nob* raiz, int valorBase){
+    Nob* noAtual = raiz;
+    Listad* listaChaves = NULL;
+    Nod* noComValor = NULL;
+
+    while(noAtual != NULL){
+        listaChaves = noAtual->listaChaves;
+        noComValor = pegarNoComValor(listaChaves->ini);
+        // Achou o nó
+        if (noComValor != NULL){
+
+        }
+        else {
+            // Percorrer sobre a árvore
+        }
+    }
+}
 
 Arvoreb* cria_arvoreb(int m) {
     Arvoreb *arvoreb = (Arvoreb*) malloc(sizeof(Arvoreb));
@@ -70,9 +103,8 @@ Nob* localiza_folha(Arvoreb *T, int k) {
 
     if (aux != NULL) {
         while (!aux->folha) {
-
-
             aux_lista = aux->listaChaves->ini;
+
             while (aux_lista != NULL && k > get_chave(aux_lista) ){
                 aux_lista = aux_lista->prox;
             }

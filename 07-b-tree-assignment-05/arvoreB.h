@@ -7,13 +7,12 @@
 
 struct nob
 {
-        bool folha;// se eh for folha
-        int qtdChaves;
-        struct nob* pai;
-        Listad *listaChaves;
-        struct nob* direita;
+    bool folha;          // Indica se um nó é folha (leaf node)
+    int qtdChaves;       // Quantidade de chaves
+    struct nob* pai;     // Ponteiro para nó PAI (parent node)
+    Listad *listaChaves; // Lista duplamente encadeade contendo as "chaves"
+    struct nob* direita; // Ponteiro para o filho mais a DIREITA (rightmost child)
 };
-
 typedef struct nob Nob;
 
 struct arvoreb
@@ -26,8 +25,8 @@ typedef struct arvoreb Arvoreb;
 
 struct chave
 {
-    int valorChave;
-    Nob *filho;
+    int valorChave; // O valor numerico em si
+    Nob *filho;     // Ponteiro para filho a ESQUERDA
 };
 typedef struct chave Chave;
 
@@ -42,5 +41,6 @@ Nob* divide_no(Nob* no_dividir);
 Nob* cria_nova_raiz(Nob* no_inserir, Nob* novo, Chave *ch);
 Arvoreb* libera_arvoreb(Arvoreb *T);
 Nob* libera_nob(Nob* raiz);
+int get_ant_imediato(Nob* raiz, int valorBase);
 
 #endif // ARVOREB_H_INCLUDED
