@@ -155,6 +155,21 @@ int get_height(Nob* raiz){
     return height;
 }
 
+int get_max(Nob* raiz){
+    Nob* aux = raiz;
+    int max = -999; // Invalid Value as default
+
+    while(aux != NULL && !aux->folha){
+        aux = aux->direita;
+    }
+
+    if (aux != NULL){
+        max = get_chave(aux->listaChaves->fim);
+    }
+
+    return max;
+}
+
 Arvoreb* cria_arvoreb(int m) {
     Arvoreb *arvoreb = (Arvoreb*) malloc(sizeof(Arvoreb));
     arvoreb->altura = 0;

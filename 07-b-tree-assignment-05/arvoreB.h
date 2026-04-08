@@ -45,5 +45,6 @@ int get_ant_imediato(Nob* raiz, int valorBase);
 void count_elements(Nob* raiz, int* amount);
 int contarElementos(Nob* raiz);
 int get_height(Nob* raiz);
+int get_max(Nob* raiz);
 
 #endif // ARVOREB_H_INCLUDED

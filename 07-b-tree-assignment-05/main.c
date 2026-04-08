@@ -29,5 +29,8 @@ int main()
     int bHeight = get_height(tree->raiz);
     printf("\n4-) A altura da arvore eh: %d", bHeight);
 
+    int max = get_max(tree->raiz);
+    printf("\n5-) O maior valor na arvore eh: %d", max);
+
     return 0;
 }
