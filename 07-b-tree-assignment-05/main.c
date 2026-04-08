@@ -18,8 +18,8 @@ int main()
 
     printf("\n\n");
 
-    int antImediato = get_ant_imediato(tree->raiz, 48);
-    printf("O antecessor de 48 eh: %d", antImediato);
+    int antImediato = get_ant_imediato(tree->raiz, 33);
+    printf("O antecessor de 33 eh: %d", antImediato);
 
     return 0;
 }

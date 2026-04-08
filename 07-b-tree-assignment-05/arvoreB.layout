@@ -2,46 +2,43 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="arvoreB.c" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="7" zoom_2="0">
+	<File name="arvoreB.c" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="365" topLine="6" />
+			<Cursor1 position="1069" topLine="26" />
 		</Cursor>
 		<Folding>
 			<Collapse line="3" />
 			<Collapse line="7" />
 			<Collapse line="15" />
-			<Collapse line="48" />
-			<Collapse line="57" />
-			<Collapse line="67" />
-			<Collapse line="75" />
-			<Collapse line="97" />
-			<Collapse line="106" />
-			<Collapse line="123" />
-			<Collapse line="147" />
-			<Collapse line="214" />
-			<Collapse line="233" />
-			<Collapse line="241" />
-			<Collapse line="243" />
+			<Collapse line="19" />
+			<Collapse line="152" />
+			<Collapse line="161" />
+			<Collapse line="178" />
+			<Collapse line="202" />
+			<Collapse line="269" />
+			<Collapse line="288" />
+			<Collapse line="296" />
+			<Collapse line="298" />
 		</Folding>
-	</File>
-	<File name="arvoreB.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1006" topLine="27" />
-		</Cursor>
 	</File>
 	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="111" topLine="0" />
+			<Cursor1 position="484" topLine="3" />
 		</Cursor>
 	</File>
-	<File name="listadupla.c" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="10" zoom_2="0">
+	<File name="listadupla.c" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2392" topLine="24" />
+			<Cursor1 position="44" topLine="91" />
 		</Cursor>
 	</File>
-	<File name="listadupla.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="12" zoom_2="0">
+	<File name="arvoreB.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="194" topLine="3" />
+			<Cursor1 position="506" topLine="6" />
+		</Cursor>
+	</File>
+	<File name="listadupla.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="7" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="118" topLine="3" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
