@@ -25,5 +25,9 @@ int main()
 
     int qtdElementos = contarElementos(tree->raiz);
     printf("\n3.2-) A quantidade de elementos na arvore eh: %d", qtdElementos);
+
+    int bHeight = get_height(tree->raiz);
+    printf("\n4-) A altura da arvore eh: %d", bHeight);
+
     return 0;
 }

@@ -136,10 +136,23 @@ int contarElementos(Nob* raiz){
             aux_lista = aux_lista->prox;
         }
 
+        // Conta a quantidade dos filhos direita
         total += contarElementos(raiz->direita);
     }
 
     return total;
+}
+
+int get_height(Nob* raiz){
+    Nob* aux = raiz;
+    int height = 0;
+
+    while(aux != NULL && !aux->folha){
+        aux = aux->direita;
+        height++;
+    }
+
+    return height;
 }
 
 Arvoreb* cria_arvoreb(int m) {
