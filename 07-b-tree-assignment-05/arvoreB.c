@@ -120,6 +120,28 @@ void count_elements(Nob* raiz, int* count){
     }
 }
 
+int contarElementos(Nob* raiz){
+    if (raiz == NULL){
+        return 0;
+    }
+
+    int total = raiz->qtdChaves;
+
+    if (!raiz->folha){
+        Nod* aux_lista = raiz->listaChaves->ini;
+
+        // Conta a quantidade dos filhos esquerda
+        while(aux_lista != NULL){
+            total += contarElementos(get_filho(aux_lista));
+            aux_lista = aux_lista->prox;
+        }
+
+        total += contarElementos(raiz->direita);
+    }
+
+    return total;
+}
+
 Arvoreb* cria_arvoreb(int m) {
     Arvoreb *arvoreb = (Arvoreb*) malloc(sizeof(Arvoreb));
     arvoreb->altura = 0;

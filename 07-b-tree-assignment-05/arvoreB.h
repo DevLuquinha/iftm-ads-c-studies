@@ -43,5 +43,6 @@ Arvoreb* libera_arvoreb(Arvoreb *T);
 Nob* libera_nob(Nob* raiz);
 int get_ant_imediato(Nob* raiz, int valorBase);
 void count_elements(Nob* raiz, int* amount);
+int contarElementos(Nob* raiz);
 
 #endif // ARVOREB_H_INCLUDED

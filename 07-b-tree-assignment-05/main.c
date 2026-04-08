@@ -21,7 +21,9 @@ int main()
 
     int countElements = 0;
     count_elements(tree->raiz, &countElements);
-    printf("\n3-) A quantidade de elementos na arvore eh: %d", countElements);
+    printf("\n3.1-) A quantidade de elementos na arvore eh: %d", countElements);
 
+    int qtdElementos = contarElementos(tree->raiz);
+    printf("\n3.2-) A quantidade de elementos na arvore eh: %d", qtdElementos);
     return 0;
 }
