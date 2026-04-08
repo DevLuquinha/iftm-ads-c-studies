@@ -42,5 +42,6 @@ Nob* cria_nova_raiz(Nob* no_inserir, Nob* novo, Chave *ch);
 Arvoreb* libera_arvoreb(Arvoreb *T);
 Nob* libera_nob(Nob* raiz);
 int get_ant_imediato(Nob* raiz, int valorBase);
+void count_elements(Nob* raiz, int* amount);
 
 #endif // ARVOREB_H_INCLUDED

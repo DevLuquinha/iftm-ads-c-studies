@@ -102,6 +102,24 @@ int get_ant_imediato(Nob* raiz, int valorBase){
     return get_chave(noAtual->listaChaves->fim);
 }
 
+void count_elements(Nob* raiz, int* count){
+    Nod *aux_lista = NULL;
+    Nob *filho_esquerda = NULL;
+
+    if (raiz != NULL) {
+        aux_lista = raiz->listaChaves->ini;
+
+        while (aux_lista != NULL){
+            filho_esquerda = get_filho(aux_lista);
+            count_elements(filho_esquerda, count);
+            *count = *count + 1;
+            aux_lista = aux_lista->prox;
+        }
+
+        count_elements(raiz->direita, count);
+    }
+}
+
 Arvoreb* cria_arvoreb(int m) {
     Arvoreb *arvoreb = (Arvoreb*) malloc(sizeof(Arvoreb));
     arvoreb->altura = 0;

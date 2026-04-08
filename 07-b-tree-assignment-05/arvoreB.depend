@@ -116,18 +116,18 @@
 	<stdlib.h>
 	<stdio.h>
 
-1775593672 source:c:\users\devluquinha\source\repos\iftm-ads-c-studies\07-b-tree-assignment-05\main.c
+1775682025 source:c:\users\devluquinha\source\repos\iftm-ads-c-studies\07-b-tree-assignment-05\main.c
 	<stdio.h>
 	<stdlib.h>
 	"arvoreb.h"
 
-1775594468 c:\users\devluquinha\source\repos\iftm-ads-c-studies\07-b-tree-assignment-05\arvoreb.h
+1775682068 c:\users\devluquinha\source\repos\iftm-ads-c-studies\07-b-tree-assignment-05\arvoreb.h
 	<stdbool.h>
 	<stdio.h>
 	<stdlib.h>
 	"listadupla.h"
 
-1775598559 source:c:\users\devluquinha\source\repos\iftm-ads-c-studies\07-b-tree-assignment-05\arvoreb.c
+1775682169 source:c:\users\devluquinha\source\repos\iftm-ads-c-studies\07-b-tree-assignment-05\arvoreb.c
 	"arvoreB.h"
 	<math.h>
 
