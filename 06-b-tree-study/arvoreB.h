@@ -32,6 +32,8 @@ struct chave
 typedef struct chave Chave;
 
 void emOrdem(Nob* raiz);
+int get_min(Nob* raiz);
+bool contem_valor(Nob* raiz, int valor);
 Nob* cria_nob();
 Chave* cria_chave(int valor);
 Arvoreb* cria_arvoreb(int m);

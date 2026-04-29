@@ -6,8 +6,8 @@ int main()
 {
     printf("\nArvore B\n\n");
     Arvoreb *tree;
-    int vet[] = {25, 12, 40, 9, 18, 33, 50, 29, 37, 45, 60, 15, 20, 48, 55};
-    int tam=15;
+    int vet[] = { 10, 20, 30, 40, 50, 60, 70 };
+    int tam = 7;
     tree = cria_arvoreb(3);
 
     for (int i=0; i<tam; i++){
@@ -16,6 +16,12 @@ int main()
 
     emOrdem(tree->raiz);
 
-    printf("\n\n\n");
+    // Contém valor
+    if(contem_valor(tree->raiz, 60)){
+        printf("\nTEM VALOR PORRA");
+    } else {
+        printf("\nNEM TEM MANO");
+    }
+
     return 0;
 }
