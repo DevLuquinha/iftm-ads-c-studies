@@ -1,0 +1,45 @@
+# depslib dependency file v1.0
+1743547137 source:c:\users\guilherme\desktop\professor if 2025\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\main.c
+	<stdio.h>
+	<stdlib.h>
+	"arvoreb.h"
+
+1743191049 source:c:\users\guilherme\desktop\professor if 2025\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\listadupla.c
+	"listadupla.h"
+
+1743191506 c:\users\guilherme\desktop\professor if 2025\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\listadupla.h
+	<stdlib.h>
+	<stdio.h>
+
+1743547195 c:\users\guilherme\desktop\professor if 2025\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\arvoreb.h
+	<stdbool.h>
+	<stdio.h>
+	<stdlib.h>
+	"listadupla.h"
+
+1744827363 source:c:\users\guilherme\desktop\professor if 2025\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\arvoreb.c
+	"arvoreB.h"
+	<math.h>
+
+1759277953 source:c:\users\guilherme\desktop\professor if 2025\material de aula\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\arvoreb.c
+	"arvoreB.h"
+	<math.h>
+
+1743547195 c:\users\guilherme\desktop\professor if 2025\material de aula\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\arvoreb.h
+	<stdbool.h>
+	<stdio.h>
+	<stdlib.h>
+	"listadupla.h"
+
+1743191506 c:\users\guilherme\desktop\professor if 2025\material de aula\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\listadupla.h
+	<stdlib.h>
+	<stdio.h>
+
+1743191049 source:c:\users\guilherme\desktop\professor if 2025\material de aula\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\listadupla.c
+	"listadupla.h"
+
+1759280510 source:c:\users\guilherme\desktop\professor if 2025\material de aula\pesquisa e ordenação\prog\aulas\arvoreb\guilherme\arvoreb\main.c
+	<stdio.h>
+	<stdlib.h>
+	"arvoreb.h"
+
