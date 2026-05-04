@@ -104,38 +104,69 @@ void insere_chave_lista_no(Nob *no, Chave *k) {
     no->qtdChaves++;
 }
 
-bool canInsertRight(Nob* no_inserir, Arvoreb *T){
-    if (no_inserir->pai == NULL){
+bool canInsertRight(Nob* no_atual, Arvoreb *T) {
+    // 1. A raiz não tem pai (não tem irmãos).
+    if (no_atual->pai == NULL) {
         return false;
     }
 
-    // 1. Pegar o início da lista de chaves do pai
-    Nod* aux_pai = no_inserir->pai->listaChaves->ini;
+    // 2. Busca o nó na lista do pai que atua como chave separadora
+    Nod* no_separador_pai = no_atual->pai->listaChaves->ini;
 
-    // 2. Percorrer a lista do pai até achar quem aponta para o no_inserir
-    while (aux_pai != NULL && get_filho(aux_pai) != no_inserir) {
-        aux_pai = aux_pai->prox;
+    // Percorre a lista do pai até encontrar a chave cujo "filho" seja o nó atual
+    while (no_separador_pai != NULL && get_filho(no_separador_pai) != no_atual) {
+        no_separador_pai = no_separador_pai->prox;
     }
 
-    // 3. Se sair do loop e aux_pai NÃO é nulo, achamos a chave separadora!
-    if (aux_pai != NULL) {
-        // A chave separadora:
-        int Ki = get_chave(aux_pai);
+    // 3. Se o separador não for nulo, o nó atual não é o filho mais à direita
+    if (no_separador_pai != NULL) {
+        Nob* irmao_direito = NULL;
 
-        // O irmão da direita (VD) é o filho da PRÓXIMA chave:
-        Nob* irmao_direita;
-        if (aux_pai->prox != NULL) {
-            irmao_direita = get_filho(aux_pai->prox);
+        // O irmão da direita é o filho da PRÓXIMA chave no pai
+        if (no_separador_pai->prox != NULL) {
+            irmao_direito = get_filho(no_separador_pai->prox);
         } else {
-            // Se não tem próxima chave, o irmão é o ponteiro 'direita' do pai
-            irmao_direita = no_inserir->pai->direita;
+            // Se não houver próxima chave, o irmão é o ponteiro 'direita' fixo do pai
+            irmao_direito = no_atual->pai->direita;
         }
 
-        if (irmao_direita != NULL && irmao_direita->qtdChaves < T->ordem - 1){
+        // 4. Verifica se o irmão direito existe e se tem espaço para receber chave
+        if (irmao_direito != NULL && irmao_direito->qtdChaves < T->ordem - 1) {
             return true;
         } else {
             return false;
         }
+    }
+
+    // Se o while terminou com no_separador_pai == NULL, não possui irmão à direita.
+    return false;
+}
+
+bool canInsertLeft(Nob* no_atual, Arvoreb *T) {
+    // 1. A raiz não possui vizinhos.
+    if (no_atual->pai == NULL) return false;
+
+    // 2. Busca o nó na lista do pai que aponta para o nó atual
+    Nod* aux_pai = no_atual->pai->listaChaves->ini;
+    while (aux_pai != NULL && get_filho(aux_pai) != no_atual) {
+        aux_pai = aux_pai->prox;
+    }
+
+    Nob* irmao_esquerdo = NULL;
+
+    // 3. Caso o nó atual não esteja na lista, ele é o ponteiro 'direita' do pai
+    if (aux_pai == NULL) {
+        // O vizinho da esquerda é o filho da última chave do pai
+        irmao_esquerdo = get_filho(no_atual->pai->listaChaves->fim);
+    }
+    // 4. Caso o nó atual esteja na lista, o vizinho esquerdo é a chave anterior
+    else if (aux_pai->ant != NULL) {
+        irmao_esquerdo = get_filho(aux_pai->ant);
+    }
+
+    // 5. Validação final do irmão esquerdo
+    if (irmao_esquerdo != NULL && irmao_esquerdo->qtdChaves < T->ordem - 1) {
+        return true;
     }
 
     return false;
@@ -189,18 +220,55 @@ void insere_valor_arvore (Arvoreb *T, int k) {
                     // 1.4 Sinaliza o fim da inserção
                     sair = 1;
                 }
+            } else if (canInsertLeft(no_inserir, T)) {
+                // 2.1 Remove a PRIMEIRA chave do nó atual (redistribuição para esquerda)
+                Chave* chave_subindo = (Chave*) remove_inicio_listad(no_inserir->listaChaves);
+                no_inserir->qtdChaves--;
+
+                // 2.2 Localiza o separador correto no pai para o Vizinho Esquerdo
+                Nod* no_separador_pai = no_inserir->pai->listaChaves->ini;
+                while (no_separador_pai != NULL && get_filho(no_separador_pai) != no_inserir) {
+                    no_separador_pai = no_separador_pai->prox;
+                }
+
+                // Ajuste do separador: se sou o 'direita', o separador é o 'fim'.
+                // Se estou na lista, o separador que desce é o 'ant'.
+                if (no_separador_pai == NULL) {
+                    no_separador_pai = no_inserir->pai->listaChaves->fim;
+                } else {
+                    no_separador_pai = no_separador_pai->ant;
+                }
+
+                if (no_separador_pai != NULL) {
+                    // A. Salva o valor antigo do pai
+                    int valor_antigo_pai = get_chave(no_separador_pai);
+
+                    // B. O pai recebe o valor da chave que veio da folha (a menor de lá)
+                    set_chave(no_separador_pai, chave_subindo->valorChave);
+
+                    // C. Recicla a chave: o valor que desce para o irmão é o do pai
+                    chave_subindo->valorChave = valor_antigo_pai;
+
+                    // D. Identifica o irmão da esquerda
+                    Nob* irmao_esquerda = get_filho(no_separador_pai);
+
+                    // E. Insere no FINAL do irmão da esquerda
+                    insere_chave_lista_no(irmao_esquerda, chave_subindo);
+
+                    sair = 1;
+                }
+            } else {
+                novo = divide_no(no_inserir);
+                chaveAInserir = (Chave*)remove_fim_listad(no_inserir->listaChaves); // A variável chave A inserir Agora recebe o valor retirado
+                no_inserir->qtdChaves--;
+
+                if (no_inserir->pai == NULL) {//dividiu a raiz
+                    T->raiz = cria_nova_raiz(no_inserir, novo, chaveAInserir);
+                    T->altura++;
+                    sair=1;
+                } else
+                    no_inserir = no_inserir->pai;
             }
-
-            novo = divide_no(no_inserir);
-            chaveAInserir = (Chave*)remove_fim_listad(no_inserir->listaChaves); // A variável chave A inserir Agora recebe o valor retirado
-            no_inserir->qtdChaves--;
-
-            if (no_inserir->pai == NULL) {//dividiu a raiz
-                T->raiz = cria_nova_raiz(no_inserir, novo, chaveAInserir);
-                T->altura++;
-                sair=1;
-            } else
-                no_inserir = no_inserir->pai;
         }
     }
 }
