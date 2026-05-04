@@ -104,6 +104,12 @@ void insere_chave_lista_no(Nob *no, Chave *k) {
     no->qtdChaves++;
 }
 
+bool canInsertRight(Nob* no_inserir, Arvoreb *T){
+    return no_inserir->direita != NULL &&
+           no_inserir->direita->qtdChaves < T->ordem -1 &&
+           no_inserir->direita->pai == no_inserir->pai;
+}
+
 void insere_valor_arvore (Arvoreb *T, int k) {
     Chave *chaveAInserir = cria_chave(k);
     Nob *no_inserir = localiza_folha(T, k);
@@ -114,6 +120,11 @@ void insere_valor_arvore (Arvoreb *T, int k) {
         if (no_inserir->qtdChaves < T->ordem)//se esta acima do limite
             sair = 1;//nao está acima do limite, acaba a insercao
         else {// está acima do limite
+            // 1. Verificar se tem nó para direita
+            if (canInsertRight(no_inserir, T)){
+
+            }
+
             novo = divide_no(no_inserir);
             chaveAInserir = (Chave*)remove_fim_listad(no_inserir->listaChaves); // A variável chave A inserir Agora recebe o valor retirado
             no_inserir->qtdChaves--;
