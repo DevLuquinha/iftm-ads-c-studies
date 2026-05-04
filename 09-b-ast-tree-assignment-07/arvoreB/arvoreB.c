@@ -105,9 +105,40 @@ void insere_chave_lista_no(Nob *no, Chave *k) {
 }
 
 bool canInsertRight(Nob* no_inserir, Arvoreb *T){
-    return no_inserir->direita != NULL &&
-           no_inserir->direita->qtdChaves < T->ordem -1 &&
-           no_inserir->direita->pai == no_inserir->pai;
+    if (no_inserir->pai == NULL){
+        return false;
+    }
+
+    // 1. Pegar o início da lista de chaves do pai
+    Nod* aux_pai = no_inserir->pai->listaChaves->ini;
+
+    // 2. Percorrer a lista do pai até achar quem aponta para o no_inserir
+    while (aux_pai != NULL && get_filho(aux_pai) != no_inserir) {
+        aux_pai = aux_pai->prox;
+    }
+
+    // 3. Se sair do loop e aux_pai NÃO é nulo, achamos a chave separadora!
+    if (aux_pai != NULL) {
+        // A chave separadora:
+        int Ki = get_chave(aux_pai);
+
+        // O irmão da direita (VD) é o filho da PRÓXIMA chave:
+        Nob* irmao_direita;
+        if (aux_pai->prox != NULL) {
+            irmao_direita = get_filho(aux_pai->prox);
+        } else {
+            // Se não tem próxima chave, o irmão é o ponteiro 'direita' do pai
+            irmao_direita = no_inserir->pai->direita;
+        }
+
+        if (irmao_direita != NULL && irmao_direita->qtdChaves < T->ordem - 1){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    return false;
 }
 
 void insere_valor_arvore (Arvoreb *T, int k) {
