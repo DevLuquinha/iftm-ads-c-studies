@@ -113,6 +113,7 @@ void* remove_fim_listad(Listad *L)
         removido = aux->info;
         free(aux);
     }
+
     return removido;
 }
 

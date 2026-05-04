@@ -151,9 +151,44 @@ void insere_valor_arvore (Arvoreb *T, int k) {
         if (no_inserir->qtdChaves < T->ordem)//se esta acima do limite
             sair = 1;//nao está acima do limite, acaba a insercao
         else {// está acima do limite
-            // 1. Verificar se tem nó para direita
-            if (canInsertRight(no_inserir, T)){
 
+            // 1. Tenta redistribuir para o irmão da direita
+            if (canInsertRight(no_inserir, T)){
+                // 1.1 Remove a última chave do nó atual (que estourou o limite)
+                Chave* ultima_chave_removida = (Chave*) remove_fim_listad(no_inserir->listaChaves);
+                no_inserir->qtdChaves--;
+
+                // 1.2 Localiza o nó na lista do pai que atua como separador entre o nó atual e o irmão da direita
+                Nod* no_separador_pai = no_inserir->pai->listaChaves->ini;
+                while (no_separador_pai != NULL && get_filho(no_separador_pai) != no_inserir) {
+                    no_separador_pai = no_separador_pai->prox;
+                }
+
+                // Se encontrou o separador, inicia a redistribuição
+                if (no_separador_pai != NULL){
+                    // A. Salva o valor atual do pai (que descerá para o irmão)
+                    int valor_antigo_separador = get_chave(no_separador_pai);
+
+                    // B. O pai recebe o valor da chave que subiu do nó atual
+                    set_chave(no_separador_pai, ultima_chave_removida->valorChave);
+
+                    // C. A chave removida é reciclada recebendo o valor antigo do pai
+                    ultima_chave_removida->valorChave = valor_antigo_separador;
+
+                    // D. Identifica o ponteiro do irmão da direita
+                    Nob* irmao_direita;
+                    if (no_separador_pai->prox != NULL) {
+                        irmao_direita = get_filho(no_separador_pai->prox);
+                    } else {
+                        irmao_direita = no_inserir->pai->direita;
+                    }
+
+                    // 1.3 Insere a chave com o valor do pai no início do irmão da direita
+                    insere_chave_lista_no(irmao_direita, ultima_chave_removida);
+
+                    // 1.4 Sinaliza o fim da inserção
+                    sair = 1;
+                }
             }
 
             novo = divide_no(no_inserir);
