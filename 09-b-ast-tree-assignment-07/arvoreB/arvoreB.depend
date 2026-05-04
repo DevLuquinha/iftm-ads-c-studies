@@ -43,11 +43,11 @@
 	<stdlib.h>
 	"arvoreb.h"
 
-1759277953 source:c:\users\devluquinha\source\repos\iftm-ads-c-studies\09-b-ast-tree-assignment-07\arvoreb\arvoreb.c
+1777933679 source:c:\users\devluquinha\source\repos\iftm-ads-c-studies\09-b-ast-tree-assignment-07\arvoreb\arvoreb.c
 	"arvoreB.h"
 	<math.h>
 
-1777516366 c:\users\devluquinha\source\repos\iftm-ads-c-studies\09-b-ast-tree-assignment-07\arvoreb\arvoreb.h
+1777933498 c:\users\devluquinha\source\repos\iftm-ads-c-studies\09-b-ast-tree-assignment-07\arvoreb\arvoreb.h
 	<stdbool.h>
 	<stdio.h>
 	<stdlib.h>
@@ -57,10 +57,10 @@
 	<stdlib.h>
 	<stdio.h>
 
-1743191049 source:c:\users\devluquinha\source\repos\iftm-ads-c-studies\09-b-ast-tree-assignment-07\arvoreb\listadupla.c
+1777930310 source:c:\users\devluquinha\source\repos\iftm-ads-c-studies\09-b-ast-tree-assignment-07\arvoreb\listadupla.c
 	"listadupla.h"
 
-1759280595 source:c:\users\devluquinha\source\repos\iftm-ads-c-studies\09-b-ast-tree-assignment-07\arvoreb\main.c
+1777933538 source:c:\users\devluquinha\source\repos\iftm-ads-c-studies\09-b-ast-tree-assignment-07\arvoreb\main.c
 	<stdio.h>
 	<stdlib.h>
 	"arvoreb.h"

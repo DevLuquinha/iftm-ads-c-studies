@@ -44,5 +44,7 @@ Arvoreb* libera_arvoreb(Arvoreb *T);
 Nob* libera_nob(Nob* raiz);
 bool canInsertLeft(Nob* no_atual, Arvoreb *T);
 bool canInsertRight(Nob* no_atual, Arvoreb *T);
+void imprime_arvore_visual(Arvoreb* T);
+void imprime_nivel(Nob* no, int nivel_atual, int nivel_alvo);
 
 #endif // ARVOREB_H_INCLUDED

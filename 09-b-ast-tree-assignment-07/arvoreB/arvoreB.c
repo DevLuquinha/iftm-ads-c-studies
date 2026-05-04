@@ -104,6 +104,52 @@ void insere_chave_lista_no(Nob *no, Chave *k) {
     no->qtdChaves++;
 }
 
+void imprime_nivel(Nob* no, int nivel_atual, int nivel_alvo) {
+    if (no == NULL) {
+        return;
+    }
+
+    // Se chegamos no nível que queremos imprimir nesta linha
+    if (nivel_atual == nivel_alvo) {
+        printf("[");
+
+        Nod* aux = no->listaChaves->ini;
+        while(aux != NULL){
+            printf("%d ", get_chave(aux));
+            aux = aux->prox;
+        }
+
+        printf("] ");
+    }
+    // Se ainda não chegamos no nível, descemos para os filhos
+    else {
+        Nod* aux = no->listaChaves->ini;
+        while (aux != NULL) {
+            // Desce para o filho à esquerda desta chave
+            imprime_nivel(get_filho(aux), nivel_atual + 1, nivel_alvo);
+            aux = aux->prox;
+        }
+        // Não podemos esquecer de descer também no ponteiro 'direita' (último filho)!
+        imprime_nivel(no->direita, nivel_atual + 1, nivel_alvo);
+    }
+}
+
+// Função principal que você vai chamar no seu main()
+void imprime_arvore_visual(Arvoreb* T) {
+    if (T == NULL || T->raiz == NULL) {
+        printf("Arvore vazia!\n");
+        return;
+    }
+
+    printf("\n=== Arvore B* ===\n");
+    // O loop roda de 0 até a altura máxima da árvore
+    for (int i = 0; i <= T->altura; i++) {
+        imprime_nivel(T->raiz, 0, i);
+        printf("\n"); // Quebra a linha após imprimir todos os nós daquele nível
+    }
+    printf("=================\n");
+}
+
 bool canInsertRight(Nob* no_atual, Arvoreb *T) {
     // 1. A raiz não tem pai (não tem irmãos).
     if (no_atual->pai == NULL) {
@@ -184,7 +230,7 @@ void insere_valor_arvore (Arvoreb *T, int k) {
         else {// está acima do limite
 
             // 1. Tenta redistribuir para o irmão da direita
-            if (canInsertRight(no_inserir, T)){
+            if (no_inserir->folha && canInsertRight(no_inserir, T)){
                 // 1.1 Remove a última chave do nó atual (que estourou o limite)
                 Chave* ultima_chave_removida = (Chave*) remove_fim_listad(no_inserir->listaChaves);
                 no_inserir->qtdChaves--;
@@ -220,7 +266,7 @@ void insere_valor_arvore (Arvoreb *T, int k) {
                     // 1.4 Sinaliza o fim da inserção
                     sair = 1;
                 }
-            } else if (canInsertLeft(no_inserir, T)) {
+            } else if (no_inserir->folha &&canInsertLeft(no_inserir, T)) {
                 // 2.1 Remove a PRIMEIRA chave do nó atual (redistribuição para esquerda)
                 Chave* chave_subindo = (Chave*) remove_inicio_listad(no_inserir->listaChaves);
                 no_inserir->qtdChaves--;
