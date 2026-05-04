@@ -42,5 +42,7 @@ Nob* divide_no(Nob* no_dividir);
 Nob* cria_nova_raiz(Nob* no_inserir, Nob* novo, Chave *ch);
 Arvoreb* libera_arvoreb(Arvoreb *T);
 Nob* libera_nob(Nob* raiz);
+bool canInsertLeft(Nob* no_atual, Arvoreb *T);
+bool canInsertRight(Nob* no_atual, Arvoreb *T);
 
 #endif // ARVOREB_H_INCLUDED
