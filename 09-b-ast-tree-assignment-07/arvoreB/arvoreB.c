@@ -163,27 +163,27 @@ bool canInsertRight(Nob* no_atual, Arvoreb *T) {
         return false;
     }
 
-    // 2. Busca o nó na lista do pai que atua como chave separadora
-    Nod* no_separador_pai = no_atual->pai->listaChaves->ini;
+    // 2. Busca no pai qual chave possui o ponteiro para o 'no_atual'
+    Nod* chave_aponta_atual = no_atual->pai->listaChaves->ini;
 
     // Percorre a lista do pai até encontrar a chave cujo "filho" seja o nó atual
-    while (no_separador_pai != NULL && get_filho(no_separador_pai) != no_atual) {
-        no_separador_pai = no_separador_pai->prox;
+    while (chave_aponta_atual != NULL && get_filho(chave_aponta_atual) != no_atual) {
+        chave_aponta_atual = chave_aponta_atual->prox;
     }
 
-    // 3. Se o separador não for nulo, o nó atual não é o filho mais à direita
-    if (no_separador_pai != NULL) {
+    // 3. Se achou a chave, identifica o irmão da direita
+    if (chave_aponta_atual != NULL) {
         Nob* irmao_direito = NULL;
 
-        // O irmão da direita é o filho da PRÓXIMA chave no pai
-        if (no_separador_pai->prox != NULL) {
-            irmao_direito = get_filho(no_separador_pai->prox);
+        // O irmão direito é o filho da PRÓXIMA chave da lista do pai
+        if (chave_aponta_atual->prox != NULL) {
+            irmao_direito = get_filho(chave_aponta_atual->prox);
         } else {
             // Se não houver próxima chave, o irmão é o ponteiro 'direita' fixo do pai
             irmao_direito = no_atual->pai->direita;
         }
 
-        // 4. Verifica se o irmão direito existe e se tem espaço para receber chave
+        // 4. Valida se o irmão existe e se possui espaço para redistribuição
         if (irmao_direito != NULL && irmao_direito->qtdChaves < T->ordem - 1) {
             return true;
         } else {
@@ -191,33 +191,36 @@ bool canInsertRight(Nob* no_atual, Arvoreb *T) {
         }
     }
 
-    // Se o while terminou com no_separador_pai == NULL, não possui irmão à direita.
+    // Se chave_aponta_atual for NULL, o no_atual já é o ponteiro 'direita' do pai.
+    // Portanto, ele é o último filho e não possui vizinho à direita.
     return false;
 }
 
 bool canInsertLeft(Nob* no_atual, Arvoreb *T) {
-    // 1. A raiz não possui vizinhos.
-    if (no_atual->pai == NULL) return false;
+    // 1. A raiz não tem pai (não tem irmãos).
+    if (no_atual->pai == NULL) {
+        return false;
+    }
 
-    // 2. Busca o nó na lista do pai que aponta para o nó atual
-    Nod* aux_pai = no_atual->pai->listaChaves->ini;
-    while (aux_pai != NULL && get_filho(aux_pai) != no_atual) {
-        aux_pai = aux_pai->prox;
+    // 2. Busca no pai qual chave possui o ponteiro para o 'no_atual'
+    Nod* chave_aponta_atual = no_atual->pai->listaChaves->ini;
+    while (chave_aponta_atual != NULL && get_filho(chave_aponta_atual) != no_atual) {
+        chave_aponta_atual = chave_aponta_atual->prox;
     }
 
     Nob* irmao_esquerdo = NULL;
 
-    // 3. Caso o nó atual não esteja na lista, ele é o ponteiro 'direita' do pai
-    if (aux_pai == NULL) {
-        // O vizinho da esquerda é o filho da última chave do pai
+    // 3. Cenário A: O 'no_atual' é o ponteiro 'direita' do pai (não está na lista)
+    if (chave_aponta_atual == NULL) {
+        // O vizinho da esquerda é o filho atrelado à ÚLTIMA chave do pai
         irmao_esquerdo = get_filho(no_atual->pai->listaChaves->fim);
     }
-    // 4. Caso o nó atual esteja na lista, o vizinho esquerdo é a chave anterior
-    else if (aux_pai->ant != NULL) {
-        irmao_esquerdo = get_filho(aux_pai->ant);
+    // 4. Cenário B: O 'no_atual' está na lista, então o vizinho é a chave ANTERIOR
+    else if (chave_aponta_atual->ant != NULL) {
+        irmao_esquerdo = get_filho(chave_aponta_atual->ant);
     }
 
-    // 5. Validação final do irmão esquerdo
+    // 5. Valida se o irmão existe e se possui espaço para redistribuição
     if (irmao_esquerdo != NULL && irmao_esquerdo->qtdChaves < T->ordem - 1) {
         return true;
     }
@@ -236,7 +239,7 @@ void insere_valor_arvore (Arvoreb *T, int k) {
             sair = 1;//nao está acima do limite, acaba a insercao
         else {// está acima do limite
 
-            // 1. Tenta redistribuir para o irmão da direita
+            // 1. Tenta redistribuir para o irmão da DIREITA (apenas folhas)
             if (no_inserir->folha && canInsertRight(no_inserir, T)){
                 // 1.1 Remove a última chave do nó atual (que estourou o limite)
                 Chave* ultima_chave_removida = (Chave*) remove_fim_listad(no_inserir->listaChaves);
@@ -248,18 +251,13 @@ void insere_valor_arvore (Arvoreb *T, int k) {
                     no_separador_pai = no_separador_pai->prox;
                 }
 
-                // Se encontrou o separador, inicia a redistribuição
                 if (no_separador_pai != NULL){
-                    // A. Salva o valor atual do pai (que descerá para o irmão)
+                    // A chave do pai desce para o irmão, e a removida sobe para o pai
                     int valor_antigo_separador = get_chave(no_separador_pai);
-
-                    // B. O pai recebe o valor da chave que subiu do nó atual
                     set_chave(no_separador_pai, ultima_chave_removida->valorChave);
-
-                    // C. A chave removida é reciclada recebendo o valor antigo do pai
                     ultima_chave_removida->valorChave = valor_antigo_separador;
 
-                    // D. Identifica o ponteiro do irmão da direita
+                    // Identifica o irmão da direita
                     Nob* irmao_direita;
                     if (no_separador_pai->prox != NULL) {
                         irmao_direita = get_filho(no_separador_pai->prox);
@@ -267,25 +265,24 @@ void insere_valor_arvore (Arvoreb *T, int k) {
                         irmao_direita = no_inserir->pai->direita;
                     }
 
-                    // 1.3 Insere a chave com o valor do pai no início do irmão da direita
+                    // Insere a chave que desceu no início do irmão da direita
                     insere_chave_lista_no(irmao_direita, ultima_chave_removida);
-
-                    // 1.4 Sinaliza o fim da inserção
                     sair = 1;
                 }
-            } else if (no_inserir->folha &&canInsertLeft(no_inserir, T)) {
-                // 2.1 Remove a PRIMEIRA chave do nó atual (redistribuição para esquerda)
+            }
+            // 2. Tenta redistribuir para o irmão da ESQUERDA (apenas folhas)
+            else if (no_inserir->folha &&canInsertLeft(no_inserir, T)) {
+                // Remove a primeira chave do nó atual
                 Chave* chave_subindo = (Chave*) remove_inicio_listad(no_inserir->listaChaves);
                 no_inserir->qtdChaves--;
 
-                // 2.2 Localiza o separador correto no pai para o Vizinho Esquerdo
+                // Localiza o separador correto no pai para o Vizinho Esquerdo
                 Nod* no_separador_pai = no_inserir->pai->listaChaves->ini;
                 while (no_separador_pai != NULL && get_filho(no_separador_pai) != no_inserir) {
                     no_separador_pai = no_separador_pai->prox;
                 }
 
-                // Ajuste do separador: se sou o 'direita', o separador é o 'fim'.
-                // Se estou na lista, o separador que desce é o 'ant'.
+                // Ajuste do separador para o lado esquerdo.
                 if (no_separador_pai == NULL) {
                     no_separador_pai = no_inserir->pai->listaChaves->fim;
                 } else {
@@ -293,24 +290,18 @@ void insere_valor_arvore (Arvoreb *T, int k) {
                 }
 
                 if (no_separador_pai != NULL) {
-                    // A. Salva o valor antigo do pai
+                    // A chave do pai desce para o irmão, e a removida sobe para o pai
                     int valor_antigo_pai = get_chave(no_separador_pai);
-
-                    // B. O pai recebe o valor da chave que veio da folha (a menor de lá)
                     set_chave(no_separador_pai, chave_subindo->valorChave);
-
-                    // C. Recicla a chave: o valor que desce para o irmão é o do pai
                     chave_subindo->valorChave = valor_antigo_pai;
 
-                    // D. Identifica o irmão da esquerda
+                    // Insere no final do irmão da esquerda
                     Nob* irmao_esquerda = get_filho(no_separador_pai);
-
-                    // E. Insere no FINAL do irmão da esquerda
                     insere_chave_lista_no(irmao_esquerda, chave_subindo);
-
                     sair = 1;
                 }
-            } else {
+            }
+            else {
                 novo = divide_no(no_inserir);
                 chaveAInserir = (Chave*)remove_fim_listad(no_inserir->listaChaves); // A variável chave A inserir Agora recebe o valor retirado
                 no_inserir->qtdChaves--;
