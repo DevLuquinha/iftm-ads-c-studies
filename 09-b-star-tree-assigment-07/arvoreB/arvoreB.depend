@@ -65,3 +65,25 @@
 	<stdlib.h>
 	"arvoreb.h"
 
+1778015427 source:c:\users\devluquinha\source\repos\iftm-ads-c-studies\09-b-star-tree-assigment-07\arvoreb\arvoreb.c
+	"arvoreB.h"
+	<math.h>
+
+1777933498 c:\users\devluquinha\source\repos\iftm-ads-c-studies\09-b-star-tree-assigment-07\arvoreb\arvoreb.h
+	<stdbool.h>
+	<stdio.h>
+	<stdlib.h>
+	"listadupla.h"
+
+1743191506 c:\users\devluquinha\source\repos\iftm-ads-c-studies\09-b-star-tree-assigment-07\arvoreb\listadupla.h
+	<stdlib.h>
+	<stdio.h>
+
+1777930310 source:c:\users\devluquinha\source\repos\iftm-ads-c-studies\09-b-star-tree-assigment-07\arvoreb\listadupla.c
+	"listadupla.h"
+
+1777934046 source:c:\users\devluquinha\source\repos\iftm-ads-c-studies\09-b-star-tree-assigment-07\arvoreb\main.c
+	<stdio.h>
+	<stdlib.h>
+	"arvoreb.h"
+
