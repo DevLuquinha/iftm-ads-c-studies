@@ -105,14 +105,16 @@ void insere_chave_lista_no(Nob *no, Chave *k) {
 }
 
 void imprime_nivel(Nob* no, int nivel_atual, int nivel_alvo) {
+    // 1. Condição de parada (recursão)
     if (no == NULL) {
         return;
     }
 
-    // Se chegamos no nível que queremos imprimir nesta linha
+    // 2. Condição de Impressão (nivel_alvo vem do loop)
     if (nivel_atual == nivel_alvo) {
         printf("[");
 
+        // Percorre a lista duplamente encadeada de chaves deste nó
         Nod* aux = no->listaChaves->ini;
         while(aux != NULL){
             printf("%d ", get_chave(aux));
@@ -121,32 +123,37 @@ void imprime_nivel(Nob* no, int nivel_atual, int nivel_alvo) {
 
         printf("] ");
     }
-    // Se ainda não chegamos no nível, descemos para os filhos
+    // 3. Condição de Descida (Precisa descer na árvore)
     else {
         Nod* aux = no->listaChaves->ini;
+
+        // 3.1. Dispara a recursão para os filhos à esquerda de cada chave do nó
         while (aux != NULL) {
-            // Desce para o filho à esquerda desta chave
+            // Desce um nível (nivel_atual + 1) passando o ponteiro do filho esquerdo
             imprime_nivel(get_filho(aux), nivel_atual + 1, nivel_alvo);
             aux = aux->prox;
         }
-        // Não podemos esquecer de descer também no ponteiro 'direita' (último filho)!
+
+        // 3.2. Dispara a recursão para o ponteiro fixo à direita (último filho)
         imprime_nivel(no->direita, nivel_atual + 1, nivel_alvo);
     }
 }
 
-// Função principal que você vai chamar no seu main()
 void imprime_arvore_visual(Arvoreb* T) {
+    // 1. Validação de segurança: verifica se a árvore foi inicializada e se não está vazia
     if (T == NULL || T->raiz == NULL) {
         printf("Arvore vazia!\n");
         return;
     }
 
     printf("\n=== Arvore B* ===\n");
-    // O loop roda de 0 até a altura máxima da árvore
+
+    // 2. Laço principal: percorre os níveis da árvore de 0 (raiz) até a profundidade máxima (altura)
     for (int i = 0; i <= T->altura; i++) {
         imprime_nivel(T->raiz, 0, i);
-        printf("\n"); // Quebra a linha após imprimir todos os nós daquele nível
+        printf("\n");
     }
+
     printf("=================\n");
 }
 
