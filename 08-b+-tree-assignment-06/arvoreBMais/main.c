@@ -24,6 +24,9 @@ int main()
         printf("\nO valor %i ESTA presente na arvore :)", chaveEncontrada->valor);
     }
 
+    float fatorOcupacao = get_fator_ocupacao(tree);
+    printf("\nO fator de ocupacao eh %.2f", fatorOcupacao);
+
     printf("\n\n\FIM TRABALHO B+");
 
     return 0;

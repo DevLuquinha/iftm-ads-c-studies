@@ -64,6 +64,37 @@ Chave* get_chave(int valorChave, arvorebm* tree){
     return chaveAux;
 }
 
+float get_fator_ocupacao(arvorebm* tree){
+    if (tree == NULL || tree->raiz == NULL){
+        return 0;
+    }
+
+    float folhasUsadas = 0;
+    float capacidadeTotal = 0;
+
+    noB* aux = tree->raiz;
+
+    // 1. Enquanto não for folha
+    while(aux->folha != 1){
+        aux = aux->esquerda;
+    }
+
+    // 2. Iterar sobre cada folha
+    while(aux != NULL){
+        folhasUsadas += aux->qtdChaves;
+        capacidadeTotal += tree->m - 1; // Mesma capacidade para todas as folhas
+
+        aux = aux->proximo;
+    }
+
+    float fatorOcupacao = 0;
+    if (capacidadeTotal != 0){
+        fatorOcupacao = folhasUsadas / capacidadeTotal;
+    }
+
+    return fatorOcupacao;
+}
+
 // LOCALIZA FOLHA PARA INSERIR K
 noB* localiza_folha(int k, arvorebm *tree) {
     noB *aux = tree->raiz;
