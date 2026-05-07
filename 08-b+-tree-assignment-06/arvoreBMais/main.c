@@ -5,24 +5,26 @@
 int main()
 {
     arvorebm* tree;
-    int vet[] = {10, 20, 5, 6, 12, 30, 7, 17, 3, 25, 1};
-    int tam=11;
+    int vet[] = {5, 4, 6, 7, 8, 2, 9, 10, 11, 20, 30, 29, 25, 40, 26, 28, 22, 21};
+    int tam=18;
 
-    tree = cria_arvore(3);
+    tree = cria_arvore(5);
     for (int i=0; i<tam; i++) {
         insere_chave_arvore(tree,vet[i]);
     }
 
     printf("\nArvore B+\n\n");
     mostraArvore(tree);
-    printf("\n\n");
 
-    struct chave* chave = get_chave(30, tree);
-    if (chave != NULL){
-        printf("\nO valor eh: %i", chave->valor);
+    int valorChave = 10;
+    Chave* chaveEncontrada = get_chave(valorChave, tree);
+    if (chaveEncontrada == NULL){
+        printf("\nO valor %i nao esta presente na arvore :(", valorChave);
     } else {
-        printf("\nDeu ruim parceiro.");
+        printf("\nO valor %i ESTA presente na arvore :)", chaveEncontrada->valor);
     }
+
+    printf("\n\n\FIM TRABALHO B+");
 
     return 0;
 }

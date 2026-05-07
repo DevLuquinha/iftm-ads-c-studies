@@ -3,6 +3,8 @@
 #include "lista.h"
 #include <Math.h>
 
+typedef struct chave Chave;
+
 struct noB
 {
     int qtdChaves;
@@ -24,6 +26,7 @@ struct arvorebm
 
 typedef struct arvorebm arvorebm;
 
+
 noB* divide(noB* noCheio, int m);
 void insere_chave_no(struct chave* k, noB *folha);
 noB* localiza_folha(int k, arvorebm *tree);
@@ -34,7 +37,6 @@ void percursoEmOrdem(noB *raiz);
 void  insere_chave_arvore(arvorebm* tree, int k);
 void mostraArvore(arvorebm* tree);
 void percursoEmNivelOtimizado(arvorebm *tree);
-struct chave* get_chave(int valorChave, arvorebm* tree);
-
+Chave* get_chave(int valorChave, arvorebm* tree);
 #endif // ARVOREBMAIS_H_INCLUDED
 
