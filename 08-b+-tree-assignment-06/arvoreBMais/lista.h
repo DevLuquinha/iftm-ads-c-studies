@@ -10,7 +10,6 @@ struct chave
     struct noB *filho;
     struct chave *ant, *prox;
 };
-
 typedef struct chave Chave;
 
 struct lista

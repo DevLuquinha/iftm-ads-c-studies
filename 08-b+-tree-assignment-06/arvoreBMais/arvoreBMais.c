@@ -20,6 +20,53 @@ noB* cria_nob() {
     return novo;
 }
 
+struct chave* get_chave(int valorChave, arvorebm* tree){
+    noB *aux = tree->raiz;
+    struct chave* auxL = NULL;
+    struct chave* resposta = NULL;
+
+    if (aux == NULL){
+        printf("The %i value isn't in tree", valorChave);
+        resposta = NULL;
+    }
+    else {
+        // Enquanto não for folha
+        while(aux->folha != 1){
+            // 1. Valor está na esquerda?
+            if (valorChave < aux->listaChaves->inicio->valor){
+                aux = aux->esquerda;
+            } else {
+                auxL = aux->listaChaves->inicio;
+                while (auxL != NULL && valorChave > auxL->valor) {
+                    auxL = auxL->prox;
+                }
+
+                if (auxL == NULL) {
+                    aux = aux->listaChaves->fim->filho;
+                } else {
+                    aux = (noB*)auxL->ant->filho;
+                }
+            }
+        }
+
+        if (aux != NULL){
+            auxL = aux->listaChaves->inicio;
+
+            while (auxL != NULL && valorChave != auxL->valor){
+                auxL = auxL->prox;
+            }
+
+            if (auxL != NULL){
+                resposta = auxL;
+            } else {
+                printf("\nThe %i value isn't in tree", valorChave);
+            }
+        }
+    }
+
+    return resposta;
+}
+
 // LOCALIZA FOLHA PARA INSERIR K
 noB* localiza_folha(int k, arvorebm *tree) {
     noB *aux = tree->raiz;
@@ -45,8 +92,10 @@ noB* localiza_folha(int k, arvorebm *tree) {
                 }
             }
         }
+
         resposta = aux;
     }
+
     return resposta;
 }
 
