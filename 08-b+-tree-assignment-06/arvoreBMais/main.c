@@ -27,6 +27,9 @@ int main()
     float fatorOcupacao = get_fator_ocupacao(tree);
     printf("\nO fator de ocupacao eh %.2f", fatorOcupacao);
 
+    int somaFolhas = get_soma_folhas(tree);
+    printf("\nA soma total das folhas eh %i", somaFolhas);
+
     printf("\n\n\FIM TRABALHO B+");
 
     return 0;

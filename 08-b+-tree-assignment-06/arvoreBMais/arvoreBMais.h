@@ -39,5 +39,6 @@ void mostraArvore(arvorebm* tree);
 void percursoEmNivelOtimizado(arvorebm *tree);
 Chave* get_chave(int valorChave, arvorebm* tree);
 float get_fator_ocupacao(arvorebm* tree);
+int get_soma_folhas(arvorebm* tree);
 #endif // ARVOREBMAIS_H_INCLUDED
 

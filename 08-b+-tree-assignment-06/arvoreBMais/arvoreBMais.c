@@ -82,7 +82,7 @@ float get_fator_ocupacao(arvorebm* tree){
     // 2. Iterar sobre cada folha
     while(aux != NULL){
         folhasUsadas += aux->qtdChaves;
-        capacidadeTotal += tree->m - 1; // Mesma capacidade para todas as folhas
+        capacidadeTotal += tree->m - 1;
 
         aux = aux->proximo;
     }
@@ -93,6 +93,32 @@ float get_fator_ocupacao(arvorebm* tree){
     }
 
     return fatorOcupacao;
+}
+
+int get_soma_folhas(arvorebm* tree){
+    if (tree == NULL || tree->raiz == NULL){
+        return 0;
+    }
+
+    noB* aux = tree->raiz;
+    while (aux->folha != 1){
+        aux = aux->esquerda;
+    }
+
+    Chave* chaveAux = NULL;
+
+    int soma = 0;
+    while (aux != NULL){
+        chaveAux = aux->listaChaves->inicio;
+        while(chaveAux != NULL){
+            soma += chaveAux->valor;
+            chaveAux = chaveAux->prox;
+        }
+
+        aux = aux->proximo;
+    }
+
+    return soma;
 }
 
 // LOCALIZA FOLHA PARA INSERIR K
