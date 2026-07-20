@@ -16,6 +16,7 @@ The `main` branch contains the **current semester's work in progress**, while co
 |--------|---------|--------|--------|
 | [`1st-algorithms-c`](../../tree/1st-algorithms-c) | Algorithms | 1st Semester (2025.1) | ✅ Completed |
 | [`2nd-data-structures-c`](../../tree/2nd-data-structures-c) | Data Structures | 2nd Semester (2025.2) | ✅ Completed |
+| [`3rd-searching-sorting-c`](../../tree/3rd-searching-sorting-c) | Searching & Sorting | 3rd Semester (2026.1) | ✅ Completed |
 
 ---
 
@@ -23,6 +24,7 @@ The `main` branch contains the **current semester's work in progress**, while co
 
 - **1st Semester - Algorithms:** Sequential structures, loops, functions, arrays, matrices
 - **2nd Semester - Data Structures:** Linked lists, stacks, trees, SPOJ challenges
+- **3rd Semester - Searching & Sorting:** Balanced trees (AVL, B, B+, B*), sorting, searching algorithms
 
 ---
 
@@ -66,6 +68,7 @@ A branch `main` contém o **trabalho em andamento do semestre atual**, enquanto 
 |--------|-----------|---------|--------|
 | [`1st-algorithms-c`](../../tree/1st-algorithms-c) | Algoritmos | 1º Semestre (2025.1) | ✅ Concluído |
 | [`2nd-data-structures-c`](../../tree/2nd-data-structures-c) | Estrutura de Dados | 2º Semestre (2025.2) | ✅ Concluído |
+| [`3rd-searching-sorting-c`](../../tree/3rd-searching-sorting-c) | Pesquisa e Ordenação | 3º Semestre (2026.1) | ✅ Concluído |
 
 ---
 
@@ -73,6 +76,7 @@ A branch `main` contém o **trabalho em andamento do semestre atual**, enquanto 
 
 - **1º Semestre - Algoritmos:** Estruturas sequenciais, loops, funções, vetores, matrizes
 - **2º Semestre - Estrutura de Dados:** Listas encadeadas, pilhas, árvores, desafios SPOJ
+- **3º Semestre - Pesquisa e Ordenação:** Árvores balanceadas (AVL, B, B+, B*), ordenação, algoritmos de busca
 
 ---
 
